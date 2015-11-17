@@ -1,2 +1,2 @@
 # JPython
-python interpreter with Java
+python interpreter by Java
