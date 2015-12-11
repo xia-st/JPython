@@ -140,8 +140,6 @@ public class Token
 			{
 				this.lineNo--;
 			}
-			
-			//XXX 在源码中这里还有一个判断，暂时未知作用，故未加
 		}
 	}
 	
