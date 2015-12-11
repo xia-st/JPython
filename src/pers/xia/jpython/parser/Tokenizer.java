@@ -1,55 +1,55 @@
 package pers.xia.jpython.parser;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
+import org.apache.log4j.Logger;
+
+import pers.xia.jpython.config.Config;
 import pers.xia.jpython.object.PyExceptions;
 
 public class Tokenizer
 {
-	private TokState tok;
-	public Tokenizer(File file, String ps1, String ps2)
-	{
-		tok = new TokState();
-		tok.file = file;
-		tok.prompt = ps1;
-		tok.nextPrompt = ps2;
-	}
+	private InputStream in;
+	private String buf;
+	private Logger log;
+	private Token tok;
 	
 	public Tokenizer()
 	{
-		tok = new TokState();
+		log = Logger.getLogger(Tokenizer.class);
 	}
 	
-	private char nextC()
+	public Tokenizer(File file)
 	{
-		for(;;)
-		{
-			if(tok.buf == null)
-			{
-                throw new PyExceptions("Tokenizer Error: No interactive mode");
-            }
-            
-            if(tok.cur < tok.buf.length())
-            {
-                return tok.buf.charAt(tok.cur++);
-            }
-            if(tok.file == null)
-            {
-                throw new PyExceptions("Tokenizer Error: No interactive mode");
-            }
-            
-        }
-    }
+		this();
+		this.tok = new Token(file);
+	}
+
+	public Token nextToken()
+	{
+		this.tok.get();
+		return tok;
+	}
+	
     public static void main(String[] args)
     {
-        try
-        {
-                Tokenizer tk = new Tokenizer();
-                tk.nextC();    
-        } catch (PyExceptions e)
-        {
-            System.out.println(e);
-        }
-        System.out.println("Hello");
+       File file = new File("test.py");
+       try
+       {
+	       Tokenizer tokenizer = new Tokenizer(file);
+	       Token tok = tokenizer.nextToken();
+	       while(tok.state != TokState.ENDMARKER)
+	       {
+	    	   System.out.println(tok);
+	    	   tok = tokenizer.nextToken();
+	       }
+       }
+       catch(PyExceptions e)
+       {
+    	   e.printStackTrace();
+       }
     }
 }
