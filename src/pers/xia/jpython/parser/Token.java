@@ -143,9 +143,6 @@ public class Token
 		}
 	}
 	
-	
-	
-	
 	private Boolean is_potential_identifier_start(char c)
 	{
 		if((c >= 'a' && c <= 'z') ||
