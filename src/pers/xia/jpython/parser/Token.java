@@ -3,11 +3,9 @@ package pers.xia.jpython.parser;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.HashMap;
 
 import org.apache.log4j.Logger;
 
-import jdk.nashorn.internal.parser.TokenStream;
 import pers.xia.jpython.config.Config;
 import pers.xia.jpython.object.PyExceptions;
 
@@ -133,7 +131,6 @@ public class Token
 			}
 			if(this.buf.charAt(this.cur) != c)
 			{
-				log.error(this.buf.charAt(this.cur) + " " + c);
 				throw new PyExceptions("token.backup: backup error");
 			}
 			if(c == '\n')
