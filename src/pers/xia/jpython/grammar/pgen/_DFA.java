@@ -12,15 +12,19 @@ class _DFA
 	
 	static final int MAXSIZE = 256;
 	
-	public _DFA()
+	public _DFA(String name)
 	{
-		this.name = null;
+		if(name == null)
+		{
+			throw new PyExceptions("_DFA must have name");
+		}
+		this.name = name;
 		this.initial = null;
 		this.nstates = 0;
 		this.states = new _State[_DFA.MAXSIZE];
 	}
 	
-	public Boolean addState(_State state)
+	public boolean addState(_State state)
 	{
 		if(this.nstates >= this.states.length)
 		{
@@ -36,5 +40,14 @@ class _DFA
 		this.initial = initial;
 		this.nstates = nstates;
 		this.states = states;
+	}
+	
+	public boolean cmp(_DFA dfa)
+	{
+		if(this.name.equals(dfa.name))
+		{
+			return true;
+		}
+		return false;
 	}
 }

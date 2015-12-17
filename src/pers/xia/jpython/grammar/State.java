@@ -20,7 +20,7 @@ public class State
 		this.arcs = arcs;
 	}
 
-	public Boolean addArc(Arc arc)
+	public boolean addArc(Arc arc)
 	{
 		if(this.narcs >= this.arcs.length)
 		{
@@ -30,7 +30,7 @@ public class State
 		return true;
 	}
 	
-	public Boolean removeArc(Arc arc)
+	public boolean removeArc(Arc arc)
 	{
 		int i = 0;
 		for(; i < this.narcs; i++)

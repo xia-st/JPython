@@ -32,7 +32,7 @@ class _Grammar
 		this.start = start;
 	}
 	
-	public Boolean addLabel(_Label label)
+	private boolean addLabel(_Label label)
 	{
 		if(nlabels >= this.labels.length)
 		{
@@ -61,6 +61,38 @@ class _Grammar
 		else
 		{
 			return this.labels[i];
+		}
+	}
+	
+	private boolean addDFA(_DFA dfa)
+	{
+		if(this.ndfas >= this.dfas.length)
+		{
+			throw new PyExceptions("Over the max size of dfa");
+		}
+		this.dfas[this.ndfas++] = dfa;
+		return true;
+	}
+	
+	public _DFA setDFA(_DFA dfa)
+	{
+		int i = 0;
+		for(; i < this.ndfas; i++)
+		{
+			if(this.dfas[i].cmp(dfa))
+			{
+				break;
+			}
+		}
+		
+		if(i >= this.ndfas)
+		{
+			this.addDFA(dfa);
+			return dfa;
+		}
+		else
+		{
+			return this.dfas[i];
 		}
 	}
 	

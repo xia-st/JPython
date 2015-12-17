@@ -10,7 +10,7 @@ public class Label
 	TokState tokState;
 	String str;
 	
-	Boolean isTerminal;
+	boolean isTerminal;
 	
 	public Label(DFA nextDfa)
 	{

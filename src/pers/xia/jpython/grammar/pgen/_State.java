@@ -17,7 +17,7 @@ class _State
 		this.arcs = new _Arc[_State.MAXSIZE];
 	}
 
-	public Boolean addArc(_Arc arc)
+	public boolean addArc(_Arc arc)
 	{
 		if(this.narcs >= this.arcs.length)
 		{
@@ -26,8 +26,33 @@ class _State
 		this.arcs[this.narcs++] = arc;
 		return true;
 	}
+	
+	public int findArc(_Label label)
+	{
+		for(int i = 0; i < this.narcs; i++)
+		{
+			if(this.arcs[i].label == label)
+			{
+				return i;
+			}
+		}
+		return -1;
+	}
+	
+	public void removeAllArc(_Label label)
+	{
+		for(int i = 0; i < this.narcs; i++)
+		{
+			if(this.arcs[i].label == label)
+			{
+				this.arcs[i] = this.arcs[this.narcs - 1];
+				this.narcs--;
+				i--;
+			}
+		}
+	}
 
-	public Boolean removeArc(_Arc arc)
+	public boolean removeArc(_Arc arc)
 	{
 		int i = 0;
 		for(; i < this.narcs; i++)

@@ -14,7 +14,7 @@ class _Label
 	TokState tokState;
 	String str;
 
-	Boolean isTerminal;
+	boolean isTerminal;
 
 	public _Label(String nextDfa)
 	{
@@ -29,7 +29,7 @@ class _Label
 		this.isTerminal = true;
 	}
 	
-	public Boolean cmp(_Label label)
+	public boolean cmp(_Label label)
 	{
 		if(this.isTerminal != label.isTerminal) return false;
 		if(this.isTerminal)

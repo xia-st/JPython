@@ -18,7 +18,7 @@ public class Token
 	int tabSize;
 	int indent;
 	int indstack[];	//Stack of indents
-	Boolean atbol;
+	boolean atbol;
 	int pendin;
 	String prompt;	//For interactive prompting
 	String nextPrompt;	//For interactive prompting
@@ -29,7 +29,7 @@ public class Token
 	String input;
 	int start;
 	int end;
-	Boolean contLine;
+	boolean contLine;
 	
 	TokState state;
 	int lineStart;	//一行的起始位置
@@ -140,7 +140,7 @@ public class Token
 		}
 	}
 	
-	private Boolean is_potential_identifier_start(char c)
+	private boolean is_potential_identifier_start(char c)
 	{
 		if((c >= 'a' && c <= 'z') ||
 				(c >= 'A' && c <= 'Z') ||
@@ -155,7 +155,7 @@ public class Token
 		}
 	}
 	
-	private Boolean is_potential_identifier_char(char c)
+	private boolean is_potential_identifier_char(char c)
 	{
 		if((c >= 'a' && c <= 'z') ||
 				(c >= 'A' && c <= 'Z') ||
@@ -172,7 +172,7 @@ public class Token
 	}
 	
 	//设置字符串
-	private Boolean checkString(char quote)
+	private boolean checkString(char quote)
 	{
 		int quote_size = 1; //1 or 3
 		int end_quote_size = 0;
@@ -227,10 +227,10 @@ public class Token
 	}
 	
 	//设置缩进信息
-	private Boolean setIndentifier()
+	private boolean setIndentifier()
 	{
 		char c = 0;
-		Boolean blankline = false;
+		boolean blankline = false;
 		int col = 0;
 		this.atbol = false;
 		
@@ -301,7 +301,7 @@ public class Token
 		return blankline;
 	}
 	
-	private Boolean isxdigit(char c)
+	private boolean isxdigit(char c)
 	{
 		if((c >= '0' && c <= '9') ||
 				(c >= 'A' && c <= 'F') ||
@@ -312,10 +312,10 @@ public class Token
 	}
 	
 	//检查是否读取到了Name
-	private Boolean checkName(char c)
+	private boolean checkName(char c)
 	{
 		/* Process b"", r"", u"", br"" and rb"" */
-		Boolean saw_b = false, saw_u = false, saw_r = false;
+		boolean saw_b = false, saw_u = false, saw_r = false;
 		
 		//处理字符串签名可能出现的b、u、r
 		while(true)
@@ -349,7 +349,7 @@ public class Token
 	}
 	
 	//虚数
-	private Boolean imaginary()
+	private boolean imaginary()
 	{
 		this.end = this.cur;
 		this.state = TokState.NUMBER;
@@ -357,7 +357,7 @@ public class Token
 	}
 	
 	
-	private Boolean checkNumber(char c)
+	private boolean checkNumber(char c)
 	{
 		if(c == '0')
 		{
@@ -411,7 +411,7 @@ public class Token
 			}
 			else
 			{
-				Boolean nonZero = false;
+				boolean nonZero = false;
 				while(c == '0')
 				{
 					c = this.nextC();
@@ -462,7 +462,7 @@ public class Token
 	}
 	
 	//指数
-	private Boolean exponent(char e)
+	private boolean exponent(char e)
 	{
 		char c = this.nextC();
 		if(c == '+' || c == '-')
@@ -502,7 +502,7 @@ public class Token
 	}
 
 	//实数
-	private Boolean fraction()
+	private boolean fraction()
 	{
 		char c = 0;
 		do
@@ -526,7 +526,7 @@ public class Token
 		return true;
 	}
 	
-	private Boolean checkDot()
+	private boolean checkDot()
 	{
 		char c = this.nextC();
 		if(Character.isDigit(c))
@@ -708,10 +708,10 @@ public class Token
 		return TokState.OP;
 	}
 	
-	public Boolean get()
+	public boolean get()
 	{
 		char c;
-		Boolean blankline = false;
+		boolean blankline = false;
 
 		//替代goto语句的使用
 		nextline:

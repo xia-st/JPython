@@ -17,13 +17,13 @@ class _Node
 		this.childs = new LinkedList<_Node>();
 	}
 
-	public Boolean addChild(_Node node)
+	public boolean addChild(_Node node)
 	{
 		this.childs.add(node);
 		return true;
 	}
 
-	public Boolean addFirstChild(_Node node)
+	public boolean addFirstChild(_Node node)
 	{
 		this.childs.addFirst(node);
 		return true;
