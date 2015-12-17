@@ -968,9 +968,19 @@ public class Pgen
 		_State normalState = null;
 		_State finalState = null;
 		
-		//get one state in normal states
-		normalState = this.getOneStateFromSet(normalStates);
-		finalState = this.getOneStateFromSet(finalStates);
+		/* get one state in normal states
+		 * have to insure the startS is the sign of collection
+		 */
+		
+		if(normalStates.contains(startS))
+			normalState = startS;
+		else
+			normalState = this.getOneStateFromSet(normalStates);
+		
+		if(finalStates.contains(startS))
+			finalState = startS;
+		else
+			finalState = this.getOneStateFromSet(finalStates);
 		
 		if(normalState != null)
 		{
@@ -1051,6 +1061,9 @@ public class Pgen
 					
 					if(collOfStates.size() <= 1)  break;
 
+					/* 
+					 * Create new collections
+					 */
 					for(Map.Entry<_State, Set<_State>> coll : collOfStates.entrySet())
 					{
 						Set<_State> states = coll.getValue();
