@@ -11,13 +11,13 @@ public class PyExceptions extends RuntimeException
     
     public PyExceptions()
     {
-    	super();
+        super();
     }
     
     public PyExceptions(String msg)
     {
-    	super(msg);
-    	map.push(msg);
+        super(msg);
+        map.push(msg);
     }
       public PyExceptions(String message, Throwable cause) {
         super(message, cause);
@@ -25,34 +25,34 @@ public class PyExceptions extends RuntimeException
       
     public PyExceptions(Token tok)
     {
-    	super();
-    	this.tok = tok;
+        super();
+        this.tok = tok;
     }
     
     public String toString()
     {
-    	String msg = "";
-    	while(!map.empty())
-    	{
-    		msg += map.pop() + "\n";
-    	}
-    	return msg;
+        String msg = "";
+        while(!map.empty())
+        {
+            msg += map.pop() + "\n";
+        }
+        return msg;
     }
     
     public void printStackTrace()
     {
-    	String msg =  "";
-    	while(!map.empty())
-    	{
-    		msg += map.pop() + "\n";
-    	}
-    	if(msg.length() > 0)
-    	{
-    		System.err.println(msg);
-    	}
-    	else 
-    	{
-    		super.printStackTrace();
-		}
+        String msg =  "";
+        while(!map.empty())
+        {
+            msg += map.pop() + "\n";
+        }
+        if(msg.length() > 0)
+        {
+            System.err.println(msg);
+        }
+        else 
+        {
+            super.printStackTrace();
+        }
     }
 }
