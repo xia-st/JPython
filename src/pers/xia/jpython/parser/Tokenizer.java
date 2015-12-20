@@ -13,7 +13,6 @@ import pers.xia.jpython.object.PyExceptions;
 public class Tokenizer
 {
     private InputStream in;
-    private String buf;
     private Logger log;
     private Token tok;
     

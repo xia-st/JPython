@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -1134,8 +1135,6 @@ public class Pgen
                 dfa.jumpedDFAs.putAll(nextDfa.jumpedDFAs);
             }
         }
-        
-        
     }
     
     public void showFA(_State state)
@@ -1202,7 +1201,6 @@ public class Pgen
         }
     }
     
-    
     public boolean createGrammar()
     {
         do
@@ -1219,74 +1217,309 @@ public class Pgen
             dfa.initial = this.modifyToDFA(ds.start);
 
             this.minimize(dfa.initial);
-
+            dfa.setStates();
             this.grammar.setDFA(dfa);
             
             // break;
         }while(this.nextLine());
         
-        /*
         for(int i = 0; i < this.grammar.ndfas; i++)
         {
             this.setNextTrueDFA(this.grammar.dfas[i]);
+            
+            /*
             System.out.println(this.grammar.dfas[i].name);
-            this.grammar.dfas[i].jumpedDFAs.forEach((k, v) -> 
-                System.out.println(k.tokState + ": " + k.str + " " + v.name));
+            for(Map.Entry<_Label, _DFA> jd : this.grammar.dfas[i].jumpedDFAs.entrySet())
+            {
+                System.out.println(jd.getKey().tokState + " " + jd.getValue().name);
+            }
             System.out.println();
+            */
         }
         
-        System.out.println(this.grammar.nlabels + " " + this.grammar.ndfas);
-        */
+        //设置起始dfa
+        for(int i = 0; i < this.grammar.ndfas; i++)
+        {
+            if(this.grammar.dfas[i].name.equals("file_input"))
+            {
+                //把起始dfa和0号位的dfa交换
+                _DFA dfa = this.grammar.dfas[0];
+                this.grammar.dfas[0] = this.grammar.dfas[i];
+                this.grammar.dfas[i] = dfa;
+                
+                this.grammar.start = this.grammar.dfas[0];
+                break;
+            }
+        }
+
         return true;
     }
-    
-    public String arcToString(_Arc arc)
-    {
-        // TODO
-        return null;
-    }
-    
-    public String labelToString(_Label label)
-    {
-        if(label.isTerminal)
-        {
-            return "new Label(" + label.tokState.toString() + ", " + 
-                    label.str + "),";
-        }
-        else
-        {
-            return "new Label("+ label.nextDfa + "),";
-        }
-    }
-    
-    public String stateToString(_State state)
-    {
-        // TODO
-        return null;
-    }
-    
-    public String DFAToString(_DFA dfa)
-    {
-        // TODO
-        return null;
-    }
-    
-    public void createGramInitFile(File file)
-    {
-        //value为label的名字（labels[i]）
-        Map<_Label, String> labelStringMap = new HashMap<_Label, String>();
-        //保存整个label描述的字符串
-        StringBuilder labelString = new StringBuilder(); 
-        
-        labelString.append("Label[] labels = {\n");
-        String labelsName = "labels[%d]";
+
+    //绘制所有label对应的代码字符串
+    private StringBuilder labelToString(Map<String, String> DFAStringMap)
+    {      
+        StringBuilder sb = new StringBuilder();
+        sb.append("    public static Label[] labels = {\n");
+        _Label label = null;
         for(int i = 0; i < this.grammar.nlabels; i++)
         {
-            labelString.append("    " + this.labelToString(this.grammar.labels[i]) + "\n");
+            label = this.grammar.labels[i];
+            if(label.isTerminal)
+            {
+                if(label.str == null)
+                {
+                    sb.append("        new Label(TokState." + label.tokState.toString() + ", null),");
+                }
+                else
+                {
+                    sb.append("        new Label(TokState." + label.tokState.toString() + ", \"" + label.str + "\"),");
+                }
+            }
+            else
+            {
+                sb.append("        new Label(" + DFAStringMap.get(label.nextDfa) + "),");
+            }
+            sb.append("\n");
+        }
+        sb.append("    };\n\n");
+        return sb;
+    }
+ 
+    //绘制某个state所有arc的代码字符串
+    private StringBuilder arcToString(_State state, 
+            String arcsName, 
+            Map<_State, String>stateStringMap,
+            Map<_Label, String>labelStringMap,
+            String fileName)
+    {
+        StringBuilder sb = new StringBuilder();
+        
+        sb.append("    public static Arc[] " + arcsName + " = {\n");
+        
+        for(int i = 0; i < state.narcs; i++)
+        {
+            sb.append("        new Arc(" + labelStringMap.get(state.arcs[i].label) +  ", " +
+                    stateStringMap.get(state.arcs[i].nextState) + "),\n");
+        }
+        sb.append("    };\n\n");
+        
+        return sb;
+    }
+
+    
+    //返回某个DFA所有state的代码字符串，并设置state与名字的对应关系
+    private StringBuilder stateToString(_DFA dfa, 
+            String statesName, 
+            Map<_Label, String>labelStringMap, 
+            int index,
+            String fileName) 
+    {
+        StringBuilder sb = new StringBuilder();
+        
+        //保存arc数组与它对应的名字
+        Map<_Arc[], String> arcsStringMap = new HashMap<_Arc[], String>(); 
+        //state数组中所对应的states的名字（like states_1[0]）
+        Map<_State, String> stateStringMap = new HashMap<_State, String>();
+        
+        
+        //设置state与它对应的名字
+        for(int i = 0; i < dfa.nstates; i++)
+        {
+            stateStringMap.put(dfa.states[i], fileName + "." + statesName + "[" + i + "]");
+        }
+        
+        //添加arc的数据
+        for(int i = 0; i < dfa.nstates; i++)
+        {
+            sb.append(this.arcToString(dfa.states[i], 
+                    "arcs_" + index + "_" + i, 
+                    stateStringMap, 
+                    labelStringMap, fileName));
+            arcsStringMap.put(dfa.states[i].arcs, fileName + ".arcs_" + index + "_" + i);
+        }
+
+        
+        sb.append("    public static State[] " + statesName + " = {\n");
+        
+        for(int i = 0; i < dfa.nstates; i++)
+        {
+            sb.append("        new State(" + dfa.states[i].narcs + ", " + 
+                    arcsStringMap.get(dfa.states[i].arcs) + "),\n");
+        }
+        
+        sb.append("    };\n\n");
+        
+        return sb;
+    }
+    
+    private StringBuilder jumpedDFAToString(Map<_Label, _DFA>jumpedDFA,
+            String jumpedDFAName,
+            Map<_Label, String> labelStringMap,
+            Map<String, String> DFAStringMap)
+    {
+        StringBuilder sb = new StringBuilder();
+        
+        sb.append("    public static Map<Label, DFA> " + jumpedDFAName + 
+                " = new HashMap<Label, DFA>(){{\n");
+        
+        for(Map.Entry<_Label, _DFA>jd : jumpedDFA.entrySet())
+        {
+            sb.append("        put(" + labelStringMap.get(jd.getKey()) + ", " +
+                    DFAStringMap.get(jd.getValue().name) + ");\n");
+        }
+        sb.append("    }};\n\n");
+        return sb;
+    }
+    
+    //绘制所有的DFA
+    private StringBuilder DFAToString(_Grammar grammar, 
+            Map<_Label, String>labelStringMap, 
+            Map<String, String>DFAStringMap,
+            String fileName)
+    {
+        
+       StringBuilder sb = new StringBuilder();
+       
+       //保存states数组与它对应的名字
+       Map<_State[], String> statesStringMap = new HashMap<_State[], String>();
+       
+       //添加所有states的字符串
+       for(int i = 0; i < grammar.ndfas; i++)
+       {
+           sb.append(this.stateToString(grammar.dfas[i], 
+                   "states_" + i, 
+                   labelStringMap, 
+                   i,
+                   fileName));
+           statesStringMap.put(grammar.dfas[i].states, "states_" + i);
+       }
+       
+       //设置DFA与对应的名字
+       for(int i = 0; i < grammar.ndfas; i++)
+       {
+           DFAStringMap.put(grammar.dfas[i].name, "dfas[" + i + "]");
+       }
+       
+       //保存jumpedDFA与它对应的名字
+        Map<Map<_Label, _DFA>, String> jumpedDFAStringMap = new  HashMap<Map<_Label, _DFA>, String>();
+
+       for(int i = 0; i < grammar.ndfas; i++)
+       {
+           sb.append(this.jumpedDFAToString(grammar.dfas[i].jumpedDFAs, 
+                   "jumpedDFAs_" + i, 
+                   labelStringMap, 
+                   DFAStringMap));
+           jumpedDFAStringMap.put(grammar.dfas[i].jumpedDFAs, "jumpedDFAs_" + i);
+       }
+       
+       sb.append("    public static DFA[] dfas = {\n");
+       
+
+       //设置所有的DFA
+       for(int i = 0; i < grammar.ndfas; i++)
+       {
+           sb.append("        new DFA(" +
+                   "DFAName." + grammar.dfas[i].name + ", " +
+                   fileName + "." + statesStringMap.get(grammar.dfas[i].states) + "[0], " +
+                   grammar.dfas[i].nstates + ", " +
+                   fileName + "." + statesStringMap.get(grammar.dfas[i].states) + ", " +
+                   jumpedDFAStringMap.get(grammar.dfas[i].jumpedDFAs) + 
+                   "),\n");
+       }
+
+       sb.append("    };\n\n");
+        return sb;
+    }
+    
+
+    public StringBuilder grammarToString(_Grammar grammar, String fileName)
+    {
+        //label对应的名字
+        Map<_Label, String> labelStringMap = new HashMap<_Label, String>();
+        
+        //dfa名字所对应的实际名字
+        Map<String, String> DFAStringMap = new HashMap<String, String>();
+        
+        //设置所有label的名字
+        String labelsName = fileName + ".labels[%d]";
+        for(int i = 0; i < this.grammar.nlabels; i++)
+        {
             labelStringMap.put(this.grammar.labels[i], String.format(labelsName, i));
         }
-        labelString.append("};");
-        System.out.println(labelString);
+        
+        //设置所有dfa的名字
+        String DFAName = "dfas[%d]";
+        for(int i = 0; i < this.grammar.ndfas; i++)
+        {
+            DFAStringMap.put(this.grammar.dfas[i].name, String.format(DFAName, i));
+        }
+        
+
+        //保存整个语法文件的内容
+        StringBuilder sb = new StringBuilder(); 
+        
+        sb.append("/* Created by Pgen */\n");
+        sb.append("package pers.xia.jpython.grammar;\n\n" +
+                "import java.util.Map;\n" + 
+                "import java.util.HashMap;\n\n" +
+                "import pers.xia.jpython.parser.TokState;\n\n");
+        sb.append("public final class GramInit{\n\n");
+        
+
+        sb.append(this.DFAToString(grammar, labelStringMap, DFAStringMap, fileName));
+        
+        // 将所有的label转换为对应的代码字符串
+        sb.append(this.labelToString(DFAStringMap));
+
+        sb.append("    public static Grammar grammar = new Grammar(" + 
+                grammar.ndfas + ", " + 
+                fileName + ".dfas" + ", " +
+                grammar.nlabels + ", " +
+                fileName + ".labels, " +
+                fileName + ".dfas[0]" +
+                ");\n");
+        
+        sb.append("};\n");
+
+        return sb;
+    }
+    
+    private void writeDFANameFILE(File file)
+    {
+        StringBuilder sb = new StringBuilder(); 
+        sb.append("package pers.xia.jpython.grammar;\n\n" +
+                "public enum DFAName\n" + 
+                "{\n");
+        for(int i = 0; i < this.grammar.ndfas; i++)
+        {
+            sb.append("    " + this.grammar.dfas[i].name + ",\n");
+        }
+        sb.append("}");
+        
+        try
+        {
+            FileWriter fw = new FileWriter(file);
+            fw.write(sb.toString());
+            fw.close();
+        } catch (IOException e)
+        {
+            throw new PyExceptions("Write " + file.getName() + " error");  
+        }
+    }
+    
+    private void writeGramInitFile(File file)
+    {
+        FileWriter fw = null;
+        try
+        {
+            fw = new FileWriter(file);
+            fw.write(this.grammarToString(this.grammar, file.getName().substring(0, file.getName().indexOf('.'))).toString());
+            fw.close();
+
+        } catch (IOException e)
+        {
+            throw new PyExceptions("Write " + file.getName() + " error");  
+        }
     }
     
     public static void main(String[] args)
@@ -1294,8 +1527,10 @@ public class Pgen
         File grammarFile = new File("grammar/Grammar");
         Pgen pgen = new Pgen(grammarFile);
         pgen.createGrammar();
-        
-        File targetFile = new File("src/pers/xia/jpython/grammar/GramInit.java");
-        pgen.createGramInitFile(targetFile);
+       
+        File targetFile = new File("src/pers/xia/jpython/grammar/DFAName.java");
+        pgen.writeDFANameFILE(targetFile);
+        targetFile = new File("src/pers/xia/jpython/grammar/GramInit.java");
+        pgen.writeGramInitFile(targetFile);
     }
 }
