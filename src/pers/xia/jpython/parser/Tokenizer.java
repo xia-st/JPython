@@ -1,18 +1,12 @@
 package pers.xia.jpython.parser;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
 import org.apache.log4j.Logger;
 
-import pers.xia.jpython.config.Config;
 import pers.xia.jpython.object.PyExceptions;
 
 public class Tokenizer
 {
-    private InputStream in;
     private Logger log;
     private Token tok;
     

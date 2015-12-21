@@ -13,7 +13,7 @@ public class Token
 {
     String buf;
     int cur;
-    ErrorCode done;
+ //   ErrorCode done;
     File file;
     int tabSize;
     int indent;
@@ -41,7 +41,7 @@ public class Token
     {
         this.buf = null;
         this.cur = 0;
-        this.done = ErrorCode.E_OK;
+//        this.done = ErrorCode.E_OK;
         this.file = null;
         this.indent = 0;
         this.tabSize = Config.TABSIZE;
