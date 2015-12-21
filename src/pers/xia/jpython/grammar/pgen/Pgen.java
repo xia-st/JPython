@@ -21,7 +21,7 @@ import org.apache.log4j.Logger;
 import pers.xia.jpython.object.PyExceptions;
 import pers.xia.jpython.tokenizer.TokState;
 
-public class Pgen
+class Pgen
 {
     _Grammar grammar;
     
