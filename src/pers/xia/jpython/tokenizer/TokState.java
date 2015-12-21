@@ -1,4 +1,4 @@
-package pers.xia.jpython.parser;
+package pers.xia.jpython.tokenizer;
 
 public enum TokState
 {

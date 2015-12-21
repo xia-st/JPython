@@ -1,4 +1,4 @@
-package pers.xia.jpython.parser;
+package pers.xia.jpython.tokenizer;
 
 import java.io.File;
 import org.apache.log4j.Logger;

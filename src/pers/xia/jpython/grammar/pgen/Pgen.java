@@ -19,7 +19,7 @@ import java.util.Stack;
 import org.apache.log4j.Logger;
 
 import pers.xia.jpython.object.PyExceptions;
-import pers.xia.jpython.parser.TokState;
+import pers.xia.jpython.tokenizer.TokState;
 
 public class Pgen
 {
@@ -1458,7 +1458,7 @@ public class Pgen
         sb.append("package pers.xia.jpython.grammar;\n\n" +
                 "import java.util.Map;\n" + 
                 "import java.util.HashMap;\n\n" +
-                "import pers.xia.jpython.parser.TokState;\n\n");
+                "import pers.xia.jpython.tokenizer.TokState;\n\n");
         sb.append("public final class GramInit{\n\n");
         
 

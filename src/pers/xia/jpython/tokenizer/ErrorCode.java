@@ -1,4 +1,4 @@
-package pers.xia.jpython.parser;
+package pers.xia.jpython.tokenizer;
 // Necessary? Maybe this file while be removed while Exception is completed
 public enum ErrorCode
 {

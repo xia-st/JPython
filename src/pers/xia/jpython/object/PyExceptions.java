@@ -2,7 +2,7 @@ package pers.xia.jpython.object;
 
 import java.util.Stack;
 
-import pers.xia.jpython.parser.Token;
+import pers.xia.jpython.tokenizer.Token;
 
 public class PyExceptions extends RuntimeException
 {

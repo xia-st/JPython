@@ -1,6 +1,6 @@
 package pers.xia.jpython.grammar;
 
-import pers.xia.jpython.parser.TokState;
+import pers.xia.jpython.tokenizer.TokState;
 
 public class Label
 {

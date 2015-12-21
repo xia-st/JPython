@@ -1,6 +1,6 @@
 package pers.xia.jpython.grammar.pgen;
 
-import pers.xia.jpython.parser.TokState;
+import pers.xia.jpython.tokenizer.TokState;
 
 /* 
  * 用于Pgen生成数据
