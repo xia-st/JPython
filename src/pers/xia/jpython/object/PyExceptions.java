@@ -23,9 +23,9 @@ public class PyExceptions extends RuntimeException
         super(message, cause);
     }
       
-    public PyExceptions(Token tok)
+    public PyExceptions(String msg, Token tok)
     {
-        super();
+        super(msg);
         this.tok = tok;
     }
     

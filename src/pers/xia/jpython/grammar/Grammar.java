@@ -2,13 +2,13 @@ package pers.xia.jpython.grammar;
 
 public class Grammar
 {
-    int ndfas;
-    DFA[] dfas;
+    public int ndfas;
+    public DFA[] dfas;
     
-    int nlabels;
-    Label[] labels;
+    public int nlabels;
+    public Label[] labels;
     
-    DFA start;
+    public DFA start;
     
     public Grammar(int ndfas, DFA[] dfas, int nlabels, Label[] labels, DFA start)
     {

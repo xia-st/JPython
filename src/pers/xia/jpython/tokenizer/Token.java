@@ -22,16 +22,16 @@ public class Token
     int pendin;
     String prompt;    //For interactive prompting
     String nextPrompt;    //For interactive prompting
-    int lineNo;
-    int level;    //Parentheses nesting level
+    public int lineNo;
+    public int level;    //Parentheses nesting level
     String enc;
-    String str;
+    public String str;
     String input;
     int start;
     int end;
     boolean contLine;
     
-    TokState state;
+    public TokState state;
     int lineStart;    //一行的起始位置
     int lineEnd;    //一行的结束位置
     

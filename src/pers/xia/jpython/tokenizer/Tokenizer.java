@@ -24,6 +24,7 @@ public class Tokenizer
     public Token nextToken()
     {
         this.tok.get();
+        this.tok.str = this.tok.buf.substring(this.tok.start, this.tok.end);
         return tok;
     }
     
