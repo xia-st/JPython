@@ -5,8 +5,8 @@ import pers.xia.jpython.object.PyExceptions;
 public class State
 {
     static int MAXSIZE = 100;
-    int narcs;
-    Arc[] arcs;
+    public int narcs;
+    public Arc[] arcs;
     
     public State(int narcs, Arc[] arcs)
     {

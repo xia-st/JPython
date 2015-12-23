@@ -2,8 +2,8 @@ package pers.xia.jpython.grammar;
 
 public class Arc
 {
-    Label label;
-    State nextState;
+    public Label label;
+    public State nextState;
     
     public Arc(Label label, State nextState)
     {

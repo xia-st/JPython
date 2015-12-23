@@ -5,12 +5,12 @@ import pers.xia.jpython.tokenizer.TokState;
 public class Label
 {
     //DFAName dfaName;  //DFA的名字
-    DFA nextDfa;        //下一个DFA
+    public DFA nextDfa;        //下一个DFA
     
     public TokState tokState;
     public String str;
     
-    boolean isTerminal;
+    public boolean isTerminal;
     
     public Label(DFA nextDfa)
     {

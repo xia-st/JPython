@@ -19,4 +19,14 @@ public class DFA
         this.states = states;
         this.jumpDFA = jumpDFA;
     }
+    
+    public DFA getNextDFA(Arc arc, Label label)
+    {
+        if(arc.label.isTerminal)
+        {
+            return null;
+        }
+        DFA dfa = arc.label.nextDfa;
+        return dfa.jumpDFA.get(label);
+    }
 }

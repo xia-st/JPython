@@ -2138,107 +2138,19 @@ public final class GramInit{
     };
 
     public static Map<Label, DFA> jumpedDFAs_0 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[155], dfas[67]);
-        put(GramInit.labels[22], dfas[7]);
         put(GramInit.labels[2], dfas[0]);
-        put(GramInit.labels[79], dfas[28]);
-        put(GramInit.labels[75], dfas[26]);
-        put(GramInit.labels[159], dfas[67]);
-        put(GramInit.labels[149], dfas[66]);
-        put(GramInit.labels[66], dfas[20]);
-        put(GramInit.labels[82], dfas[67]);
-        put(GramInit.labels[153], dfas[67]);
-        put(GramInit.labels[140], dfas[64]);
-        put(GramInit.labels[33], dfas[57]);
-        put(GramInit.labels[160], dfas[67]);
-        put(GramInit.labels[158], dfas[67]);
-        put(GramInit.labels[89], dfas[37]);
-        put(GramInit.labels[146], dfas[64]);
-        put(GramInit.labels[115], dfas[50]);
-        put(GramInit.labels[141], dfas[64]);
-        put(GramInit.labels[172], dfas[83]);
-        put(GramInit.labels[74], dfas[24]);
-        put(GramInit.labels[13], dfas[67]);
-        put(GramInit.labels[162], dfas[67]);
-        put(GramInit.labels[88], dfas[36]);
-        put(GramInit.labels[167], dfas[76]);
-        put(GramInit.labels[105], dfas[44]);
-        put(GramInit.labels[72], dfas[22]);
         put(GramInit.labels[7], dfas[0]);
-        put(GramInit.labels[100], dfas[42]);
-        put(GramInit.labels[23], dfas[67]);
-        put(GramInit.labels[73], dfas[23]);
-        put(GramInit.labels[11], dfas[3]);
-        put(GramInit.labels[87], dfas[35]);
-        put(GramInit.labels[64], dfas[19]);
-        put(GramInit.labels[96], dfas[40]);
-        put(GramInit.labels[102], dfas[43]);
-        put(GramInit.labels[21], dfas[39]);
-        put(GramInit.labels[161], dfas[67]);
-        put(GramInit.labels[120], dfas[54]);
-        put(GramInit.labels[99], dfas[41]);
-        put(GramInit.labels[76], dfas[29]);
+        put(GramInit.labels[6], dfas[13]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_1 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[155], dfas[67]);
-        put(GramInit.labels[22], dfas[7]);
+        put(GramInit.labels[3], dfas[14]);
         put(GramInit.labels[2], dfas[1]);
-        put(GramInit.labels[79], dfas[28]);
-        put(GramInit.labels[75], dfas[26]);
-        put(GramInit.labels[159], dfas[67]);
-        put(GramInit.labels[149], dfas[66]);
-        put(GramInit.labels[66], dfas[20]);
-        put(GramInit.labels[82], dfas[67]);
-        put(GramInit.labels[153], dfas[67]);
-        put(GramInit.labels[140], dfas[64]);
-        put(GramInit.labels[33], dfas[57]);
-        put(GramInit.labels[160], dfas[67]);
-        put(GramInit.labels[158], dfas[67]);
-        put(GramInit.labels[89], dfas[37]);
-        put(GramInit.labels[146], dfas[64]);
-        put(GramInit.labels[115], dfas[50]);
-        put(GramInit.labels[141], dfas[64]);
-        put(GramInit.labels[172], dfas[83]);
-        put(GramInit.labels[74], dfas[24]);
-        put(GramInit.labels[13], dfas[67]);
-        put(GramInit.labels[162], dfas[67]);
-        put(GramInit.labels[88], dfas[36]);
-        put(GramInit.labels[167], dfas[76]);
-        put(GramInit.labels[105], dfas[44]);
-        put(GramInit.labels[72], dfas[22]);
-        put(GramInit.labels[100], dfas[42]);
-        put(GramInit.labels[23], dfas[67]);
-        put(GramInit.labels[73], dfas[23]);
-        put(GramInit.labels[11], dfas[3]);
-        put(GramInit.labels[87], dfas[35]);
-        put(GramInit.labels[64], dfas[19]);
-        put(GramInit.labels[96], dfas[40]);
-        put(GramInit.labels[102], dfas[43]);
-        put(GramInit.labels[21], dfas[39]);
-        put(GramInit.labels[161], dfas[67]);
-        put(GramInit.labels[120], dfas[54]);
-        put(GramInit.labels[99], dfas[41]);
-        put(GramInit.labels[76], dfas[29]);
+        put(GramInit.labels[4], dfas[38]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_2 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[162], dfas[67]);
-        put(GramInit.labels[155], dfas[67]);
-        put(GramInit.labels[159], dfas[67]);
-        put(GramInit.labels[149], dfas[66]);
-        put(GramInit.labels[82], dfas[67]);
-        put(GramInit.labels[153], dfas[67]);
-        put(GramInit.labels[140], dfas[64]);
-        put(GramInit.labels[23], dfas[67]);
-        put(GramInit.labels[160], dfas[67]);
-        put(GramInit.labels[158], dfas[67]);
-        put(GramInit.labels[146], dfas[64]);
-        put(GramInit.labels[115], dfas[50]);
-        put(GramInit.labels[161], dfas[67]);
-        put(GramInit.labels[120], dfas[54]);
-        put(GramInit.labels[141], dfas[64]);
-        put(GramInit.labels[13], dfas[67]);
+        put(GramInit.labels[9], dfas[74]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_3 = new HashMap<Label, DFA>(){{
@@ -2246,11 +2158,11 @@ public final class GramInit{
     }};
 
     public static Map<Label, DFA> jumpedDFAs_4 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[11], dfas[3]);
+        put(GramInit.labels[10], dfas[3]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_5 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[11], dfas[3]);
+        put(GramInit.labels[16], dfas[4]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_6 = new HashMap<Label, DFA>(){{
@@ -2266,9 +2178,9 @@ public final class GramInit{
     }};
 
     public static Map<Label, DFA> jumpedDFAs_9 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[33], dfas[9]);
-        put(GramInit.labels[23], dfas[10]);
+        put(GramInit.labels[30], dfas[10]);
         put(GramInit.labels[34], dfas[9]);
+        put(GramInit.labels[33], dfas[9]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_10 = new HashMap<Label, DFA>(){{
@@ -2276,9 +2188,9 @@ public final class GramInit{
     }};
 
     public static Map<Label, DFA> jumpedDFAs_11 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[33], dfas[11]);
-        put(GramInit.labels[23], dfas[12]);
+        put(GramInit.labels[36], dfas[12]);
         put(GramInit.labels[34], dfas[11]);
+        put(GramInit.labels[33], dfas[11]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_12 = new HashMap<Label, DFA>(){{
@@ -2286,148 +2198,32 @@ public final class GramInit{
     }};
 
     public static Map<Label, DFA> jumpedDFAs_13 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[155], dfas[67]);
-        put(GramInit.labels[22], dfas[7]);
-        put(GramInit.labels[79], dfas[28]);
-        put(GramInit.labels[75], dfas[26]);
-        put(GramInit.labels[159], dfas[67]);
-        put(GramInit.labels[149], dfas[66]);
-        put(GramInit.labels[66], dfas[20]);
-        put(GramInit.labels[82], dfas[67]);
-        put(GramInit.labels[153], dfas[67]);
-        put(GramInit.labels[140], dfas[64]);
-        put(GramInit.labels[33], dfas[57]);
-        put(GramInit.labels[160], dfas[67]);
-        put(GramInit.labels[158], dfas[67]);
-        put(GramInit.labels[89], dfas[37]);
-        put(GramInit.labels[146], dfas[64]);
-        put(GramInit.labels[115], dfas[50]);
-        put(GramInit.labels[141], dfas[64]);
-        put(GramInit.labels[172], dfas[83]);
-        put(GramInit.labels[74], dfas[24]);
-        put(GramInit.labels[13], dfas[67]);
-        put(GramInit.labels[162], dfas[67]);
-        put(GramInit.labels[88], dfas[36]);
-        put(GramInit.labels[167], dfas[76]);
-        put(GramInit.labels[105], dfas[44]);
-        put(GramInit.labels[72], dfas[22]);
-        put(GramInit.labels[100], dfas[42]);
-        put(GramInit.labels[23], dfas[67]);
-        put(GramInit.labels[73], dfas[23]);
-        put(GramInit.labels[11], dfas[3]);
-        put(GramInit.labels[87], dfas[35]);
-        put(GramInit.labels[64], dfas[19]);
-        put(GramInit.labels[96], dfas[40]);
-        put(GramInit.labels[102], dfas[43]);
-        put(GramInit.labels[21], dfas[39]);
-        put(GramInit.labels[161], dfas[67]);
-        put(GramInit.labels[120], dfas[54]);
-        put(GramInit.labels[99], dfas[41]);
-        put(GramInit.labels[76], dfas[29]);
+        put(GramInit.labels[3], dfas[14]);
+        put(GramInit.labels[4], dfas[38]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_14 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[155], dfas[67]);
-        put(GramInit.labels[79], dfas[28]);
-        put(GramInit.labels[75], dfas[26]);
-        put(GramInit.labels[159], dfas[67]);
-        put(GramInit.labels[149], dfas[66]);
-        put(GramInit.labels[66], dfas[20]);
-        put(GramInit.labels[82], dfas[67]);
-        put(GramInit.labels[153], dfas[67]);
-        put(GramInit.labels[140], dfas[64]);
-        put(GramInit.labels[33], dfas[57]);
-        put(GramInit.labels[160], dfas[67]);
-        put(GramInit.labels[158], dfas[67]);
-        put(GramInit.labels[89], dfas[37]);
-        put(GramInit.labels[146], dfas[64]);
-        put(GramInit.labels[115], dfas[50]);
-        put(GramInit.labels[141], dfas[64]);
-        put(GramInit.labels[172], dfas[83]);
-        put(GramInit.labels[74], dfas[24]);
-        put(GramInit.labels[13], dfas[67]);
-        put(GramInit.labels[162], dfas[67]);
-        put(GramInit.labels[88], dfas[36]);
-        put(GramInit.labels[72], dfas[22]);
-        put(GramInit.labels[23], dfas[67]);
-        put(GramInit.labels[73], dfas[23]);
-        put(GramInit.labels[87], dfas[35]);
-        put(GramInit.labels[64], dfas[19]);
-        put(GramInit.labels[161], dfas[67]);
-        put(GramInit.labels[120], dfas[54]);
-        put(GramInit.labels[76], dfas[29]);
+        put(GramInit.labels[37], dfas[15]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_15 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[155], dfas[67]);
-        put(GramInit.labels[79], dfas[28]);
-        put(GramInit.labels[75], dfas[26]);
-        put(GramInit.labels[159], dfas[67]);
-        put(GramInit.labels[149], dfas[66]);
-        put(GramInit.labels[66], dfas[20]);
-        put(GramInit.labels[82], dfas[67]);
-        put(GramInit.labels[153], dfas[67]);
-        put(GramInit.labels[140], dfas[64]);
-        put(GramInit.labels[33], dfas[57]);
-        put(GramInit.labels[160], dfas[67]);
-        put(GramInit.labels[158], dfas[67]);
-        put(GramInit.labels[89], dfas[37]);
-        put(GramInit.labels[146], dfas[64]);
-        put(GramInit.labels[115], dfas[50]);
-        put(GramInit.labels[141], dfas[64]);
-        put(GramInit.labels[172], dfas[83]);
-        put(GramInit.labels[74], dfas[24]);
-        put(GramInit.labels[13], dfas[67]);
-        put(GramInit.labels[162], dfas[67]);
-        put(GramInit.labels[88], dfas[36]);
-        put(GramInit.labels[72], dfas[22]);
-        put(GramInit.labels[23], dfas[67]);
-        put(GramInit.labels[73], dfas[23]);
-        put(GramInit.labels[87], dfas[35]);
-        put(GramInit.labels[64], dfas[19]);
-        put(GramInit.labels[161], dfas[67]);
-        put(GramInit.labels[120], dfas[54]);
-        put(GramInit.labels[76], dfas[29]);
+        put(GramInit.labels[42], dfas[21]);
+        put(GramInit.labels[44], dfas[35]);
+        put(GramInit.labels[39], dfas[16]);
+        put(GramInit.labels[41], dfas[20]);
+        put(GramInit.labels[40], dfas[19]);
+        put(GramInit.labels[45], dfas[36]);
+        put(GramInit.labels[46], dfas[37]);
+        put(GramInit.labels[43], dfas[27]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_16 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[162], dfas[67]);
-        put(GramInit.labels[155], dfas[67]);
-        put(GramInit.labels[159], dfas[67]);
-        put(GramInit.labels[149], dfas[66]);
-        put(GramInit.labels[82], dfas[67]);
-        put(GramInit.labels[153], dfas[67]);
-        put(GramInit.labels[140], dfas[64]);
-        put(GramInit.labels[33], dfas[57]);
-        put(GramInit.labels[23], dfas[67]);
-        put(GramInit.labels[160], dfas[67]);
-        put(GramInit.labels[158], dfas[67]);
-        put(GramInit.labels[146], dfas[64]);
-        put(GramInit.labels[115], dfas[50]);
-        put(GramInit.labels[161], dfas[67]);
-        put(GramInit.labels[120], dfas[54]);
-        put(GramInit.labels[141], dfas[64]);
-        put(GramInit.labels[13], dfas[67]);
+        put(GramInit.labels[47], dfas[17]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_17 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[162], dfas[67]);
-        put(GramInit.labels[155], dfas[67]);
-        put(GramInit.labels[159], dfas[67]);
-        put(GramInit.labels[149], dfas[66]);
-        put(GramInit.labels[82], dfas[67]);
-        put(GramInit.labels[153], dfas[67]);
-        put(GramInit.labels[140], dfas[64]);
-        put(GramInit.labels[33], dfas[57]);
-        put(GramInit.labels[23], dfas[67]);
-        put(GramInit.labels[160], dfas[67]);
-        put(GramInit.labels[158], dfas[67]);
-        put(GramInit.labels[146], dfas[64]);
-        put(GramInit.labels[115], dfas[50]);
-        put(GramInit.labels[161], dfas[67]);
-        put(GramInit.labels[120], dfas[54]);
-        put(GramInit.labels[141], dfas[64]);
-        put(GramInit.labels[13], dfas[67]);
+        put(GramInit.labels[50], dfas[57]);
+        put(GramInit.labels[26], dfas[48]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_18 = new HashMap<Label, DFA>(){{
@@ -2455,11 +2251,11 @@ public final class GramInit{
     }};
 
     public static Map<Label, DFA> jumpedDFAs_21 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[72], dfas[22]);
-        put(GramInit.labels[172], dfas[83]);
-        put(GramInit.labels[74], dfas[24]);
-        put(GramInit.labels[75], dfas[26]);
-        put(GramInit.labels[73], dfas[23]);
+        put(GramInit.labels[69], dfas[24]);
+        put(GramInit.labels[67], dfas[22]);
+        put(GramInit.labels[68], dfas[23]);
+        put(GramInit.labels[71], dfas[25]);
+        put(GramInit.labels[70], dfas[26]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_22 = new HashMap<Label, DFA>(){{
@@ -2475,7 +2271,7 @@ public final class GramInit{
     }};
 
     public static Map<Label, DFA> jumpedDFAs_25 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[172], dfas[83]);
+        put(GramInit.labels[49], dfas[83]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_26 = new HashMap<Label, DFA>(){{
@@ -2483,8 +2279,8 @@ public final class GramInit{
     }};
 
     public static Map<Label, DFA> jumpedDFAs_27 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[76], dfas[29]);
-        put(GramInit.labels[79], dfas[28]);
+        put(GramInit.labels[78], dfas[29]);
+        put(GramInit.labels[77], dfas[28]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_28 = new HashMap<Label, DFA>(){{
@@ -2500,15 +2296,15 @@ public final class GramInit{
     }};
 
     public static Map<Label, DFA> jumpedDFAs_31 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[23], dfas[34]);
+        put(GramInit.labels[12], dfas[34]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_32 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[23], dfas[30]);
+        put(GramInit.labels[84], dfas[30]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_33 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[23], dfas[34]);
+        put(GramInit.labels[86], dfas[31]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_34 = new HashMap<Label, DFA>(){{
@@ -2528,15 +2324,15 @@ public final class GramInit{
     }};
 
     public static Map<Label, DFA> jumpedDFAs_38 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[22], dfas[7]);
-        put(GramInit.labels[11], dfas[3]);
-        put(GramInit.labels[167], dfas[76]);
-        put(GramInit.labels[105], dfas[44]);
-        put(GramInit.labels[96], dfas[40]);
-        put(GramInit.labels[102], dfas[43]);
-        put(GramInit.labels[21], dfas[39]);
-        put(GramInit.labels[100], dfas[42]);
-        put(GramInit.labels[99], dfas[41]);
+        put(GramInit.labels[92], dfas[42]);
+        put(GramInit.labels[19], dfas[7]);
+        put(GramInit.labels[91], dfas[41]);
+        put(GramInit.labels[90], dfas[40]);
+        put(GramInit.labels[94], dfas[44]);
+        put(GramInit.labels[17], dfas[5]);
+        put(GramInit.labels[18], dfas[76]);
+        put(GramInit.labels[95], dfas[39]);
+        put(GramInit.labels[93], dfas[43]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_39 = new HashMap<Label, DFA>(){{
@@ -2564,22 +2360,7 @@ public final class GramInit{
     }};
 
     public static Map<Label, DFA> jumpedDFAs_45 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[162], dfas[67]);
-        put(GramInit.labels[155], dfas[67]);
-        put(GramInit.labels[159], dfas[67]);
-        put(GramInit.labels[149], dfas[66]);
-        put(GramInit.labels[82], dfas[67]);
-        put(GramInit.labels[153], dfas[67]);
-        put(GramInit.labels[140], dfas[64]);
-        put(GramInit.labels[23], dfas[67]);
-        put(GramInit.labels[160], dfas[67]);
-        put(GramInit.labels[158], dfas[67]);
-        put(GramInit.labels[146], dfas[64]);
-        put(GramInit.labels[115], dfas[50]);
-        put(GramInit.labels[161], dfas[67]);
-        put(GramInit.labels[120], dfas[54]);
-        put(GramInit.labels[141], dfas[64]);
-        put(GramInit.labels[13], dfas[67]);
+        put(GramInit.labels[26], dfas[48]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_46 = new HashMap<Label, DFA>(){{
@@ -2587,74 +2368,18 @@ public final class GramInit{
     }};
 
     public static Map<Label, DFA> jumpedDFAs_47 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[155], dfas[67]);
         put(GramInit.labels[2], dfas[47]);
-        put(GramInit.labels[79], dfas[28]);
-        put(GramInit.labels[75], dfas[26]);
-        put(GramInit.labels[159], dfas[67]);
-        put(GramInit.labels[149], dfas[66]);
-        put(GramInit.labels[66], dfas[20]);
-        put(GramInit.labels[82], dfas[67]);
-        put(GramInit.labels[153], dfas[67]);
-        put(GramInit.labels[140], dfas[64]);
-        put(GramInit.labels[33], dfas[57]);
-        put(GramInit.labels[160], dfas[67]);
-        put(GramInit.labels[158], dfas[67]);
-        put(GramInit.labels[89], dfas[37]);
-        put(GramInit.labels[146], dfas[64]);
-        put(GramInit.labels[115], dfas[50]);
-        put(GramInit.labels[141], dfas[64]);
-        put(GramInit.labels[172], dfas[83]);
-        put(GramInit.labels[74], dfas[24]);
-        put(GramInit.labels[13], dfas[67]);
-        put(GramInit.labels[162], dfas[67]);
-        put(GramInit.labels[88], dfas[36]);
-        put(GramInit.labels[72], dfas[22]);
-        put(GramInit.labels[23], dfas[67]);
-        put(GramInit.labels[73], dfas[23]);
-        put(GramInit.labels[87], dfas[35]);
-        put(GramInit.labels[64], dfas[19]);
-        put(GramInit.labels[161], dfas[67]);
-        put(GramInit.labels[120], dfas[54]);
-        put(GramInit.labels[76], dfas[29]);
+        put(GramInit.labels[3], dfas[14]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_48 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[162], dfas[67]);
-        put(GramInit.labels[155], dfas[67]);
-        put(GramInit.labels[159], dfas[67]);
-        put(GramInit.labels[149], dfas[66]);
-        put(GramInit.labels[82], dfas[67]);
-        put(GramInit.labels[153], dfas[67]);
-        put(GramInit.labels[140], dfas[64]);
-        put(GramInit.labels[23], dfas[67]);
-        put(GramInit.labels[160], dfas[67]);
-        put(GramInit.labels[158], dfas[67]);
-        put(GramInit.labels[146], dfas[64]);
-        put(GramInit.labels[115], dfas[50]);
-        put(GramInit.labels[161], dfas[67]);
-        put(GramInit.labels[120], dfas[54]);
-        put(GramInit.labels[141], dfas[64]);
-        put(GramInit.labels[13], dfas[67]);
+        put(GramInit.labels[112], dfas[50]);
+        put(GramInit.labels[111], dfas[52]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_49 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[162], dfas[67]);
-        put(GramInit.labels[155], dfas[67]);
-        put(GramInit.labels[159], dfas[67]);
-        put(GramInit.labels[149], dfas[66]);
-        put(GramInit.labels[82], dfas[67]);
-        put(GramInit.labels[153], dfas[67]);
-        put(GramInit.labels[140], dfas[64]);
-        put(GramInit.labels[23], dfas[67]);
-        put(GramInit.labels[160], dfas[67]);
-        put(GramInit.labels[158], dfas[67]);
-        put(GramInit.labels[146], dfas[64]);
-        put(GramInit.labels[115], dfas[51]);
-        put(GramInit.labels[161], dfas[67]);
-        put(GramInit.labels[120], dfas[54]);
-        put(GramInit.labels[141], dfas[64]);
-        put(GramInit.labels[13], dfas[67]);
+        put(GramInit.labels[114], dfas[51]);
+        put(GramInit.labels[111], dfas[52]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_50 = new HashMap<Label, DFA>(){{
@@ -2666,74 +2391,20 @@ public final class GramInit{
     }};
 
     public static Map<Label, DFA> jumpedDFAs_52 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[162], dfas[67]);
-        put(GramInit.labels[155], dfas[67]);
-        put(GramInit.labels[159], dfas[67]);
-        put(GramInit.labels[149], dfas[66]);
-        put(GramInit.labels[82], dfas[67]);
-        put(GramInit.labels[153], dfas[67]);
-        put(GramInit.labels[140], dfas[64]);
-        put(GramInit.labels[23], dfas[67]);
-        put(GramInit.labels[160], dfas[67]);
-        put(GramInit.labels[158], dfas[67]);
-        put(GramInit.labels[146], dfas[64]);
-        put(GramInit.labels[161], dfas[67]);
-        put(GramInit.labels[120], dfas[54]);
-        put(GramInit.labels[141], dfas[64]);
-        put(GramInit.labels[13], dfas[67]);
+        put(GramInit.labels[116], dfas[53]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_53 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[162], dfas[67]);
-        put(GramInit.labels[155], dfas[67]);
-        put(GramInit.labels[159], dfas[67]);
-        put(GramInit.labels[149], dfas[66]);
-        put(GramInit.labels[82], dfas[67]);
-        put(GramInit.labels[153], dfas[67]);
-        put(GramInit.labels[140], dfas[64]);
-        put(GramInit.labels[23], dfas[67]);
-        put(GramInit.labels[160], dfas[67]);
-        put(GramInit.labels[158], dfas[67]);
-        put(GramInit.labels[146], dfas[64]);
-        put(GramInit.labels[161], dfas[67]);
-        put(GramInit.labels[120], dfas[54]);
-        put(GramInit.labels[141], dfas[64]);
-        put(GramInit.labels[13], dfas[67]);
+        put(GramInit.labels[118], dfas[54]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_54 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[162], dfas[67]);
-        put(GramInit.labels[155], dfas[67]);
-        put(GramInit.labels[159], dfas[67]);
-        put(GramInit.labels[149], dfas[66]);
-        put(GramInit.labels[82], dfas[67]);
-        put(GramInit.labels[153], dfas[67]);
-        put(GramInit.labels[140], dfas[64]);
-        put(GramInit.labels[23], dfas[67]);
-        put(GramInit.labels[160], dfas[67]);
-        put(GramInit.labels[158], dfas[67]);
-        put(GramInit.labels[146], dfas[64]);
-        put(GramInit.labels[161], dfas[67]);
+        put(GramInit.labels[121], dfas[55]);
         put(GramInit.labels[120], dfas[54]);
-        put(GramInit.labels[141], dfas[64]);
-        put(GramInit.labels[13], dfas[67]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_55 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[162], dfas[67]);
-        put(GramInit.labels[155], dfas[67]);
-        put(GramInit.labels[159], dfas[67]);
-        put(GramInit.labels[149], dfas[66]);
-        put(GramInit.labels[82], dfas[67]);
-        put(GramInit.labels[153], dfas[67]);
-        put(GramInit.labels[140], dfas[64]);
-        put(GramInit.labels[23], dfas[67]);
-        put(GramInit.labels[160], dfas[67]);
-        put(GramInit.labels[158], dfas[67]);
-        put(GramInit.labels[146], dfas[64]);
-        put(GramInit.labels[161], dfas[67]);
-        put(GramInit.labels[141], dfas[64]);
-        put(GramInit.labels[13], dfas[67]);
+        put(GramInit.labels[107], dfas[58]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_56 = new HashMap<Label, DFA>(){{
@@ -2753,150 +2424,43 @@ public final class GramInit{
     }};
 
     public static Map<Label, DFA> jumpedDFAs_58 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[162], dfas[67]);
-        put(GramInit.labels[155], dfas[67]);
-        put(GramInit.labels[159], dfas[67]);
-        put(GramInit.labels[149], dfas[66]);
-        put(GramInit.labels[82], dfas[67]);
-        put(GramInit.labels[153], dfas[67]);
-        put(GramInit.labels[140], dfas[64]);
-        put(GramInit.labels[23], dfas[67]);
-        put(GramInit.labels[160], dfas[67]);
-        put(GramInit.labels[158], dfas[67]);
-        put(GramInit.labels[146], dfas[64]);
-        put(GramInit.labels[161], dfas[67]);
-        put(GramInit.labels[141], dfas[64]);
-        put(GramInit.labels[13], dfas[67]);
+        put(GramInit.labels[130], dfas[59]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_59 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[162], dfas[67]);
-        put(GramInit.labels[155], dfas[67]);
-        put(GramInit.labels[159], dfas[67]);
-        put(GramInit.labels[149], dfas[66]);
-        put(GramInit.labels[82], dfas[67]);
-        put(GramInit.labels[153], dfas[67]);
-        put(GramInit.labels[140], dfas[64]);
-        put(GramInit.labels[23], dfas[67]);
-        put(GramInit.labels[160], dfas[67]);
-        put(GramInit.labels[158], dfas[67]);
-        put(GramInit.labels[146], dfas[64]);
-        put(GramInit.labels[161], dfas[67]);
-        put(GramInit.labels[141], dfas[64]);
-        put(GramInit.labels[13], dfas[67]);
+        put(GramInit.labels[132], dfas[60]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_60 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[162], dfas[67]);
-        put(GramInit.labels[155], dfas[67]);
-        put(GramInit.labels[159], dfas[67]);
-        put(GramInit.labels[149], dfas[66]);
-        put(GramInit.labels[82], dfas[67]);
-        put(GramInit.labels[153], dfas[67]);
-        put(GramInit.labels[140], dfas[64]);
-        put(GramInit.labels[23], dfas[67]);
-        put(GramInit.labels[160], dfas[67]);
-        put(GramInit.labels[158], dfas[67]);
-        put(GramInit.labels[146], dfas[64]);
-        put(GramInit.labels[161], dfas[67]);
-        put(GramInit.labels[141], dfas[64]);
-        put(GramInit.labels[13], dfas[67]);
+        put(GramInit.labels[134], dfas[61]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_61 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[162], dfas[67]);
-        put(GramInit.labels[155], dfas[67]);
-        put(GramInit.labels[159], dfas[67]);
-        put(GramInit.labels[149], dfas[66]);
-        put(GramInit.labels[82], dfas[67]);
-        put(GramInit.labels[153], dfas[67]);
-        put(GramInit.labels[140], dfas[64]);
-        put(GramInit.labels[23], dfas[67]);
-        put(GramInit.labels[160], dfas[67]);
-        put(GramInit.labels[158], dfas[67]);
-        put(GramInit.labels[146], dfas[64]);
-        put(GramInit.labels[161], dfas[67]);
-        put(GramInit.labels[141], dfas[64]);
-        put(GramInit.labels[13], dfas[67]);
+        put(GramInit.labels[136], dfas[62]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_62 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[162], dfas[67]);
-        put(GramInit.labels[155], dfas[67]);
-        put(GramInit.labels[159], dfas[67]);
-        put(GramInit.labels[149], dfas[66]);
-        put(GramInit.labels[82], dfas[67]);
-        put(GramInit.labels[153], dfas[67]);
-        put(GramInit.labels[140], dfas[64]);
-        put(GramInit.labels[23], dfas[67]);
-        put(GramInit.labels[160], dfas[67]);
-        put(GramInit.labels[158], dfas[67]);
-        put(GramInit.labels[146], dfas[64]);
-        put(GramInit.labels[161], dfas[67]);
-        put(GramInit.labels[141], dfas[64]);
-        put(GramInit.labels[13], dfas[67]);
+        put(GramInit.labels[139], dfas[63]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_63 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[162], dfas[67]);
-        put(GramInit.labels[155], dfas[67]);
-        put(GramInit.labels[159], dfas[67]);
-        put(GramInit.labels[149], dfas[66]);
-        put(GramInit.labels[82], dfas[67]);
-        put(GramInit.labels[153], dfas[67]);
-        put(GramInit.labels[140], dfas[64]);
-        put(GramInit.labels[23], dfas[67]);
-        put(GramInit.labels[160], dfas[67]);
-        put(GramInit.labels[158], dfas[67]);
-        put(GramInit.labels[146], dfas[64]);
-        put(GramInit.labels[161], dfas[67]);
-        put(GramInit.labels[141], dfas[64]);
-        put(GramInit.labels[13], dfas[67]);
+        put(GramInit.labels[142], dfas[64]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_64 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[162], dfas[67]);
-        put(GramInit.labels[155], dfas[67]);
-        put(GramInit.labels[159], dfas[67]);
-        put(GramInit.labels[149], dfas[66]);
-        put(GramInit.labels[82], dfas[67]);
-        put(GramInit.labels[153], dfas[67]);
-        put(GramInit.labels[140], dfas[64]);
-        put(GramInit.labels[23], dfas[67]);
-        put(GramInit.labels[160], dfas[67]);
-        put(GramInit.labels[158], dfas[67]);
+        put(GramInit.labels[147], dfas[65]);
         put(GramInit.labels[146], dfas[64]);
-        put(GramInit.labels[161], dfas[67]);
         put(GramInit.labels[141], dfas[64]);
-        put(GramInit.labels[13], dfas[67]);
+        put(GramInit.labels[140], dfas[64]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_65 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[162], dfas[67]);
-        put(GramInit.labels[160], dfas[67]);
-        put(GramInit.labels[158], dfas[67]);
-        put(GramInit.labels[155], dfas[67]);
-        put(GramInit.labels[159], dfas[67]);
-        put(GramInit.labels[161], dfas[67]);
-        put(GramInit.labels[149], dfas[66]);
-        put(GramInit.labels[82], dfas[67]);
-        put(GramInit.labels[153], dfas[67]);
-        put(GramInit.labels[23], dfas[67]);
-        put(GramInit.labels[13], dfas[67]);
+        put(GramInit.labels[148], dfas[66]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_66 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[162], dfas[67]);
-        put(GramInit.labels[160], dfas[67]);
-        put(GramInit.labels[158], dfas[67]);
-        put(GramInit.labels[155], dfas[67]);
-        put(GramInit.labels[159], dfas[67]);
-        put(GramInit.labels[161], dfas[67]);
+        put(GramInit.labels[150], dfas[67]);
         put(GramInit.labels[149], dfas[66]);
-        put(GramInit.labels[82], dfas[67]);
-        put(GramInit.labels[153], dfas[67]);
-        put(GramInit.labels[23], dfas[67]);
-        put(GramInit.labels[13], dfas[67]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_67 = new HashMap<Label, DFA>(){{
@@ -2913,23 +2477,8 @@ public final class GramInit{
     }};
 
     public static Map<Label, DFA> jumpedDFAs_68 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[162], dfas[67]);
-        put(GramInit.labels[155], dfas[67]);
-        put(GramInit.labels[159], dfas[67]);
-        put(GramInit.labels[149], dfas[66]);
-        put(GramInit.labels[82], dfas[67]);
-        put(GramInit.labels[153], dfas[67]);
-        put(GramInit.labels[140], dfas[64]);
-        put(GramInit.labels[33], dfas[57]);
-        put(GramInit.labels[23], dfas[67]);
-        put(GramInit.labels[160], dfas[67]);
-        put(GramInit.labels[158], dfas[67]);
-        put(GramInit.labels[146], dfas[64]);
-        put(GramInit.labels[115], dfas[50]);
-        put(GramInit.labels[161], dfas[67]);
-        put(GramInit.labels[120], dfas[54]);
-        put(GramInit.labels[141], dfas[64]);
-        put(GramInit.labels[13], dfas[67]);
+        put(GramInit.labels[50], dfas[57]);
+        put(GramInit.labels[26], dfas[48]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_69 = new HashMap<Label, DFA>(){{
@@ -2939,43 +2488,12 @@ public final class GramInit{
     }};
 
     public static Map<Label, DFA> jumpedDFAs_70 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[162], dfas[67]);
-        put(GramInit.labels[27], dfas[71]);
-        put(GramInit.labels[155], dfas[67]);
-        put(GramInit.labels[159], dfas[67]);
-        put(GramInit.labels[149], dfas[66]);
-        put(GramInit.labels[82], dfas[67]);
-        put(GramInit.labels[153], dfas[67]);
-        put(GramInit.labels[140], dfas[64]);
-        put(GramInit.labels[23], dfas[67]);
-        put(GramInit.labels[160], dfas[67]);
-        put(GramInit.labels[158], dfas[67]);
-        put(GramInit.labels[146], dfas[64]);
-        put(GramInit.labels[115], dfas[50]);
-        put(GramInit.labels[161], dfas[67]);
-        put(GramInit.labels[120], dfas[54]);
-        put(GramInit.labels[141], dfas[64]);
-        put(GramInit.labels[13], dfas[67]);
+        put(GramInit.labels[165], dfas[71]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_71 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[162], dfas[67]);
         put(GramInit.labels[27], dfas[71]);
-        put(GramInit.labels[155], dfas[67]);
-        put(GramInit.labels[159], dfas[67]);
-        put(GramInit.labels[149], dfas[66]);
-        put(GramInit.labels[82], dfas[67]);
-        put(GramInit.labels[153], dfas[67]);
-        put(GramInit.labels[140], dfas[64]);
-        put(GramInit.labels[23], dfas[67]);
-        put(GramInit.labels[160], dfas[67]);
-        put(GramInit.labels[158], dfas[67]);
-        put(GramInit.labels[146], dfas[64]);
-        put(GramInit.labels[115], dfas[50]);
-        put(GramInit.labels[161], dfas[67]);
-        put(GramInit.labels[120], dfas[54]);
-        put(GramInit.labels[141], dfas[64]);
-        put(GramInit.labels[13], dfas[67]);
+        put(GramInit.labels[26], dfas[48]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_72 = new HashMap<Label, DFA>(){{
@@ -2983,61 +2501,18 @@ public final class GramInit{
     }};
 
     public static Map<Label, DFA> jumpedDFAs_73 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[162], dfas[67]);
-        put(GramInit.labels[155], dfas[67]);
-        put(GramInit.labels[159], dfas[67]);
-        put(GramInit.labels[149], dfas[66]);
-        put(GramInit.labels[82], dfas[67]);
-        put(GramInit.labels[153], dfas[67]);
-        put(GramInit.labels[140], dfas[64]);
-        put(GramInit.labels[33], dfas[57]);
-        put(GramInit.labels[23], dfas[67]);
-        put(GramInit.labels[160], dfas[67]);
-        put(GramInit.labels[158], dfas[67]);
-        put(GramInit.labels[146], dfas[64]);
-        put(GramInit.labels[161], dfas[67]);
-        put(GramInit.labels[141], dfas[64]);
-        put(GramInit.labels[13], dfas[67]);
+        put(GramInit.labels[107], dfas[58]);
+        put(GramInit.labels[50], dfas[57]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_74 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[162], dfas[67]);
-        put(GramInit.labels[155], dfas[67]);
-        put(GramInit.labels[159], dfas[67]);
-        put(GramInit.labels[149], dfas[66]);
-        put(GramInit.labels[82], dfas[67]);
-        put(GramInit.labels[153], dfas[67]);
-        put(GramInit.labels[140], dfas[64]);
-        put(GramInit.labels[23], dfas[67]);
-        put(GramInit.labels[160], dfas[67]);
-        put(GramInit.labels[158], dfas[67]);
-        put(GramInit.labels[146], dfas[64]);
-        put(GramInit.labels[115], dfas[50]);
-        put(GramInit.labels[161], dfas[67]);
-        put(GramInit.labels[120], dfas[54]);
-        put(GramInit.labels[141], dfas[64]);
-        put(GramInit.labels[13], dfas[67]);
+        put(GramInit.labels[26], dfas[48]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_75 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[162], dfas[67]);
-        put(GramInit.labels[155], dfas[67]);
-        put(GramInit.labels[159], dfas[67]);
-        put(GramInit.labels[149], dfas[66]);
-        put(GramInit.labels[82], dfas[67]);
-        put(GramInit.labels[153], dfas[67]);
-        put(GramInit.labels[140], dfas[64]);
-        put(GramInit.labels[33], dfas[57]);
-        put(GramInit.labels[23], dfas[67]);
-        put(GramInit.labels[160], dfas[67]);
-        put(GramInit.labels[158], dfas[67]);
-        put(GramInit.labels[146], dfas[64]);
-        put(GramInit.labels[115], dfas[50]);
-        put(GramInit.labels[161], dfas[67]);
-        put(GramInit.labels[120], dfas[54]);
-        put(GramInit.labels[141], dfas[64]);
+        put(GramInit.labels[50], dfas[57]);
         put(GramInit.labels[34], dfas[75]);
-        put(GramInit.labels[13], dfas[67]);
+        put(GramInit.labels[26], dfas[48]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_76 = new HashMap<Label, DFA>(){{
@@ -3045,50 +2520,18 @@ public final class GramInit{
     }};
 
     public static Map<Label, DFA> jumpedDFAs_77 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[162], dfas[67]);
-        put(GramInit.labels[155], dfas[67]);
-        put(GramInit.labels[159], dfas[67]);
-        put(GramInit.labels[149], dfas[66]);
-        put(GramInit.labels[82], dfas[67]);
-        put(GramInit.labels[153], dfas[67]);
-        put(GramInit.labels[140], dfas[64]);
-        put(GramInit.labels[33], dfas[78]);
-        put(GramInit.labels[23], dfas[67]);
-        put(GramInit.labels[160], dfas[67]);
-        put(GramInit.labels[158], dfas[67]);
-        put(GramInit.labels[146], dfas[64]);
-        put(GramInit.labels[115], dfas[50]);
-        put(GramInit.labels[161], dfas[67]);
-        put(GramInit.labels[120], dfas[54]);
-        put(GramInit.labels[141], dfas[64]);
-        put(GramInit.labels[34], dfas[78]);
-        put(GramInit.labels[13], dfas[67]);
+        put(GramInit.labels[168], dfas[78]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_78 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[162], dfas[67]);
-        put(GramInit.labels[155], dfas[67]);
-        put(GramInit.labels[159], dfas[67]);
-        put(GramInit.labels[149], dfas[66]);
-        put(GramInit.labels[82], dfas[67]);
-        put(GramInit.labels[153], dfas[67]);
-        put(GramInit.labels[140], dfas[64]);
-        put(GramInit.labels[33], dfas[78]);
-        put(GramInit.labels[23], dfas[67]);
-        put(GramInit.labels[160], dfas[67]);
-        put(GramInit.labels[158], dfas[67]);
-        put(GramInit.labels[146], dfas[64]);
-        put(GramInit.labels[115], dfas[50]);
-        put(GramInit.labels[161], dfas[67]);
-        put(GramInit.labels[120], dfas[54]);
-        put(GramInit.labels[141], dfas[64]);
         put(GramInit.labels[34], dfas[78]);
-        put(GramInit.labels[13], dfas[67]);
+        put(GramInit.labels[33], dfas[78]);
+        put(GramInit.labels[26], dfas[48]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_79 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[96], dfas[81]);
-        put(GramInit.labels[100], dfas[80]);
+        put(GramInit.labels[163], dfas[80]);
+        put(GramInit.labels[170], dfas[81]);
     }};
 
     public static Map<Label, DFA> jumpedDFAs_80 = new HashMap<Label, DFA>(){{
@@ -3108,31 +2551,16 @@ public final class GramInit{
     }};
 
     public static Map<Label, DFA> jumpedDFAs_84 = new HashMap<Label, DFA>(){{
-        put(GramInit.labels[162], dfas[67]);
-        put(GramInit.labels[155], dfas[67]);
-        put(GramInit.labels[159], dfas[67]);
-        put(GramInit.labels[149], dfas[66]);
-        put(GramInit.labels[82], dfas[67]);
-        put(GramInit.labels[153], dfas[67]);
-        put(GramInit.labels[140], dfas[64]);
-        put(GramInit.labels[23], dfas[67]);
-        put(GramInit.labels[160], dfas[67]);
-        put(GramInit.labels[158], dfas[67]);
-        put(GramInit.labels[146], dfas[64]);
-        put(GramInit.labels[115], dfas[50]);
-        put(GramInit.labels[161], dfas[67]);
-        put(GramInit.labels[120], dfas[54]);
-        put(GramInit.labels[141], dfas[64]);
+        put(GramInit.labels[9], dfas[74]);
         put(GramInit.labels[76], dfas[84]);
-        put(GramInit.labels[13], dfas[67]);
     }};
 
     public static DFA[] dfas = {
         new DFA(DFAName.file_input, GramInit.states_0[0], 2, GramInit.states_0, jumpedDFAs_0),
         new DFA(DFAName.single_input, GramInit.states_1[0], 3, GramInit.states_1, jumpedDFAs_1),
-        new DFA(DFAName.eval_input, GramInit.states_2[0], 3, GramInit.states_2, jumpedDFAs_74),
-        new DFA(DFAName.decorator, GramInit.states_3[0], 6, GramInit.states_3, jumpedDFAs_5),
-        new DFA(DFAName.decorators, GramInit.states_4[0], 2, GramInit.states_4, jumpedDFAs_5),
+        new DFA(DFAName.eval_input, GramInit.states_2[0], 3, GramInit.states_2, jumpedDFAs_2),
+        new DFA(DFAName.decorator, GramInit.states_3[0], 6, GramInit.states_3, jumpedDFAs_3),
+        new DFA(DFAName.decorators, GramInit.states_4[0], 2, GramInit.states_4, jumpedDFAs_4),
         new DFA(DFAName.decorated, GramInit.states_5[0], 3, GramInit.states_5, jumpedDFAs_5),
         new DFA(DFAName.async_funcdef, GramInit.states_6[0], 3, GramInit.states_6, jumpedDFAs_6),
         new DFA(DFAName.funcdef, GramInit.states_7[0], 8, GramInit.states_7, jumpedDFAs_7),
@@ -3142,9 +2570,9 @@ public final class GramInit{
         new DFA(DFAName.varargslist, GramInit.states_11[0], 12, GramInit.states_11, jumpedDFAs_11),
         new DFA(DFAName.vfpdef, GramInit.states_12[0], 2, GramInit.states_12, jumpedDFAs_12),
         new DFA(DFAName.stmt, GramInit.states_13[0], 2, GramInit.states_13, jumpedDFAs_13),
-        new DFA(DFAName.simple_stmt, GramInit.states_14[0], 4, GramInit.states_14, jumpedDFAs_15),
+        new DFA(DFAName.simple_stmt, GramInit.states_14[0], 4, GramInit.states_14, jumpedDFAs_14),
         new DFA(DFAName.small_stmt, GramInit.states_15[0], 2, GramInit.states_15, jumpedDFAs_15),
-        new DFA(DFAName.expr_stmt, GramInit.states_16[0], 6, GramInit.states_16, jumpedDFAs_68),
+        new DFA(DFAName.expr_stmt, GramInit.states_16[0], 6, GramInit.states_16, jumpedDFAs_16),
         new DFA(DFAName.testlist_star_expr, GramInit.states_17[0], 3, GramInit.states_17, jumpedDFAs_68),
         new DFA(DFAName.augassign, GramInit.states_18[0], 2, GramInit.states_18, jumpedDFAs_18),
         new DFA(DFAName.del_stmt, GramInit.states_19[0], 3, GramInit.states_19, jumpedDFAs_19),
@@ -3153,15 +2581,15 @@ public final class GramInit{
         new DFA(DFAName.break_stmt, GramInit.states_22[0], 2, GramInit.states_22, jumpedDFAs_22),
         new DFA(DFAName.continue_stmt, GramInit.states_23[0], 2, GramInit.states_23, jumpedDFAs_23),
         new DFA(DFAName.return_stmt, GramInit.states_24[0], 3, GramInit.states_24, jumpedDFAs_24),
-        new DFA(DFAName.yield_stmt, GramInit.states_25[0], 2, GramInit.states_25, jumpedDFAs_83),
+        new DFA(DFAName.yield_stmt, GramInit.states_25[0], 2, GramInit.states_25, jumpedDFAs_25),
         new DFA(DFAName.raise_stmt, GramInit.states_26[0], 5, GramInit.states_26, jumpedDFAs_26),
         new DFA(DFAName.import_stmt, GramInit.states_27[0], 2, GramInit.states_27, jumpedDFAs_27),
         new DFA(DFAName.import_name, GramInit.states_28[0], 3, GramInit.states_28, jumpedDFAs_28),
         new DFA(DFAName.import_from, GramInit.states_29[0], 8, GramInit.states_29, jumpedDFAs_29),
-        new DFA(DFAName.import_as_name, GramInit.states_30[0], 2, GramInit.states_30, jumpedDFAs_32),
-        new DFA(DFAName.dotted_as_name, GramInit.states_31[0], 4, GramInit.states_31, jumpedDFAs_34),
+        new DFA(DFAName.import_as_name, GramInit.states_30[0], 2, GramInit.states_30, jumpedDFAs_30),
+        new DFA(DFAName.dotted_as_name, GramInit.states_31[0], 4, GramInit.states_31, jumpedDFAs_31),
         new DFA(DFAName.import_as_names, GramInit.states_32[0], 3, GramInit.states_32, jumpedDFAs_32),
-        new DFA(DFAName.dotted_as_names, GramInit.states_33[0], 2, GramInit.states_33, jumpedDFAs_34),
+        new DFA(DFAName.dotted_as_names, GramInit.states_33[0], 2, GramInit.states_33, jumpedDFAs_33),
         new DFA(DFAName.dotted_name, GramInit.states_34[0], 2, GramInit.states_34, jumpedDFAs_34),
         new DFA(DFAName.global_stmt, GramInit.states_35[0], 3, GramInit.states_35, jumpedDFAs_35),
         new DFA(DFAName.nonlocal_stmt, GramInit.states_36[0], 3, GramInit.states_36, jumpedDFAs_36),
@@ -3176,36 +2604,36 @@ public final class GramInit{
         new DFA(DFAName.with_item, GramInit.states_45[0], 4, GramInit.states_45, jumpedDFAs_74),
         new DFA(DFAName.except_clause, GramInit.states_46[0], 5, GramInit.states_46, jumpedDFAs_46),
         new DFA(DFAName.suite, GramInit.states_47[0], 5, GramInit.states_47, jumpedDFAs_47),
-        new DFA(DFAName.test, GramInit.states_48[0], 6, GramInit.states_48, jumpedDFAs_74),
+        new DFA(DFAName.test, GramInit.states_48[0], 6, GramInit.states_48, jumpedDFAs_48),
         new DFA(DFAName.test_nocond, GramInit.states_49[0], 2, GramInit.states_49, jumpedDFAs_49),
         new DFA(DFAName.lambdef, GramInit.states_50[0], 5, GramInit.states_50, jumpedDFAs_50),
         new DFA(DFAName.lambdef_nocond, GramInit.states_51[0], 5, GramInit.states_51, jumpedDFAs_51),
-        new DFA(DFAName.or_test, GramInit.states_52[0], 2, GramInit.states_52, jumpedDFAs_54),
-        new DFA(DFAName.and_test, GramInit.states_53[0], 2, GramInit.states_53, jumpedDFAs_54),
+        new DFA(DFAName.or_test, GramInit.states_52[0], 2, GramInit.states_52, jumpedDFAs_52),
+        new DFA(DFAName.and_test, GramInit.states_53[0], 2, GramInit.states_53, jumpedDFAs_53),
         new DFA(DFAName.not_test, GramInit.states_54[0], 3, GramInit.states_54, jumpedDFAs_54),
-        new DFA(DFAName.comparison, GramInit.states_55[0], 2, GramInit.states_55, jumpedDFAs_64),
+        new DFA(DFAName.comparison, GramInit.states_55[0], 2, GramInit.states_55, jumpedDFAs_55),
         new DFA(DFAName.comp_op, GramInit.states_56[0], 4, GramInit.states_56, jumpedDFAs_56),
         new DFA(DFAName.star_expr, GramInit.states_57[0], 3, GramInit.states_57, jumpedDFAs_57),
-        new DFA(DFAName.expr, GramInit.states_58[0], 2, GramInit.states_58, jumpedDFAs_64),
-        new DFA(DFAName.xor_expr, GramInit.states_59[0], 2, GramInit.states_59, jumpedDFAs_64),
-        new DFA(DFAName.and_expr, GramInit.states_60[0], 2, GramInit.states_60, jumpedDFAs_64),
-        new DFA(DFAName.shift_expr, GramInit.states_61[0], 2, GramInit.states_61, jumpedDFAs_64),
-        new DFA(DFAName.arith_expr, GramInit.states_62[0], 2, GramInit.states_62, jumpedDFAs_64),
-        new DFA(DFAName.term, GramInit.states_63[0], 2, GramInit.states_63, jumpedDFAs_64),
+        new DFA(DFAName.expr, GramInit.states_58[0], 2, GramInit.states_58, jumpedDFAs_58),
+        new DFA(DFAName.xor_expr, GramInit.states_59[0], 2, GramInit.states_59, jumpedDFAs_59),
+        new DFA(DFAName.and_expr, GramInit.states_60[0], 2, GramInit.states_60, jumpedDFAs_60),
+        new DFA(DFAName.shift_expr, GramInit.states_61[0], 2, GramInit.states_61, jumpedDFAs_61),
+        new DFA(DFAName.arith_expr, GramInit.states_62[0], 2, GramInit.states_62, jumpedDFAs_62),
+        new DFA(DFAName.term, GramInit.states_63[0], 2, GramInit.states_63, jumpedDFAs_63),
         new DFA(DFAName.factor, GramInit.states_64[0], 3, GramInit.states_64, jumpedDFAs_64),
-        new DFA(DFAName.power, GramInit.states_65[0], 4, GramInit.states_65, jumpedDFAs_66),
+        new DFA(DFAName.power, GramInit.states_65[0], 4, GramInit.states_65, jumpedDFAs_65),
         new DFA(DFAName.atom_expr, GramInit.states_66[0], 3, GramInit.states_66, jumpedDFAs_66),
         new DFA(DFAName.atom, GramInit.states_67[0], 7, GramInit.states_67, jumpedDFAs_67),
         new DFA(DFAName.testlist_comp, GramInit.states_68[0], 5, GramInit.states_68, jumpedDFAs_68),
         new DFA(DFAName.trailer, GramInit.states_69[0], 7, GramInit.states_69, jumpedDFAs_69),
-        new DFA(DFAName.subscriptlist, GramInit.states_70[0], 3, GramInit.states_70, jumpedDFAs_71),
+        new DFA(DFAName.subscriptlist, GramInit.states_70[0], 3, GramInit.states_70, jumpedDFAs_70),
         new DFA(DFAName.subscript, GramInit.states_71[0], 5, GramInit.states_71, jumpedDFAs_71),
         new DFA(DFAName.sliceop, GramInit.states_72[0], 3, GramInit.states_72, jumpedDFAs_72),
         new DFA(DFAName.exprlist, GramInit.states_73[0], 3, GramInit.states_73, jumpedDFAs_73),
         new DFA(DFAName.testlist, GramInit.states_74[0], 3, GramInit.states_74, jumpedDFAs_74),
         new DFA(DFAName.dictorsetmaker, GramInit.states_75[0], 14, GramInit.states_75, jumpedDFAs_75),
         new DFA(DFAName.classdef, GramInit.states_76[0], 6, GramInit.states_76, jumpedDFAs_76),
-        new DFA(DFAName.arglist, GramInit.states_77[0], 3, GramInit.states_77, jumpedDFAs_78),
+        new DFA(DFAName.arglist, GramInit.states_77[0], 3, GramInit.states_77, jumpedDFAs_77),
         new DFA(DFAName.argument, GramInit.states_78[0], 4, GramInit.states_78, jumpedDFAs_78),
         new DFA(DFAName.comp_iter, GramInit.states_79[0], 2, GramInit.states_79, jumpedDFAs_79),
         new DFA(DFAName.comp_for, GramInit.states_80[0], 6, GramInit.states_80, jumpedDFAs_80),

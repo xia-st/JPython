@@ -1102,7 +1102,7 @@ class Pgen
         return null;
     }
     
-    // 当跳转到本DFA时需要跳转的实际DFA
+    // 设置可以跳转到本处的DFA
     private void setNextTrueDFA(_DFA dfa)
     {
         if(dfa.jumpedDFAs != null) return;
@@ -1112,12 +1112,17 @@ class Pgen
         
         for(_Label label : labels)
         {
+            //如果是终结符的话就指向本dfa，否则就指向下一个dfa
             if(label.isTerminal)
             {
                 dfa.jumpedDFAs.put(label, dfa);
             }
             else
             {
+                
+                dfa.jumpedDFAs.put(label, this.grammar.getDFA(label.nextDfa));
+                
+                /* 这段代码可以直接指出需要跳转的实际DFA，但是这会导致CST结构混乱，故删去
                 _DFA nextDfa = this.grammar.getDFA(label.nextDfa);
                 if(nextDfa.jumpedDFAs == null) this.setNextTrueDFA(nextDfa);
                 
@@ -1129,6 +1134,7 @@ class Pgen
                     }
                 }
                 dfa.jumpedDFAs.putAll(nextDfa.jumpedDFAs);
+                */
             }
         }
     }
