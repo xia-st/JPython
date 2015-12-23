@@ -20,13 +20,8 @@ public class DFA
         this.jumpDFA = jumpDFA;
     }
     
-    public DFA getNextDFA(Arc arc, Label label)
+    public DFA getNextDFA(Label label)
     {
-        if(arc.label.isTerminal)
-        {
-            return null;
-        }
-        DFA dfa = arc.label.nextDfa;
-        return dfa.jumpDFA.get(label);
+        return this.jumpDFA.get(label);
     }
 }
