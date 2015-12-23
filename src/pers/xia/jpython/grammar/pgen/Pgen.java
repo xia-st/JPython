@@ -1112,7 +1112,11 @@ class Pgen
         
         for(_Label label : labels)
         {
-            //如果是终结符的话就指向本dfa，否则就指向下一个dfa
+            /* 
+             * 如果是终结符的话就指向本dfa，否则就获取下一个终结符中jumpedDFAs的所有label放入
+             * 到本终结符的jumpedDFAs中，并设置DFA为nextDfa
+             */
+            
             if(label.isTerminal)
             {
                 dfa.jumpedDFAs.put(label, dfa);
@@ -1120,9 +1124,6 @@ class Pgen
             else
             {
                 
-                dfa.jumpedDFAs.put(label, this.grammar.getDFA(label.nextDfa));
-                
-                /* 这段代码可以直接指出需要跳转的实际DFA，但是这会导致CST结构混乱，故删去
                 _DFA nextDfa = this.grammar.getDFA(label.nextDfa);
                 if(nextDfa.jumpedDFAs == null) this.setNextTrueDFA(nextDfa);
                 
@@ -1132,9 +1133,8 @@ class Pgen
                     {
                         throw new PyExceptions("same label");
                     }
+                    dfa.jumpedDFAs.put(ld.getKey(), nextDfa);
                 }
-                dfa.jumpedDFAs.putAll(nextDfa.jumpedDFAs);
-                */
             }
         }
     }
