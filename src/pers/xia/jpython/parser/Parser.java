@@ -1,17 +1,20 @@
 package pers.xia.jpython.parser;
 
+import java.io.File;
 import java.util.Stack;
 
 import org.apache.log4j.Logger;
 
 import pers.xia.jpython.grammar.Arc;
 import pers.xia.jpython.grammar.DFA;
+import pers.xia.jpython.grammar.GramInit;
 import pers.xia.jpython.grammar.Grammar;
 import pers.xia.jpython.grammar.Label;
 import pers.xia.jpython.grammar.State;
 import pers.xia.jpython.object.PyExceptions;
 import pers.xia.jpython.tokenizer.TokState;
 import pers.xia.jpython.tokenizer.Token;
+import pers.xia.jpython.tokenizer.Tokenizer;
 
 public class Parser
 {
@@ -200,6 +203,35 @@ public class Parser
                 continue;
             }
             throw new PyExceptions("Illigal token: ", token);
+        }
+    }
+    
+    public static void main(String[] args)
+    {
+        File file = new File("test.py");
+        Parser parser = new Parser(GramInit.grammar);
+        Tokenizer tokenizer = new Tokenizer(file);
+        try
+        {
+            Token tok = tokenizer.nextToken();
+            int colOffset = 0;
+            while(tok.state != TokState.ENDMARKER)
+            {
+                parser.AddToken(tok, colOffset);
+                if(tok.state == TokState.NEWLINE)
+                {
+                    colOffset = 0;
+                }
+                else
+                {
+                    colOffset++;
+                }
+                tok = tokenizer.nextToken();
+            }
+        }
+        catch(PyExceptions e)
+        {
+            e.printStackTrace();
         }
     }
 }
