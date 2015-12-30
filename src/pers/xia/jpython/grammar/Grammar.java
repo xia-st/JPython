@@ -8,9 +8,9 @@ public class Grammar
     public int nlabels;
     public Label[] labels;
     
-    public DFA start;
+    public int start;
     
-    public Grammar(int ndfas, DFA[] dfas, int nlabels, Label[] labels, DFA start)
+    public Grammar(int ndfas, DFA[] dfas, int nlabels, Label[] labels, int start)
     {
         this.ndfas = ndfas;
         this.dfas = dfas;

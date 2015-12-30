@@ -1240,6 +1240,7 @@ class Pgen
         }
         
         //设置起始dfa
+        /* 这段代码毫无无意义
         for(int i = 0; i < this.grammar.ndfas; i++)
         {
             if(this.grammar.dfas[i].name.equals("file_input"))
@@ -1253,6 +1254,7 @@ class Pgen
                 break;
             }
         }
+        */
 
         return true;
     }
@@ -1279,7 +1281,7 @@ class Pgen
             }
             else
             {
-                sb.append("        new Label(" + DFAStringMap.get(label.nextDfa) + "),");
+                sb.append("        new Label(" + DFAStringMap.getOrDefault(label.nextDfa, "-1") + "),");
             }
             sb.append("\n");
         }
@@ -1301,7 +1303,8 @@ class Pgen
         for(int i = 0; i < state.narcs; i++)
         {
             sb.append("        new Arc(" + labelStringMap.get(state.arcs[i].label) +  ", " +
-                    stateStringMap.get(state.arcs[i].nextState) + "),\n");
+                    stateStringMap.getOrDefault(state.arcs[i].nextState, "-1") + 
+                    "),\n");
         }
         sb.append("    };\n\n");
         
@@ -1327,7 +1330,7 @@ class Pgen
         //设置state与它对应的名字
         for(int i = 0; i < dfa.nstates; i++)
         {
-            stateStringMap.put(dfa.states[i], fileName + "." + statesName + "[" + i + "]");
+            stateStringMap.put(dfa.states[i], Integer.toString(i));
         }
         
         //添加arc的数据
@@ -1361,8 +1364,8 @@ class Pgen
     {
         StringBuilder sb = new StringBuilder();
         
-        sb.append("    public static Map<Label, DFA> " + jumpedDFAName + 
-                " = new HashMap<Label, DFA>(){{\n");
+        sb.append("    public static Map<Integer, Integer> " + jumpedDFAName + 
+                " = new HashMap<Integer, Integer>(){{\n");
         
         for(Map.Entry<_Label, _DFA>jd : jumpedDFA.entrySet())
         {
@@ -1399,7 +1402,7 @@ class Pgen
        //设置DFA与对应的名字
        for(int i = 0; i < grammar.ndfas; i++)
        {
-           DFAStringMap.put(grammar.dfas[i].name, "dfas[" + i + "]");
+           DFAStringMap.put(grammar.dfas[i].name, Integer.toString(i));
        }
        
        //保存jumpedDFA与它对应的名字
@@ -1422,7 +1425,7 @@ class Pgen
        {
            sb.append("        new DFA(" +
                    "DFAName." + grammar.dfas[i].name + ", " +
-                   fileName + "." + statesStringMap.get(grammar.dfas[i].states) + "[0], " +
+                   "0, " +
                    grammar.dfas[i].nstates + ", " +
                    fileName + "." + statesStringMap.get(grammar.dfas[i].states) + ", " +
                    jumpedDFAStringMap.get(grammar.dfas[i].jumpedDFAs) + 
@@ -1442,15 +1445,15 @@ class Pgen
         //dfa名字所对应的实际名字
         Map<String, String> DFAStringMap = new HashMap<String, String>();
         
-        //设置所有label的名字
-        String labelsName = fileName + ".labels[%d]";
+        //逆转label和它的下标
+        String labelsName = "%d";
         for(int i = 0; i < this.grammar.nlabels; i++)
         {
             labelStringMap.put(this.grammar.labels[i], String.format(labelsName, i));
         }
         
-        //设置所有dfa的名字
-        String DFAName = "dfas[%d]";
+        //逆转label和它的下标
+        String DFAName = "%d";
         for(int i = 0; i < this.grammar.ndfas; i++)
         {
             DFAStringMap.put(this.grammar.dfas[i].name, String.format(DFAName, i));
@@ -1478,7 +1481,7 @@ class Pgen
                 fileName + ".dfas" + ", " +
                 grammar.nlabels + ", " +
                 fileName + ".labels, " +
-                fileName + ".dfas[0]" +
+                "0" +
                 ");\n");
         
         sb.append("};\n");

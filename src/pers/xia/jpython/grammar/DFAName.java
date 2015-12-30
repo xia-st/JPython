@@ -2,8 +2,8 @@ package pers.xia.jpython.grammar;
 
 public enum DFAName
 {
-    file_input,
     single_input,
+    file_input,
     eval_input,
     decorator,
     decorators,
