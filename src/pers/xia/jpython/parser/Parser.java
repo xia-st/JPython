@@ -20,8 +20,8 @@ public class Parser
 {
     class StackEntry    //栈中的元素
     {
-        DFA dfa = null; //所属的DFA
-        State curState = null;  //当前的state
+        int dfa; //所属的DFA
+        int curState;  //当前的state
         Node parentNode = null; //当前的父结点，用于连接下面的结点
     }
 
@@ -33,20 +33,20 @@ public class Parser
     
     public Parser(Grammar grammar)
     {
-        this(grammar, null);
+        this(grammar, -1);
     }
     
-    public Parser(Grammar grammar, DFA start)
+    public Parser(Grammar grammar, int start)
     {
         this.log = Logger.getLogger(Parser.class);
         
         StackEntry stackEntry = new StackEntry();
         
-        if(start == null) start = grammar.start;
+        if(start < 0) start = grammar.start;
        
         stackEntry.dfa = start;
-        stackEntry.curState = start.initial;
-        stackEntry.parentNode = new Node(start.name);
+        stackEntry.curState = grammar.getDFA(start).initial;
+        stackEntry.parentNode = new Node(grammar.getDFA(start).name);
         
         stack.push(stackEntry);
         this.grammar = grammar;
@@ -54,7 +54,7 @@ public class Parser
     }
     
     //根据Token确定相应的label
-    private Label classify(Token token)
+    private int classify(Token token)
     {
         /* 
          * 如果token的state是NAME的话需要考虑为关键字还是普通的NAME，
@@ -63,7 +63,7 @@ public class Parser
          */
         if(token.state == TokState.NAME)
         {
-            Label label = null; // 保存(NAME, null)这个label
+            int label = -1; // 保存(NAME, null)这个label
             
             for(int i = 0; i < this.grammar.nlabels; i++)
             {
@@ -71,18 +71,18 @@ public class Parser
                 {
                     if(this.grammar.labels[i].str == null)
                     {
-                        label = this.grammar.labels[i];
+                        label = i;
                         continue;
                     }
                     if(this.grammar.labels[i].str.equals(token.str))
                     {
-                        log.debug(token.str + "is a key word");
-                        return this.grammar.labels[i];
+                        log.info(token.str + "is a key word");
+                        return i;
                     }
                 }
             }
-            if(label == null) throw new PyExceptions("Illegal token", token);
-            log.debug("It is a token we know");
+            if(label == -1) throw new PyExceptions("Illegal token", token);
+            log.info(token.str + " is a token we know");
             return label;
         }
         
@@ -93,15 +93,15 @@ public class Parser
         {
             if(this.grammar.labels[i].tokState == token.state)
             {
-                log.debug(token.str + "is a token");
-                return this.grammar.labels[i];
+                log.info(token.str + "is a key word");
+                return i;
             }
         }
         throw new PyExceptions("Illegal token", token);
     }
     
     //设置下一个结点
-    private void shift(TokState tokState, State nextState, String str, int lineNo, int colOffset)
+    private void shift(TokState tokState, int nextState, String str, int lineNo, int colOffset)
     {
         StackEntry stackEntry = this.stack.peek();
         stackEntry.parentNode.addChild(tokState, str, lineNo, colOffset);
@@ -109,17 +109,19 @@ public class Parser
     }
     
     //添加一个新的stackEntry
-    private void push(DFA nextDFA, int lineNo, int colOffset)
+    private void push(int nextDFA, int lineNo, int colOffset)
     {
         StackEntry stackEntry = this.stack.peek();
         
-        stackEntry.parentNode.addChild(nextDFA.name, lineNo, colOffset);
+        DFA _dfa = grammar.getDFA(nextDFA);
+        
+        stackEntry.parentNode.addChild(_dfa.name, lineNo, colOffset);
         
         Node node = stackEntry.parentNode.getChild(-1);
         
         StackEntry newSE = new StackEntry();
         newSE.dfa = nextDFA;
-        newSE.curState = nextDFA.initial;
+        newSE.curState = _dfa.initial;
         newSE.parentNode = node;
         
         this.stack.push(newSE);
@@ -127,7 +129,7 @@ public class Parser
     
     public void AddToken(Token token, int colOffset)
     {
-        Label label = this.classify(token);
+        int label = this.classify(token);
         
         
         for(;;)
@@ -189,7 +191,8 @@ public class Parser
                     }
                     throw new PyExceptions("grammar ERROR");
                 }
-            }
+            }            int narcs = stackEntry.curState.narcs;
+
             
             //如果每找到对应的label且以及到达终结符的话就pop出结点，从前一个结点继续查找
             if(finalState)

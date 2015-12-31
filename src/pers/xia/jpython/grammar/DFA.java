@@ -2,6 +2,8 @@ package pers.xia.jpython.grammar;
 
 import java.util.Map;
 
+import pers.xia.jpython.object.PyExceptions;
+
 public class DFA
 {
     public DFAName name;    //DFA name
@@ -18,6 +20,15 @@ public class DFA
         this.nstates = nstates;
         this.states = states;
         this.jumpDFA = jumpDFA;
+    }
+    
+    public State getState(int index)
+    {
+        if(index >= nstates || index < 0)
+        {
+            throw new PyExceptions("DFA: Out of Index");
+        }
+        return this.states[index];
     }
     
     public int getNextDFA(int label)

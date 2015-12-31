@@ -1,5 +1,7 @@
 package pers.xia.jpython.grammar;
 
+import pers.xia.jpython.object.PyExceptions;
+
 public class Grammar
 {
     public int ndfas;
@@ -18,4 +20,23 @@ public class Grammar
         this.labels = labels;
         this.start = start;
     }
+    
+    public DFA getDFA(int index)
+    {
+        if(index < 0 || index >= this.ndfas)
+        {
+            throw new PyExceptions("Grammar: Out of Index while get DFA");
+        }
+        return this.dfas[index];
+    }
+    
+    public Label getLabe(int index)
+    {
+        if(index < 0 || index >= this.ndfas)
+        {
+            throw new PyExceptions("Grammar: Out of Index while get DFA");
+        }
+        return this.labels[index];
+    }
+    
 }
