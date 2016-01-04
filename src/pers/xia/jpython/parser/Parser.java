@@ -20,7 +20,7 @@ public class Parser
 {
     class StackEntry    //栈中的元素
     {
-        int dfa; //所属的DFA
+        DFA dfa; //所属的DFA
         int curState;  //当前的state
         Node parentNode = null; //当前的父结点，用于连接下面的结点
     }
@@ -44,7 +44,7 @@ public class Parser
         
         if(start < 0) start = grammar.start;
        
-        stackEntry.dfa = start;
+        stackEntry.dfa = grammar.getDFA(start);
         stackEntry.curState = grammar.getDFA(start).initial;
         stackEntry.parentNode = new Node(grammar.getDFA(start).name);
         
@@ -109,19 +109,17 @@ public class Parser
     }
     
     //添加一个新的stackEntry
-    private void push(int nextDFA, int lineNo, int colOffset)
+    private void push(DFA nextDFA, int lineNo, int colOffset)
     {
         StackEntry stackEntry = this.stack.peek();
-        
-        DFA _dfa = grammar.getDFA(nextDFA);
-        
-        stackEntry.parentNode.addChild(_dfa.name, lineNo, colOffset);
+                
+        stackEntry.parentNode.addChild(nextDFA.name, lineNo, colOffset);
         
         Node node = stackEntry.parentNode.getChild(-1);
         
         StackEntry newSE = new StackEntry();
         newSE.dfa = nextDFA;
-        newSE.curState = _dfa.initial;
+        newSE.curState = nextDFA.initial;
         newSE.parentNode = node;
         
         this.stack.push(newSE);
@@ -129,82 +127,13 @@ public class Parser
     
     public void AddToken(Token token, int colOffset)
     {
-        int label = this.classify(token);
+        int _label = this.classify(token);
+        Label label = this.grammar.getLabe(_label);
         
-        
+        // 马上修改掉！！！！！！！
         for(;;)
         {
-            StackEntry stackEntry = this.stack.peek();
-        
-            int narcs = stackEntry.curState.narcs;
-
-            boolean finalState = false;
-            
-            //遍历每一条边
-            for(int i = 0; i < narcs; i++)
-            {
-                Arc arc = stackEntry.curState.arcs[i];
-                /*
-                 * 如果是终结符的话将其放入到当前父结点，否则就创建新的
-                 * stackEntry，连接新的子树
-                 */
-                if(arc.label.isTerminal)
-                {
-                    if(arc.label == label)
-                    {
-                        this.shift(label.tokState, arc.nextState, token.str, token.lineNo, colOffset);
-                        return;
-                    }
-                }
-                else
-                {
-                    if(arc.label.nextDfa == null)
-                    {
-                        finalState = true; 
-                        continue;
-                    }
-                    DFA nextDFA = arc.label.nextDfa;
-
-                    //一层层遍历下去，每搜索一层DFA就添加一次结点，直到找到最后的结点。
-                    DFA nnextDFA = nextDFA.getNextDFA(label);
-
-                    if(nnextDFA == null) continue;
-
-                    while(nextDFA != nnextDFA)
-                    {
-                        this.push(nextDFA, token.lineNo, colOffset);
-                        nextDFA = nnextDFA;
-                    }
-                    this.push(nextDFA, token.lineNo, colOffset);
-
-                    StackEntry stackEntry2 = this.stack.peek();
-
-                    int narcs2 = stackEntry2.curState.narcs;
-                    for(int j = 0; j < narcs2; j++)
-                    {
-                        Arc arc2 = stackEntry.curState.arcs[i];
-                        if(arc2.label == label)
-                        {
-                            this.shift(label.tokState, arc2.nextState, token.str, token.lineNo, colOffset);
-                            return;
-                        }
-                    }
-                    throw new PyExceptions("grammar ERROR");
-                }
-            }            int narcs = stackEntry.curState.narcs;
-
-            
-            //如果每找到对应的label且以及到达终结符的话就pop出结点，从前一个结点继续查找
-            if(finalState)
-            {
-                this.stack.pop();
-                if(this.stack.empty())
-                {
-                    log.debug("accept");
-                    return;
-                }
-                continue;
-            }
+            //TODO add token
             throw new PyExceptions("Illigal token: ", token);
         }
     }

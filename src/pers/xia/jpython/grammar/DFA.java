@@ -33,6 +33,6 @@ public class DFA
     
     public int getNextDFA(int label)
     {
-        return this.jumpDFA.get(label);
+        return this.jumpDFA.getOrDefault(label, -1);
     }
 }

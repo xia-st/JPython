@@ -1364,12 +1364,14 @@ class Pgen
     {
         StringBuilder sb = new StringBuilder();
         
-        sb.append("    public static Map<Integer, Integer> " + jumpedDFAName + 
-                " = new HashMap<Integer, Integer>(){{\n");
+        sb.append("    public final static Map<Integer, Integer> " + jumpedDFAName + 
+                " = new HashMap<Integer, Integer>(){\n" +
+                "        private static final long serialVersionUID = 1L;\n" +
+                "        {\n");
         
         for(Map.Entry<_Label, _DFA>jd : jumpedDFA.entrySet())
         {
-            sb.append("        put(" + labelStringMap.get(jd.getKey()) + ", " +
+            sb.append("            put(" + labelStringMap.get(jd.getKey()) + ", " +
                     DFAStringMap.get(jd.getValue().name) + ");\n");
         }
         sb.append("    }};\n\n");
