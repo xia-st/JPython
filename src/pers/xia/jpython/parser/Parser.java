@@ -38,6 +38,10 @@ public class Parser
     
     public Parser(Grammar grammar, int start)
     {
+        if(!grammar.accel)
+        {
+            grammar.addAccelerators();
+        }
         this.log = Logger.getLogger(Parser.class);
         
         StackEntry stackEntry = new StackEntry();
@@ -48,7 +52,8 @@ public class Parser
         stackEntry.curState = grammar.getDFA(start).initial;
         stackEntry.parentNode = new Node(grammar.getDFA(start).name);
         
-        stack.push(stackEntry);
+        this.stack = new Stack<StackEntry>();
+        this.stack.push(stackEntry);
         this.grammar = grammar;
         this.tree = stackEntry.parentNode;
     }
@@ -76,7 +81,7 @@ public class Parser
                     }
                     if(this.grammar.labels[i].str.equals(token.str))
                     {
-                        log.info(token.str + "is a key word");
+                        log.info(token.str + " is a key word");
                         return i;
                     }
                 }
@@ -93,7 +98,7 @@ public class Parser
         {
             if(this.grammar.labels[i].tokState == token.state)
             {
-                log.info(token.str + "is a key word");
+                log.info(token.str + " is a key word");
                 return i;
             }
         }
@@ -103,37 +108,89 @@ public class Parser
     //设置下一个结点
     private void shift(TokState tokState, int nextState, String str, int lineNo, int colOffset)
     {
-        StackEntry stackEntry = this.stack.peek();
-        stackEntry.parentNode.addChild(tokState, str, lineNo, colOffset);
-        stackEntry.curState = nextState;
+        StackEntry se = this.stack.peek();
+        se.parentNode.addChild(tokState, str, lineNo, colOffset);
+        se.curState = nextState;
     }
     
     //添加一个新的stackEntry
     private void push(DFA nextDFA, int lineNo, int colOffset)
     {
-        StackEntry stackEntry = this.stack.peek();
+        StackEntry se = this.stack.peek();
                 
-        stackEntry.parentNode.addChild(nextDFA.name, lineNo, colOffset);
+        se.parentNode.addChild(nextDFA.name, lineNo, colOffset);
         
-        Node node = stackEntry.parentNode.getChild(-1);
+        Node node = se.parentNode.getChild(-1);
         
-        StackEntry newSE = new StackEntry();
-        newSE.dfa = nextDFA;
-        newSE.curState = nextDFA.initial;
-        newSE.parentNode = node;
+        StackEntry se1 = new StackEntry();
+        se1.dfa = nextDFA;
+        se1.curState = nextDFA.initial;
+        se1.parentNode = node;
         
-        this.stack.push(newSE);
+        this.stack.push(se1);
     }
     
     public void AddToken(Token token, int colOffset)
     {
-        int _label = this.classify(token);
-        Label label = this.grammar.getLabe(_label);
-        
-        // 马上修改掉！！！！！！！
+        int ilabel = this.classify(token);
+                
         for(;;)
         {
-            //TODO add token
+            StackEntry se = this.stack.peek();
+            DFA dfa = se.dfa;
+            State state = dfa.getState(se.curState);
+            
+            log.debug("DFA: " + dfa.name + ", State: " + state.hashCode());
+            
+            if(ilabel >= state.lower && ilabel < state.upper)
+            {
+                int x = state.next(ilabel - state.lower);
+                
+                if(x > -1)
+                {
+                    if(x > State.MAXNARCS)
+                    {
+                        log.debug("push...");
+                        DFA dfa1 = grammar.getDFA(x - State.MAXNARCS);
+                        this.push(dfa1, token.lineNo, colOffset);
+                        continue;
+                    }
+                    
+                    log.debug("shift...");
+                    this.shift(token.state, x, token.str, token.lineNo, colOffset);
+                    
+                    /* 
+                     * Pop while we are in an accept-only sstate
+                     */
+                    
+                    state = dfa.getState(se.curState);
+                    while(state.accept && state.narcs == 1)
+                    {
+                        this.stack.pop();
+                        if(this.stack.empty())
+                        {
+                            log.debug("accept");
+                            return;
+                        }
+                        se = this.stack.peek();
+                        dfa = se.dfa;
+                        state = dfa.getState(se.curState);
+                    }
+                    return;
+                }
+            }
+            
+            if(state.accept)
+            {
+                this.stack.pop();
+                log.debug("Pop...");
+                if(this.stack.empty())
+                {
+                    new PyExceptions(" Error: bottom of stack.\n");
+                }
+                continue;
+            }
+            
             throw new PyExceptions("Illigal token: ", token);
         }
     }
@@ -141,10 +198,11 @@ public class Parser
     public static void main(String[] args)
     {
         File file = new File("test.py");
-        Parser parser = new Parser(GramInit.grammar);
-        Tokenizer tokenizer = new Tokenizer(file);
+
         try
         {
+            Parser parser = new Parser(GramInit.grammar);
+            Tokenizer tokenizer = new Tokenizer(file);
             Token tok = tokenizer.nextToken();
             int colOffset = 0;
             while(tok.state != TokState.ENDMARKER)
@@ -164,6 +222,7 @@ public class Parser
         catch(PyExceptions e)
         {
             e.printStackTrace();
+            throw e;
         }
     }
 }

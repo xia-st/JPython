@@ -26,6 +26,7 @@ public class PyExceptions extends RuntimeException
     public PyExceptions(String msg, Token tok)
     {
         super(msg);
+        map.push(msg + tok.hashCode());
         this.tok = tok;
     }
     

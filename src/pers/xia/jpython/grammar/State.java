@@ -4,15 +4,15 @@ import pers.xia.jpython.object.PyExceptions;
 
 public class State
 {
-    static final int MAXNARCS = 100;
+    public static final int MAXNARCS = 100;
     public int narcs;
     public Arc[] arcs;
     
     /* Optional accelerators */
-    int lower;  /* Lowest label index */
-    int upper; /* Highest label index */
+    public int lower;  /* Lowest label index */
+    public int upper; /* Highest label index */
     int accel[]; /* Accelerators */
-    boolean accept; /* Accepting state */
+    public boolean accept; /* Accepting state */
     
     
     public State(int narcs, Arc[] arcs)
@@ -21,5 +21,10 @@ public class State
         this.arcs = arcs;
         this.accept = false;
     }
-
+    
+    public int next(int index)
+    {
+        return accel[index];
+    }
+    
 }

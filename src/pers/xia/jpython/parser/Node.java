@@ -1,5 +1,6 @@
 package pers.xia.jpython.parser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import pers.xia.jpython.grammar.DFAName;
@@ -20,12 +21,14 @@ public class Node
    
    public Node(DFAName dfaType)
    {
+       this.childs = new ArrayList<Node>();
        this.dfaType = dfaType;
        this.isDFAType = true;
    }
    
    public Node(TokState tokType)
    {
+       this.childs = new ArrayList<Node>();
        this.tokType = tokType;
        this.isDFAType = false;
    }

@@ -1,5 +1,7 @@
 package pers.xia.jpython.grammar;
 
+import java.util.Map;
+
 import pers.xia.jpython.object.PyExceptions;
 
 public class Grammar
@@ -33,10 +35,11 @@ public class Grammar
         
         Arc a[] = state.arcs;
         
-        for(int i = 0; i < this.nlabels; i++)
+        for(int i = 0; i < state.narcs; i++)
         {
             int lbl = a[i].label;
-            Label l = this.getLabe(lbl);
+            Label l = this.getLabel(lbl);
+            
             if(l.isTerminal)
             {
                 accel[lbl] = i;
@@ -48,13 +51,37 @@ public class Grammar
             else
             {
                 DFA dfa = this.getDFA(l.nextDfa);
-                if(dfa.getNextDFA(lbl) != -1)
+                
+                //XXX 在修改graminit后此处也得修改
+                for(Map.Entry<Integer, Integer> map : dfa.jumpDFA.entrySet())
                 {
-                    accel[lbl] = l.nextDfa + State.MAXNARCS;
+                    accel[map.getKey()] = l.nextDfa + State.MAXNARCS;
                 }
             }
         }
         
+        int lower; //标记最小的label下标
+        int upper;    //标记最大的label下标
+        
+        //获取最小坐标和最大坐标
+        for(lower = 0; lower < this.nlabels && accel[lower] == -1; lower++);
+        for(upper = this.nlabels; upper >= 0 && upper > lower && accel[upper-1] == -1; upper--);
+
+        //不存在有效边
+        if(upper == lower)
+        {
+            return;
+        }
+        
+        state.lower = lower;
+        state.upper = upper;
+        
+        //将生成的数组放到state里面
+        state.accel = new int[state.upper - state.lower];
+        for(int i = 0; i < upper - lower; i++)
+        {
+            state.accel[i] = accel[i + lower];
+        }
     }
     
     private void fixDFA(DFA dfa)
@@ -83,9 +110,9 @@ public class Grammar
         return this.dfas[index];
     }
     
-    public Label getLabe(int index)
+    public Label getLabel(int index)
     {
-        if(index < 0 || index >= this.ndfas)
+        if(index < 0 || index >= this.nlabels)
         {
             throw new PyExceptions("Grammar: Out of Index while get DFA");
         }

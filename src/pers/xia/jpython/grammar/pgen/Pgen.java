@@ -1112,6 +1112,8 @@ class Pgen
         
         for(_Label label : labels)
         {
+
+
             /* 
              * 如果是终结符的话就指向本dfa，否则就获取下一个终结符中jumpedDFAs的所有label放入
              * 到本终结符的jumpedDFAs中，并设置DFA为nextDfa
@@ -1123,7 +1125,6 @@ class Pgen
             }
             else
             {
-                
                 _DFA nextDfa = this.grammar.getDFA(label.nextDfa);
                 if(nextDfa.jumpedDFAs == null) this.setNextTrueDFA(nextDfa);
                 
