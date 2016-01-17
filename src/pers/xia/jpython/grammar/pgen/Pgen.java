@@ -1005,7 +1005,9 @@ class Pgen
         
         this.initOoOmMap(startS, one2oneMap, one2multiMap);
         
-        for(Map.Entry<_State, _State> oo : one2oneMap.entrySet())
+        
+       /* Wrote 7 days but have a Huge Problem, I could not bear to delete it
+        * for(Map.Entry<_State, _State> oo : one2oneMap.entrySet())
         {
             //当前运算的结点
             _State oneState = oo.getKey();
@@ -1015,6 +1017,7 @@ class Pgen
 
             //保存oneState的所有label
             List<_Label> baseLabel = new LinkedList<_Label>();
+            // 将oneState中的Label保存到baseLabel中
             //XXX 尝试下lambda表达式，这里代码的速度对最终项目没影响
             Arrays.asList(Arrays.copyOfRange(oneState.arcs, 0, oneState.narcs))
                 .forEach((arc) -> baseLabel.add(arc.label));
@@ -1024,10 +1027,10 @@ class Pgen
                 // 如果出现了划分的话需要继续以当前label为基准进行操作
                 for(;;)
                 {
-                    /* 
+                     
                      * 通过某个label时的目标集合相同时的state的集合
                      * key为指向的state，value为指向该state的所有state集合
-                     */
+                     
                     Map<_State, Set<_State>> collOfStates = new HashMap<_State, Set<_State>>();
 
                     
@@ -1058,16 +1061,16 @@ class Pgen
                     
                     if(collOfStates.size() <= 1)  break;
 
-                    /* 
+                     
                      * Create new collections
-                     */
+                     
                     for(Map.Entry<_State, Set<_State>> coll : collOfStates.entrySet())
                     {
                         Set<_State> states = coll.getValue();
-                        /*
+                        
                          *  如果当前集合中有包含本集合所表示的标志结点，则
                          *  当前集合不用划分出新的数据
-                         */
+                         
                         if(states.contains(curColl)) continue;
                         
                         one2multiMap.get(curColl).removeAll(states);
@@ -1080,7 +1083,7 @@ class Pgen
                     }
                 }
             }
-        }
+        }*/
         
         //连接新的结点
         for(Map.Entry<_State, Set<_State>> om : one2multiMap.entrySet())
@@ -1192,9 +1195,7 @@ class Pgen
                                 " DFA " + arc.label.nextDfa + 
                                 " -> " + state2.hashCode());
                     }
-    
                 }
-
             }
             if(stateStack2.empty()) break;
             
@@ -1202,6 +1203,7 @@ class Pgen
             stateStack2 = new Stack<_State>();
             
         }
+        System.out.println();
     }
     
     public boolean createGrammar()
@@ -1216,10 +1218,17 @@ class Pgen
             _Node tree = this.createTree();
             DoubleS ds = this.createFA(tree);
             this.removeNonArc(ds.start);
+            
 
+            
             dfa.initial = this.modifyToDFA(ds.start);
-
+            
+            System.out.println(dfa.name);
+            this.showFA(dfa.initial);
+            
             this.minimize(dfa.initial);
+
+            this.showFA(dfa.initial);
             dfa.setStates();
             this.grammar.setDFA(dfa);
             

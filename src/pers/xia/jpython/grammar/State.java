@@ -4,7 +4,6 @@ import pers.xia.jpython.object.PyExceptions;
 
 public class State
 {
-    public static final int MAXNARCS = 100;
     public int narcs;
     public Arc[] arcs;
     

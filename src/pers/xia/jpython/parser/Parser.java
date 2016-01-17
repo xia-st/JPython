@@ -1,9 +1,13 @@
 package pers.xia.jpython.parser;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Stack;
 
 import org.apache.log4j.Logger;
+
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 import pers.xia.jpython.grammar.Arc;
 import pers.xia.jpython.grammar.DFA;
@@ -114,11 +118,12 @@ public class Parser
     }
     
     //添加一个新的stackEntry
-    private void push(DFA nextDFA, int lineNo, int colOffset)
+    private void push(DFA nextDFA, int nextState, int lineNo, int colOffset)
     {
         StackEntry se = this.stack.peek();
                 
         se.parentNode.addChild(nextDFA.name, lineNo, colOffset);
+        se.curState = nextState;
         
         Node node = se.parentNode.getChild(-1);
         
@@ -148,11 +153,12 @@ public class Parser
                 
                 if(x > -1)
                 {
-                    if(x > State.MAXNARCS)
+                    if((x & (1 << 7)) > 0)
                     {
                         log.debug("push...");
-                        DFA dfa1 = grammar.getDFA(x - State.MAXNARCS);
-                        this.push(dfa1, token.lineNo, colOffset);
+                        DFA dfa1 = grammar.getDFA(x >> 8);
+                        int nextState = x & (1 << 7 - 1);
+                        this.push(dfa1, nextState, token.lineNo, colOffset);
                         continue;
                     }
                     
@@ -160,12 +166,13 @@ public class Parser
                     this.shift(token.state, x, token.str, token.lineNo, colOffset);
                     
                     /* 
-                     * Pop while we are in an accept-only sstate
+                     * Pop while we are in an accept-only state
                      */
                     
-                    state = dfa.getState(se.curState);
+                    state = dfa.getState(this.stack.peek().curState);
                     while(state.accept && state.narcs == 1)
                     {
+                        log.debug("Pop while singal accept-only state...");
                         this.stack.pop();
                         if(this.stack.empty())
                         {
@@ -183,7 +190,7 @@ public class Parser
             if(state.accept)
             {
                 this.stack.pop();
-                log.debug("Pop...");
+                log.debug("Pop while accept...");
                 if(this.stack.empty())
                 {
                     new PyExceptions(" Error: bottom of stack.\n");

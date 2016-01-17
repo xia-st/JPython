@@ -42,7 +42,7 @@ public class Grammar
             
             if(l.isTerminal)
             {
-                accel[lbl] = i;
+                accel[lbl] = a[i].nextState;
             }
             else if(l.nextDfa == -1)
             {
@@ -55,7 +55,8 @@ public class Grammar
                 //XXX 在修改graminit后此处也得修改
                 for(Map.Entry<Integer, Integer> map : dfa.jumpDFA.entrySet())
                 {
-                    accel[map.getKey()] = l.nextDfa + State.MAXNARCS;
+                    accel[map.getKey()] = l.nextDfa << 8 | 1 << 7 |
+                            a[i].nextState;
                 }
             }
         }

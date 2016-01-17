@@ -39,6 +39,18 @@ class _State
         return -1;
     }
     
+    public int findArc(_State nextState)
+    {
+        for(int i = 0; i < this.narcs; i++)
+        {
+            if(this.arcs[i].nextState == nextState);
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+    
     public void removeAllArc(_Label label)
     {
         for(int i = 0; i < this.narcs; i++)
