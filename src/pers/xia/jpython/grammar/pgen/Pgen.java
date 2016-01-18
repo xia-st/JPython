@@ -1005,86 +1005,87 @@ class Pgen
         
         this.initOoOmMap(startS, one2oneMap, one2multiMap);
         
-        
-       /* Wrote 7 days but have a Huge Problem, I could not bear to delete it
-        * for(Map.Entry<_State, _State> oo : one2oneMap.entrySet())
+        boolean changedCollecton;   //标记集合是否被拆分
+        for(;;)
         {
-            //当前运算的结点
-            _State oneState = oo.getKey();
-
-            //当前结点的标志结点
-            _State curColl = oo.getValue();
-
-            //保存oneState的所有label
-            List<_Label> baseLabel = new LinkedList<_Label>();
-            // 将oneState中的Label保存到baseLabel中
-            //XXX 尝试下lambda表达式，这里代码的速度对最终项目没影响
-            Arrays.asList(Arrays.copyOfRange(oneState.arcs, 0, oneState.narcs))
-                .forEach((arc) -> baseLabel.add(arc.label));
+            changedCollecton = false;
             
-            for(_Label label : baseLabel)
+            /*
+             * 由于在循环体内对Map进行增加删除操作可能会导致ConcurrentModificationException异常，
+             * 所以在这里设置了个setCache用于保存循环中需要在one2multiMap中创建的集合
+             */
+            List<Set<_State>> setCache = new ArrayList<Set<_State>>();
+            
+            for(Map.Entry<_State, Set<_State>> o2m : one2multiMap.entrySet())
             {
-                // 如果出现了划分的话需要继续以当前label为基准进行操作
-                for(;;)
+                _State markedState = o2m.getKey();
+                Set<_State> states = o2m.getValue();
+                
+                //集合内长度为1就不需要进行判断了
+                if(states.size() == 1)
                 {
-                     
-                     * 通过某个label时的目标集合相同时的state的集合
-                     * key为指向的state，value为指向该state的所有state集合
-                     
-                    Map<_State, Set<_State>> collOfStates = new HashMap<_State, Set<_State>>();
-
-                    
-                    //和当前结点属于同一个集合的所有结点
-                    Set<_State> m2 = one2multiMap.get(curColl);
-                    if(m2.size() == 1) break;
-
-                    //统计以某个label为基础集合内的所有结点的跳转位置
-                    for(_State state : m2)
+                    continue;
+                }
+                
+                //key为指向的state集合，value为指向集合为key的所有state的集合
+                Map<Set<_State>, Set<_State>> m2mMap = new HashMap<Set<_State>, Set<_State>>();
+                
+                for(_State state : states)
+                {
+                    Set<_State> nextStates = new HashSet<_State>();
+                    for(int i = 0; i < state.narcs; i++)
                     {
-                        _State s1 = null;    //指向的集合结点
-                        //_State s2 = null;
-                        int i = state.findArc(label);
-                        
-                        s1 = i < 0 ? null : one2oneMap.get(state.arcs[i].nextState);
-
-                        if(collOfStates.containsKey(s1))
-                        {
-                            collOfStates.get(s1).add(state);
-                        }
-                        else
-                        {
-                            Set<_State> set = new HashSet<_State>();
-                            set.add(state);
-                            collOfStates.put(s1, set);
-                        }
+                        if(state.arcs[i].nextState != null)
+                            nextStates.add(state.arcs[i].nextState);
                     }
                     
-                    if(collOfStates.size() <= 1)  break;
-
-                     
-                     * Create new collections
-                     
-                    for(Map.Entry<_State, Set<_State>> coll : collOfStates.entrySet())
+                    // 相同指向的所有state集合
+                    Set<_State> valueStates = m2mMap.getOrDefault(nextStates, null);
+                    
+                    if(valueStates != null)
                     {
-                        Set<_State> states = coll.getValue();
-                        
-                         *  如果当前集合中有包含本集合所表示的标志结点，则
-                         *  当前集合不用划分出新的数据
-                         
-                        if(states.contains(curColl)) continue;
-                        
-                        one2multiMap.get(curColl).removeAll(states);
-                        
-                        _State state = this.getOneStateFromSet(states);
-                        one2multiMap.put(state, states);
-
-                        // 将states中出现的结点的归属集合结点改为state
-                        states.forEach((s) -> one2oneMap.put(s, state));
+                        valueStates.add(state);
+                    }
+                    else
+                    {
+                        valueStates = new HashSet<_State>();
+                        valueStates.add(state);
+                        m2mMap.put(nextStates, valueStates);
                     }
                 }
+                
+                //如果m2mMap长度为1的话则不需要划分
+                if(m2mMap.size() == 1)
+                {
+                    continue;
+                }
+                changedCollecton = true;
+                
+                for(Set<_State> newStates : m2mMap.values())
+                {
+                    //如果存在标记结点，就不需要对此创建新的集合。
+                    if(newStates.contains(markedState)) continue;
+                    
+                    states.removeAll(newStates);
+                    
+                    // 将需要新增的集合放入到setCache中，用于后面的新增操作
+                    setCache.add(newStates);
+
+                }
             }
-        }*/
-        
+            
+            for(Set<_State> newStates : setCache)
+            {               
+                    _State markedState2 = this.getOneStateFromSet(newStates);
+                    one2multiMap.put(markedState2, newStates);
+                    
+                    //将one2oneMap中在newStates中出现的标记结点都改为markedStates2
+                    newStates.forEach((s) -> one2oneMap.put(s, markedState2));
+            }
+            
+            if(!changedCollecton) break;
+        }
+ 
         //连接新的结点
         for(Map.Entry<_State, Set<_State>> om : one2multiMap.entrySet())
         {
