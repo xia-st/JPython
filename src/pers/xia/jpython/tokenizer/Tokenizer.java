@@ -30,7 +30,7 @@ public class Tokenizer
     
     public static void main(String[] args)
     {
-       File file = new File("test.py");
+       File file = new File("translator.py");
        try
        {
            Tokenizer tokenizer = new Tokenizer(file);

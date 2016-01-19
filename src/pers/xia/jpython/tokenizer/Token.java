@@ -233,7 +233,7 @@ public class Token
         boolean blankline = false;
         int col = 0;
         this.atbol = false;
-        
+                
         //获取缩进占位数
         for(;;)
         {
@@ -729,10 +729,10 @@ public class Token
                     this.lineEnd = this.buf.length();
                 }
                 
+                this.start = this.cur;
                 blankline = setIndentifier();
+                this.end = this.cur;
             }
-            
-            this.start = this.cur;
 
             //check pendin
             if(this.pendin != 0)
@@ -751,6 +751,8 @@ public class Token
                 }
             }
         
+            this.start = this.cur;
+
             //替代goto语句的使用
             again:
             for(;;)
@@ -838,6 +840,7 @@ public class Token
                     {
                         this.backup(c3);
                     }
+                    this.state = state;
                     this.end = this.cur;
                     return true;
                 }

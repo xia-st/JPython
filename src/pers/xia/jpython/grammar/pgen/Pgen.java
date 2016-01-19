@@ -997,7 +997,7 @@ class Pgen
     }
     
     //dfa最小化
-    private _State minimize(_State startS)
+    private void minimize(_State startS)
     {
         //state of key mean the raw state, state of value mean the colleaction's representative
         Map<_State, _State> one2oneMap = new HashMap<_State, _State>();
@@ -1103,7 +1103,7 @@ class Pgen
         }
         
         
-        return null;
+        return;
     }
     
     // 设置可以跳转到本处的DFA
