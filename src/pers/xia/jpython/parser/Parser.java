@@ -7,8 +7,6 @@ import java.util.Stack;
 
 import org.apache.log4j.Logger;
 
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
-
 import pers.xia.jpython.grammar.Arc;
 import pers.xia.jpython.grammar.DFA;
 import pers.xia.jpython.grammar.GramInit;
