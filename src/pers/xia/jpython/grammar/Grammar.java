@@ -51,11 +51,10 @@ public class Grammar
             else
             {
                 DFA dfa = this.getDFA(l.nextDfa);
-                
-                //XXX 在修改graminit后此处也得修改
-                for(Map.Entry<Integer, Integer> map : dfa.jumpDFA.entrySet())
+
+                for(int j = 0; j < dfa.acceptLabel.length; j++)
                 {
-                    accel[map.getKey()] = l.nextDfa << 8 | 1 << 7 |
+                    accel[dfa.acceptLabel[j]] = l.nextDfa << 8 | 1 << 7 |
                             a[i].nextState;
                 }
             }

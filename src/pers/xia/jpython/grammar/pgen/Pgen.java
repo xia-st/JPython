@@ -1368,24 +1368,29 @@ class Pgen
         return sb;
     }
     
-    private StringBuilder jumpedDFAToString(Map<_Label, _DFA>jumpedDFA,
+    private StringBuilder acceptLabelToString(Set<_Label>acceptLabel,
             String jumpedDFAName,
             Map<_Label, String> labelStringMap,
             Map<String, String> DFAStringMap)
     {
         StringBuilder sb = new StringBuilder();
         
-        sb.append("    public final static Map<Integer, Integer> " + jumpedDFAName + 
-                " = new HashMap<Integer, Integer>(){\n" +
-                "        private static final long serialVersionUID = 1L;\n" +
-                "        {\n");
+        String jumped[] = new String[acceptLabel.size()];
         
-        for(Map.Entry<_Label, _DFA>jd : jumpedDFA.entrySet())
+        
+        int index = 0;
+        for(_Label label  : acceptLabel)
         {
-            sb.append("            put(" + labelStringMap.get(jd.getKey()) + ", " +
-                    DFAStringMap.get(jd.getValue().name) + ");\n");
+            jumped[index++] = labelStringMap.get(label);
         }
-        sb.append("    }};\n\n");
+        
+        sb.append("    public final static int[] " + jumpedDFAName + " = {");
+        for(int i = 0; i < jumped.length; i++)
+        {
+            sb.append(jumped[i] + ", ");
+        }
+        
+        sb.append("};\n");
         return sb;
     }
     
@@ -1423,11 +1428,11 @@ class Pgen
 
        for(int i = 0; i < grammar.ndfas; i++)
        {
-           sb.append(this.jumpedDFAToString(grammar.dfas[i].jumpedDFAs, 
-                   "jumpedDFAs_" + i, 
+           sb.append(this.acceptLabelToString(grammar.dfas[i].jumpedDFAs.keySet(), 
+                   "acceptLabel_" + i, 
                    labelStringMap, 
                    DFAStringMap));
-           jumpedDFAStringMap.put(grammar.dfas[i].jumpedDFAs, "jumpedDFAs_" + i);
+           jumpedDFAStringMap.put(grammar.dfas[i].jumpedDFAs, "acceptLabel_" + i);
        }
        
        sb.append("    public static DFA[] dfas = {\n");

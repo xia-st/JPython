@@ -10,16 +10,16 @@ public class DFA
     public int initial;    //Initial state,
     public int nstates;    //the number of state
     public State[] states;    //states for DFA
-    public Map<Integer, Integer> jumpDFA;    //当跳转到本DFA时根据lebel判断实际需要跳转的DFA
+    public int[] acceptLabel;    //保存跳转到当前DFA
 
     
-    public DFA(DFAName name, int initial, int nstates, State[] states, Map<Integer, Integer> jumpDFA)
+    public DFA(DFAName name, int initial, int nstates, State[] states, int[] acceptLabel)
     {
         this.name = name;
         this.initial = initial;
         this.nstates = nstates;
         this.states = states;
-        this.jumpDFA = jumpDFA;
+        this.acceptLabel = acceptLabel;
     }
     
     public State getState(int index)
@@ -29,10 +29,5 @@ public class DFA
             throw new PyExceptions("DFA: Out of Index");
         }
         return this.states[index];
-    }
-    
-    public int getNextDFA(int label)
-    {
-        return this.jumpDFA.getOrDefault(label, -1);
     }
 }
