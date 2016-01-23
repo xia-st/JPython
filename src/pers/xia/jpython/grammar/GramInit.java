@@ -2943,1252 +2943,177 @@ public final class GramInit{
         new State(1, GramInit.arcs_84_2),
     };
 
-    public final static Map<Integer, Integer> jumpedDFAs_0 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(161, 14);
-            put(66, 14);
-            put(75, 14);
-            put(2, 0);
-            put(140, 14);
-            put(162, 14);
-            put(153, 14);
-            put(13, 14);
-            put(102, 38);
-            put(72, 14);
-            put(64, 14);
-            put(105, 38);
-            put(160, 14);
-            put(155, 14);
-            put(73, 14);
-            put(115, 14);
-            put(74, 14);
-            put(21, 38);
-            put(82, 14);
-            put(33, 14);
-            put(23, 14);
-            put(159, 14);
-            put(89, 14);
-            put(96, 38);
-            put(167, 38);
-            put(120, 14);
-            put(141, 14);
-            put(87, 14);
-            put(172, 14);
-            put(149, 14);
-            put(99, 38);
-            put(22, 38);
-            put(79, 14);
-            put(11, 38);
-            put(158, 14);
-            put(146, 14);
-            put(100, 38);
-            put(88, 14);
-            put(76, 14);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_1 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(161, 13);
-            put(66, 13);
-            put(75, 13);
-            put(2, 1);
-            put(140, 13);
-            put(162, 13);
-            put(153, 13);
-            put(13, 13);
-            put(102, 13);
-            put(72, 13);
-            put(64, 13);
-            put(105, 13);
-            put(160, 13);
-            put(155, 13);
-            put(73, 13);
-            put(115, 13);
-            put(74, 13);
-            put(21, 13);
-            put(82, 13);
-            put(33, 13);
-            put(23, 13);
-            put(159, 13);
-            put(89, 13);
-            put(96, 13);
-            put(167, 13);
-            put(120, 13);
-            put(141, 13);
-            put(87, 13);
-            put(172, 13);
-            put(149, 13);
-            put(99, 13);
-            put(22, 13);
-            put(79, 13);
-            put(11, 13);
-            put(158, 13);
-            put(146, 13);
-            put(100, 13);
-            put(88, 13);
-            put(7, 1);
-            put(76, 13);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_2 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(161, 74);
-            put(159, 74);
-            put(140, 74);
-            put(162, 74);
-            put(153, 74);
-            put(13, 74);
-            put(120, 74);
-            put(141, 74);
-            put(160, 74);
-            put(149, 74);
-            put(155, 74);
-            put(115, 74);
-            put(82, 74);
-            put(158, 74);
-            put(23, 74);
-            put(146, 74);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_3 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(11, 3);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_4 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(11, 3);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_5 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(11, 4);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_6 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(21, 6);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_7 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(22, 7);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_8 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(13, 8);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_9 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(33, 9);
-            put(23, 10);
-            put(34, 9);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_10 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(23, 10);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_11 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(33, 11);
-            put(23, 12);
-            put(34, 11);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_12 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(23, 12);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_13 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(161, 14);
-            put(66, 14);
-            put(75, 14);
-            put(140, 14);
-            put(162, 14);
-            put(153, 14);
-            put(13, 14);
-            put(102, 38);
-            put(72, 14);
-            put(64, 14);
-            put(105, 38);
-            put(160, 14);
-            put(155, 14);
-            put(73, 14);
-            put(115, 14);
-            put(74, 14);
-            put(21, 38);
-            put(82, 14);
-            put(33, 14);
-            put(23, 14);
-            put(159, 14);
-            put(89, 14);
-            put(96, 38);
-            put(167, 38);
-            put(120, 14);
-            put(141, 14);
-            put(87, 14);
-            put(172, 14);
-            put(149, 14);
-            put(99, 38);
-            put(22, 38);
-            put(79, 14);
-            put(11, 38);
-            put(158, 14);
-            put(146, 14);
-            put(100, 38);
-            put(88, 14);
-            put(76, 14);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_14 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(161, 15);
-            put(66, 15);
-            put(75, 15);
-            put(140, 15);
-            put(162, 15);
-            put(153, 15);
-            put(13, 15);
-            put(72, 15);
-            put(64, 15);
-            put(160, 15);
-            put(155, 15);
-            put(73, 15);
-            put(115, 15);
-            put(74, 15);
-            put(82, 15);
-            put(33, 15);
-            put(23, 15);
-            put(159, 15);
-            put(89, 15);
-            put(120, 15);
-            put(141, 15);
-            put(87, 15);
-            put(172, 15);
-            put(149, 15);
-            put(79, 15);
-            put(158, 15);
-            put(146, 15);
-            put(88, 15);
-            put(76, 15);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_15 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(161, 16);
-            put(66, 20);
-            put(75, 21);
-            put(140, 16);
-            put(162, 16);
-            put(153, 16);
-            put(13, 16);
-            put(72, 21);
-            put(64, 19);
-            put(160, 16);
-            put(155, 16);
-            put(73, 21);
-            put(115, 16);
-            put(74, 21);
-            put(82, 16);
-            put(33, 16);
-            put(23, 16);
-            put(159, 16);
-            put(89, 37);
-            put(120, 16);
-            put(141, 16);
-            put(87, 35);
-            put(172, 21);
-            put(149, 16);
-            put(79, 27);
-            put(158, 16);
-            put(146, 16);
-            put(88, 36);
-            put(76, 27);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_16 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(161, 17);
-            put(159, 17);
-            put(140, 17);
-            put(162, 17);
-            put(153, 17);
-            put(13, 17);
-            put(120, 17);
-            put(141, 17);
-            put(160, 17);
-            put(149, 17);
-            put(155, 17);
-            put(115, 17);
-            put(82, 17);
-            put(158, 17);
-            put(33, 17);
-            put(23, 17);
-            put(146, 17);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_17 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(161, 48);
-            put(159, 48);
-            put(140, 48);
-            put(162, 48);
-            put(153, 48);
-            put(13, 48);
-            put(120, 48);
-            put(141, 48);
-            put(160, 48);
-            put(149, 48);
-            put(155, 48);
-            put(115, 48);
-            put(82, 48);
-            put(158, 48);
-            put(33, 57);
-            put(23, 48);
-            put(146, 48);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_18 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(58, 18);
-            put(63, 18);
-            put(56, 18);
-            put(62, 18);
-            put(59, 18);
-            put(57, 18);
-            put(61, 18);
-            put(53, 18);
-            put(54, 18);
-            put(52, 18);
-            put(60, 18);
-            put(51, 18);
-            put(55, 18);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_19 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(64, 19);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_20 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(66, 20);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_21 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(75, 26);
-            put(172, 25);
-            put(73, 23);
-            put(74, 24);
-            put(72, 22);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_22 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(72, 22);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_23 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(73, 23);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_24 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(74, 24);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_25 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(172, 83);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_26 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(75, 26);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_27 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(79, 28);
-            put(76, 29);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_28 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(79, 28);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_29 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(76, 29);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_30 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(23, 30);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_31 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(23, 34);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_32 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(23, 30);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_33 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(23, 31);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_34 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(23, 34);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_35 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(87, 35);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_36 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(88, 36);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_37 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(89, 37);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_38 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(99, 41);
-            put(22, 7);
-            put(21, 39);
-            put(96, 40);
-            put(11, 5);
-            put(100, 42);
-            put(102, 43);
-            put(167, 76);
-            put(105, 44);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_39 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(21, 39);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_40 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(96, 40);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_41 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(99, 41);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_42 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(100, 42);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_43 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(102, 43);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_44 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(105, 44);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_45 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(161, 48);
-            put(159, 48);
-            put(140, 48);
-            put(162, 48);
-            put(153, 48);
-            put(13, 48);
-            put(120, 48);
-            put(141, 48);
-            put(160, 48);
-            put(149, 48);
-            put(155, 48);
-            put(115, 48);
-            put(82, 48);
-            put(158, 48);
-            put(23, 48);
-            put(146, 48);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_46 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(108, 46);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_47 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(161, 14);
-            put(66, 14);
-            put(75, 14);
-            put(2, 47);
-            put(140, 14);
-            put(162, 14);
-            put(153, 14);
-            put(13, 14);
-            put(72, 14);
-            put(64, 14);
-            put(160, 14);
-            put(155, 14);
-            put(73, 14);
-            put(115, 14);
-            put(74, 14);
-            put(82, 14);
-            put(33, 14);
-            put(23, 14);
-            put(159, 14);
-            put(89, 14);
-            put(120, 14);
-            put(141, 14);
-            put(87, 14);
-            put(172, 14);
-            put(149, 14);
-            put(79, 14);
-            put(158, 14);
-            put(146, 14);
-            put(88, 14);
-            put(76, 14);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_48 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(161, 52);
-            put(159, 52);
-            put(140, 52);
-            put(162, 52);
-            put(153, 52);
-            put(13, 52);
-            put(120, 52);
-            put(141, 52);
-            put(160, 52);
-            put(149, 52);
-            put(155, 52);
-            put(115, 50);
-            put(82, 52);
-            put(158, 52);
-            put(23, 52);
-            put(146, 52);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_49 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(161, 52);
-            put(159, 52);
-            put(140, 52);
-            put(162, 52);
-            put(153, 52);
-            put(13, 52);
-            put(120, 52);
-            put(141, 52);
-            put(160, 52);
-            put(149, 52);
-            put(155, 52);
-            put(115, 51);
-            put(82, 52);
-            put(158, 52);
-            put(23, 52);
-            put(146, 52);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_50 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(115, 50);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_51 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(115, 51);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_52 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(161, 53);
-            put(159, 53);
-            put(140, 53);
-            put(162, 53);
-            put(153, 53);
-            put(13, 53);
-            put(120, 53);
-            put(141, 53);
-            put(160, 53);
-            put(149, 53);
-            put(155, 53);
-            put(82, 53);
-            put(158, 53);
-            put(23, 53);
-            put(146, 53);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_53 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(161, 54);
-            put(159, 54);
-            put(140, 54);
-            put(162, 54);
-            put(153, 54);
-            put(13, 54);
-            put(120, 54);
-            put(141, 54);
-            put(160, 54);
-            put(149, 54);
-            put(155, 54);
-            put(82, 54);
-            put(158, 54);
-            put(23, 54);
-            put(146, 54);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_54 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(161, 55);
-            put(159, 55);
-            put(140, 55);
-            put(162, 55);
-            put(153, 55);
-            put(13, 55);
-            put(120, 54);
-            put(141, 55);
-            put(160, 55);
-            put(149, 55);
-            put(155, 55);
-            put(82, 55);
-            put(158, 55);
-            put(23, 55);
-            put(146, 55);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_55 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(161, 58);
-            put(159, 58);
-            put(140, 58);
-            put(162, 58);
-            put(153, 58);
-            put(13, 58);
-            put(141, 58);
-            put(160, 58);
-            put(149, 58);
-            put(155, 58);
-            put(82, 58);
-            put(158, 58);
-            put(23, 58);
-            put(146, 58);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_56 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(126, 56);
-            put(123, 56);
-            put(129, 56);
-            put(101, 56);
-            put(125, 56);
-            put(128, 56);
-            put(124, 56);
-            put(120, 56);
-            put(127, 56);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_57 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(33, 57);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_58 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(161, 59);
-            put(159, 59);
-            put(140, 59);
-            put(162, 59);
-            put(153, 59);
-            put(13, 59);
-            put(141, 59);
-            put(160, 59);
-            put(149, 59);
-            put(155, 59);
-            put(82, 59);
-            put(158, 59);
-            put(23, 59);
-            put(146, 59);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_59 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(161, 60);
-            put(159, 60);
-            put(140, 60);
-            put(162, 60);
-            put(153, 60);
-            put(13, 60);
-            put(141, 60);
-            put(160, 60);
-            put(149, 60);
-            put(155, 60);
-            put(82, 60);
-            put(158, 60);
-            put(23, 60);
-            put(146, 60);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_60 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(161, 61);
-            put(159, 61);
-            put(140, 61);
-            put(162, 61);
-            put(153, 61);
-            put(13, 61);
-            put(141, 61);
-            put(160, 61);
-            put(149, 61);
-            put(155, 61);
-            put(82, 61);
-            put(158, 61);
-            put(23, 61);
-            put(146, 61);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_61 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(161, 62);
-            put(159, 62);
-            put(140, 62);
-            put(162, 62);
-            put(153, 62);
-            put(13, 62);
-            put(141, 62);
-            put(160, 62);
-            put(149, 62);
-            put(155, 62);
-            put(82, 62);
-            put(158, 62);
-            put(23, 62);
-            put(146, 62);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_62 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(161, 63);
-            put(159, 63);
-            put(140, 63);
-            put(162, 63);
-            put(153, 63);
-            put(13, 63);
-            put(141, 63);
-            put(160, 63);
-            put(149, 63);
-            put(155, 63);
-            put(82, 63);
-            put(158, 63);
-            put(23, 63);
-            put(146, 63);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_63 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(161, 64);
-            put(159, 64);
-            put(140, 64);
-            put(162, 64);
-            put(153, 64);
-            put(13, 64);
-            put(141, 64);
-            put(160, 64);
-            put(149, 64);
-            put(155, 64);
-            put(82, 64);
-            put(158, 64);
-            put(23, 64);
-            put(146, 64);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_64 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(161, 65);
-            put(159, 65);
-            put(140, 64);
-            put(162, 65);
-            put(153, 65);
-            put(13, 65);
-            put(141, 64);
-            put(160, 65);
-            put(149, 65);
-            put(155, 65);
-            put(82, 65);
-            put(158, 65);
-            put(23, 65);
-            put(146, 64);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_65 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(161, 66);
-            put(160, 66);
-            put(159, 66);
-            put(149, 66);
-            put(155, 66);
-            put(162, 66);
-            put(82, 66);
-            put(153, 66);
-            put(158, 66);
-            put(23, 66);
-            put(13, 66);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_66 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(161, 67);
-            put(160, 67);
-            put(159, 67);
-            put(149, 66);
-            put(155, 67);
-            put(162, 67);
-            put(82, 67);
-            put(153, 67);
-            put(158, 67);
-            put(23, 67);
-            put(13, 67);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_67 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(161, 67);
-            put(160, 67);
-            put(159, 67);
-            put(155, 67);
-            put(162, 67);
-            put(82, 67);
-            put(153, 67);
-            put(158, 67);
-            put(23, 67);
-            put(13, 67);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_68 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(161, 48);
-            put(159, 48);
-            put(140, 48);
-            put(162, 48);
-            put(153, 48);
-            put(13, 48);
-            put(120, 48);
-            put(141, 48);
-            put(160, 48);
-            put(149, 48);
-            put(155, 48);
-            put(115, 48);
-            put(82, 48);
-            put(158, 48);
-            put(33, 57);
-            put(23, 48);
-            put(146, 48);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_69 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(153, 69);
-            put(81, 69);
-            put(13, 69);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_70 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(161, 71);
-            put(159, 71);
-            put(27, 71);
-            put(140, 71);
-            put(162, 71);
-            put(153, 71);
-            put(13, 71);
-            put(120, 71);
-            put(141, 71);
-            put(160, 71);
-            put(149, 71);
-            put(155, 71);
-            put(115, 71);
-            put(82, 71);
-            put(158, 71);
-            put(23, 71);
-            put(146, 71);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_71 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(161, 48);
-            put(159, 48);
-            put(27, 71);
-            put(140, 48);
-            put(162, 48);
-            put(153, 48);
-            put(13, 48);
-            put(120, 48);
-            put(141, 48);
-            put(160, 48);
-            put(149, 48);
-            put(155, 48);
-            put(115, 48);
-            put(82, 48);
-            put(158, 48);
-            put(23, 48);
-            put(146, 48);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_72 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(27, 72);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_73 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(161, 58);
-            put(159, 58);
-            put(140, 58);
-            put(162, 58);
-            put(153, 58);
-            put(13, 58);
-            put(141, 58);
-            put(160, 58);
-            put(149, 58);
-            put(155, 58);
-            put(82, 58);
-            put(158, 58);
-            put(33, 57);
-            put(23, 58);
-            put(146, 58);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_74 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(161, 48);
-            put(159, 48);
-            put(140, 48);
-            put(162, 48);
-            put(153, 48);
-            put(13, 48);
-            put(120, 48);
-            put(141, 48);
-            put(160, 48);
-            put(149, 48);
-            put(155, 48);
-            put(115, 48);
-            put(82, 48);
-            put(158, 48);
-            put(23, 48);
-            put(146, 48);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_75 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(161, 48);
-            put(159, 48);
-            put(140, 48);
-            put(162, 48);
-            put(153, 48);
-            put(13, 48);
-            put(120, 48);
-            put(141, 48);
-            put(160, 48);
-            put(149, 48);
-            put(155, 48);
-            put(115, 48);
-            put(82, 48);
-            put(158, 48);
-            put(33, 57);
-            put(23, 48);
-            put(146, 48);
-            put(34, 75);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_76 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(167, 76);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_77 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(161, 78);
-            put(159, 78);
-            put(140, 78);
-            put(162, 78);
-            put(153, 78);
-            put(13, 78);
-            put(120, 78);
-            put(141, 78);
-            put(160, 78);
-            put(149, 78);
-            put(155, 78);
-            put(115, 78);
-            put(82, 78);
-            put(158, 78);
-            put(33, 78);
-            put(23, 78);
-            put(146, 78);
-            put(34, 78);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_78 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(161, 48);
-            put(159, 48);
-            put(140, 48);
-            put(162, 48);
-            put(153, 48);
-            put(13, 48);
-            put(120, 48);
-            put(141, 48);
-            put(160, 48);
-            put(149, 48);
-            put(155, 48);
-            put(115, 48);
-            put(82, 48);
-            put(158, 48);
-            put(33, 78);
-            put(23, 48);
-            put(146, 48);
-            put(34, 78);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_79 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(96, 81);
-            put(100, 80);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_80 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(100, 80);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_81 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(96, 81);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_82 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(23, 82);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_83 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(172, 83);
-    }};
-
-    public final static Map<Integer, Integer> jumpedDFAs_84 = new HashMap<Integer, Integer>(){
-        private static final long serialVersionUID = 1L;
-        {
-            put(161, 74);
-            put(159, 74);
-            put(140, 74);
-            put(162, 74);
-            put(153, 74);
-            put(13, 74);
-            put(120, 74);
-            put(141, 74);
-            put(160, 74);
-            put(149, 74);
-            put(155, 74);
-            put(115, 74);
-            put(82, 74);
-            put(158, 74);
-            put(23, 74);
-            put(146, 74);
-            put(76, 84);
-    }};
-
+    public final static int[] acceptLabel_0 = {161, 66, 75, 2, 140, 162, 153, 13, 102, 72, 64, 105, 160, 155, 73, 115, 74, 21, 82, 33, 23, 159, 89, 96, 167, 120, 141, 87, 172, 149, 99, 22, 79, 11, 158, 146, 100, 88, 76, };
+    public final static int[] acceptLabel_1 = {161, 66, 75, 2, 140, 162, 153, 13, 102, 72, 64, 105, 160, 155, 73, 115, 74, 21, 82, 33, 23, 159, 89, 96, 167, 120, 141, 87, 172, 149, 99, 22, 79, 11, 158, 146, 100, 88, 7, 76, };
+    public final static int[] acceptLabel_2 = {161, 159, 140, 162, 153, 13, 120, 141, 160, 149, 155, 115, 82, 158, 23, 146, };
+    public final static int[] acceptLabel_3 = {11, };
+    public final static int[] acceptLabel_4 = {11, };
+    public final static int[] acceptLabel_5 = {11, };
+    public final static int[] acceptLabel_6 = {21, };
+    public final static int[] acceptLabel_7 = {22, };
+    public final static int[] acceptLabel_8 = {13, };
+    public final static int[] acceptLabel_9 = {33, 23, 34, };
+    public final static int[] acceptLabel_10 = {23, };
+    public final static int[] acceptLabel_11 = {33, 23, 34, };
+    public final static int[] acceptLabel_12 = {23, };
+    public final static int[] acceptLabel_13 = {161, 66, 75, 140, 162, 153, 13, 102, 72, 64, 105, 160, 155, 73, 115, 74, 21, 82, 33, 23, 159, 89, 96, 167, 120, 141, 87, 172, 149, 99, 22, 79, 11, 158, 146, 100, 88, 76, };
+    public final static int[] acceptLabel_14 = {161, 66, 75, 140, 162, 153, 13, 72, 64, 160, 155, 73, 115, 74, 82, 33, 23, 159, 89, 120, 141, 87, 172, 149, 79, 158, 146, 88, 76, };
+    public final static int[] acceptLabel_15 = {161, 66, 75, 140, 162, 153, 13, 72, 64, 160, 155, 73, 115, 74, 82, 33, 23, 159, 89, 120, 141, 87, 172, 149, 79, 158, 146, 88, 76, };
+    public final static int[] acceptLabel_16 = {161, 159, 140, 162, 153, 13, 120, 141, 160, 149, 155, 115, 82, 158, 33, 23, 146, };
+    public final static int[] acceptLabel_17 = {161, 159, 140, 162, 153, 13, 120, 141, 160, 149, 155, 115, 82, 158, 33, 23, 146, };
+    public final static int[] acceptLabel_18 = {58, 63, 56, 62, 59, 57, 61, 53, 54, 52, 60, 51, 55, };
+    public final static int[] acceptLabel_19 = {64, };
+    public final static int[] acceptLabel_20 = {66, };
+    public final static int[] acceptLabel_21 = {75, 172, 73, 74, 72, };
+    public final static int[] acceptLabel_22 = {72, };
+    public final static int[] acceptLabel_23 = {73, };
+    public final static int[] acceptLabel_24 = {74, };
+    public final static int[] acceptLabel_25 = {172, };
+    public final static int[] acceptLabel_26 = {75, };
+    public final static int[] acceptLabel_27 = {79, 76, };
+    public final static int[] acceptLabel_28 = {79, };
+    public final static int[] acceptLabel_29 = {76, };
+    public final static int[] acceptLabel_30 = {23, };
+    public final static int[] acceptLabel_31 = {23, };
+    public final static int[] acceptLabel_32 = {23, };
+    public final static int[] acceptLabel_33 = {23, };
+    public final static int[] acceptLabel_34 = {23, };
+    public final static int[] acceptLabel_35 = {87, };
+    public final static int[] acceptLabel_36 = {88, };
+    public final static int[] acceptLabel_37 = {89, };
+    public final static int[] acceptLabel_38 = {99, 22, 21, 96, 11, 100, 102, 167, 105, };
+    public final static int[] acceptLabel_39 = {21, };
+    public final static int[] acceptLabel_40 = {96, };
+    public final static int[] acceptLabel_41 = {99, };
+    public final static int[] acceptLabel_42 = {100, };
+    public final static int[] acceptLabel_43 = {102, };
+    public final static int[] acceptLabel_44 = {105, };
+    public final static int[] acceptLabel_45 = {161, 159, 140, 162, 153, 13, 120, 141, 160, 149, 155, 115, 82, 158, 23, 146, };
+    public final static int[] acceptLabel_46 = {108, };
+    public final static int[] acceptLabel_47 = {161, 66, 75, 2, 140, 162, 153, 13, 72, 64, 160, 155, 73, 115, 74, 82, 33, 23, 159, 89, 120, 141, 87, 172, 149, 79, 158, 146, 88, 76, };
+    public final static int[] acceptLabel_48 = {161, 159, 140, 162, 153, 13, 120, 141, 160, 149, 155, 115, 82, 158, 23, 146, };
+    public final static int[] acceptLabel_49 = {161, 159, 140, 162, 153, 13, 120, 141, 160, 149, 155, 115, 82, 158, 23, 146, };
+    public final static int[] acceptLabel_50 = {115, };
+    public final static int[] acceptLabel_51 = {115, };
+    public final static int[] acceptLabel_52 = {161, 159, 140, 162, 153, 13, 120, 141, 160, 149, 155, 82, 158, 23, 146, };
+    public final static int[] acceptLabel_53 = {161, 159, 140, 162, 153, 13, 120, 141, 160, 149, 155, 82, 158, 23, 146, };
+    public final static int[] acceptLabel_54 = {161, 159, 140, 162, 153, 13, 120, 141, 160, 149, 155, 82, 158, 23, 146, };
+    public final static int[] acceptLabel_55 = {161, 159, 140, 162, 153, 13, 141, 160, 149, 155, 82, 158, 23, 146, };
+    public final static int[] acceptLabel_56 = {126, 123, 129, 101, 125, 128, 124, 120, 127, };
+    public final static int[] acceptLabel_57 = {33, };
+    public final static int[] acceptLabel_58 = {161, 159, 140, 162, 153, 13, 141, 160, 149, 155, 82, 158, 23, 146, };
+    public final static int[] acceptLabel_59 = {161, 159, 140, 162, 153, 13, 141, 160, 149, 155, 82, 158, 23, 146, };
+    public final static int[] acceptLabel_60 = {161, 159, 140, 162, 153, 13, 141, 160, 149, 155, 82, 158, 23, 146, };
+    public final static int[] acceptLabel_61 = {161, 159, 140, 162, 153, 13, 141, 160, 149, 155, 82, 158, 23, 146, };
+    public final static int[] acceptLabel_62 = {161, 159, 140, 162, 153, 13, 141, 160, 149, 155, 82, 158, 23, 146, };
+    public final static int[] acceptLabel_63 = {161, 159, 140, 162, 153, 13, 141, 160, 149, 155, 82, 158, 23, 146, };
+    public final static int[] acceptLabel_64 = {161, 159, 140, 162, 153, 13, 141, 160, 149, 155, 82, 158, 23, 146, };
+    public final static int[] acceptLabel_65 = {161, 160, 159, 149, 155, 162, 82, 153, 158, 23, 13, };
+    public final static int[] acceptLabel_66 = {161, 160, 159, 149, 155, 162, 82, 153, 158, 23, 13, };
+    public final static int[] acceptLabel_67 = {161, 160, 159, 155, 162, 82, 153, 158, 23, 13, };
+    public final static int[] acceptLabel_68 = {161, 159, 140, 162, 153, 13, 120, 141, 160, 149, 155, 115, 82, 158, 33, 23, 146, };
+    public final static int[] acceptLabel_69 = {153, 81, 13, };
+    public final static int[] acceptLabel_70 = {161, 159, 27, 140, 162, 153, 13, 120, 141, 160, 149, 155, 115, 82, 158, 23, 146, };
+    public final static int[] acceptLabel_71 = {161, 159, 27, 140, 162, 153, 13, 120, 141, 160, 149, 155, 115, 82, 158, 23, 146, };
+    public final static int[] acceptLabel_72 = {27, };
+    public final static int[] acceptLabel_73 = {161, 159, 140, 162, 153, 13, 141, 160, 149, 155, 82, 158, 33, 23, 146, };
+    public final static int[] acceptLabel_74 = {161, 159, 140, 162, 153, 13, 120, 141, 160, 149, 155, 115, 82, 158, 23, 146, };
+    public final static int[] acceptLabel_75 = {161, 159, 140, 162, 153, 13, 120, 141, 160, 149, 155, 115, 82, 158, 33, 23, 146, 34, };
+    public final static int[] acceptLabel_76 = {167, };
+    public final static int[] acceptLabel_77 = {161, 159, 140, 162, 153, 13, 120, 141, 160, 149, 155, 115, 82, 158, 33, 23, 146, 34, };
+    public final static int[] acceptLabel_78 = {161, 159, 140, 162, 153, 13, 120, 141, 160, 149, 155, 115, 82, 158, 33, 23, 146, 34, };
+    public final static int[] acceptLabel_79 = {96, 100, };
+    public final static int[] acceptLabel_80 = {100, };
+    public final static int[] acceptLabel_81 = {96, };
+    public final static int[] acceptLabel_82 = {23, };
+    public final static int[] acceptLabel_83 = {172, };
+    public final static int[] acceptLabel_84 = {161, 159, 140, 162, 153, 13, 120, 141, 160, 149, 155, 115, 82, 158, 23, 146, 76, };
     public static DFA[] dfas = {
-        new DFA(DFAName.single_input, 0, 3, GramInit.states_0, jumpedDFAs_0),
-        new DFA(DFAName.file_input, 0, 3, GramInit.states_1, jumpedDFAs_1),
-        new DFA(DFAName.eval_input, 0, 4, GramInit.states_2, jumpedDFAs_2),
-        new DFA(DFAName.decorator, 0, 7, GramInit.states_3, jumpedDFAs_4),
-        new DFA(DFAName.decorators, 0, 2, GramInit.states_4, jumpedDFAs_4),
-        new DFA(DFAName.decorated, 0, 3, GramInit.states_5, jumpedDFAs_5),
-        new DFA(DFAName.async_funcdef, 0, 3, GramInit.states_6, jumpedDFAs_6),
-        new DFA(DFAName.funcdef, 0, 8, GramInit.states_7, jumpedDFAs_7),
-        new DFA(DFAName.parameters, 0, 4, GramInit.states_8, jumpedDFAs_8),
-        new DFA(DFAName.typedargslist, 0, 34, GramInit.states_9, jumpedDFAs_9),
-        new DFA(DFAName.tfpdef, 0, 4, GramInit.states_10, jumpedDFAs_10),
-        new DFA(DFAName.varargslist, 0, 34, GramInit.states_11, jumpedDFAs_11),
-        new DFA(DFAName.vfpdef, 0, 2, GramInit.states_12, jumpedDFAs_12),
-        new DFA(DFAName.stmt, 0, 2, GramInit.states_13, jumpedDFAs_13),
-        new DFA(DFAName.simple_stmt, 0, 6, GramInit.states_14, jumpedDFAs_14),
-        new DFA(DFAName.small_stmt, 0, 2, GramInit.states_15, jumpedDFAs_15),
-        new DFA(DFAName.expr_stmt, 0, 7, GramInit.states_16, jumpedDFAs_16),
-        new DFA(DFAName.testlist_star_expr, 0, 5, GramInit.states_17, jumpedDFAs_68),
-        new DFA(DFAName.augassign, 0, 2, GramInit.states_18, jumpedDFAs_18),
-        new DFA(DFAName.del_stmt, 0, 3, GramInit.states_19, jumpedDFAs_19),
-        new DFA(DFAName.pass_stmt, 0, 2, GramInit.states_20, jumpedDFAs_20),
-        new DFA(DFAName.flow_stmt, 0, 2, GramInit.states_21, jumpedDFAs_21),
-        new DFA(DFAName.break_stmt, 0, 2, GramInit.states_22, jumpedDFAs_22),
-        new DFA(DFAName.continue_stmt, 0, 2, GramInit.states_23, jumpedDFAs_23),
-        new DFA(DFAName.return_stmt, 0, 3, GramInit.states_24, jumpedDFAs_24),
-        new DFA(DFAName.yield_stmt, 0, 2, GramInit.states_25, jumpedDFAs_83),
-        new DFA(DFAName.raise_stmt, 0, 5, GramInit.states_26, jumpedDFAs_26),
-        new DFA(DFAName.import_stmt, 0, 2, GramInit.states_27, jumpedDFAs_27),
-        new DFA(DFAName.import_name, 0, 3, GramInit.states_28, jumpedDFAs_28),
-        new DFA(DFAName.import_from, 0, 8, GramInit.states_29, jumpedDFAs_29),
-        new DFA(DFAName.import_as_name, 0, 4, GramInit.states_30, jumpedDFAs_32),
-        new DFA(DFAName.dotted_as_name, 0, 4, GramInit.states_31, jumpedDFAs_34),
-        new DFA(DFAName.import_as_names, 0, 5, GramInit.states_32, jumpedDFAs_32),
-        new DFA(DFAName.dotted_as_names, 0, 5, GramInit.states_33, jumpedDFAs_33),
-        new DFA(DFAName.dotted_name, 0, 5, GramInit.states_34, jumpedDFAs_34),
-        new DFA(DFAName.global_stmt, 0, 6, GramInit.states_35, jumpedDFAs_35),
-        new DFA(DFAName.nonlocal_stmt, 0, 6, GramInit.states_36, jumpedDFAs_36),
-        new DFA(DFAName.assert_stmt, 0, 5, GramInit.states_37, jumpedDFAs_37),
-        new DFA(DFAName.compound_stmt, 0, 2, GramInit.states_38, jumpedDFAs_38),
-        new DFA(DFAName.async_stmt, 0, 3, GramInit.states_39, jumpedDFAs_39),
-        new DFA(DFAName.if_stmt, 0, 15, GramInit.states_40, jumpedDFAs_40),
-        new DFA(DFAName.while_stmt, 0, 8, GramInit.states_41, jumpedDFAs_41),
-        new DFA(DFAName.for_stmt, 0, 10, GramInit.states_42, jumpedDFAs_42),
-        new DFA(DFAName.try_stmt, 0, 17, GramInit.states_43, jumpedDFAs_43),
-        new DFA(DFAName.with_stmt, 0, 8, GramInit.states_44, jumpedDFAs_44),
-        new DFA(DFAName.with_item, 0, 4, GramInit.states_45, jumpedDFAs_74),
-        new DFA(DFAName.except_clause, 0, 5, GramInit.states_46, jumpedDFAs_46),
-        new DFA(DFAName.suite, 0, 5, GramInit.states_47, jumpedDFAs_47),
-        new DFA(DFAName.test, 0, 6, GramInit.states_48, jumpedDFAs_48),
-        new DFA(DFAName.test_nocond, 0, 2, GramInit.states_49, jumpedDFAs_49),
-        new DFA(DFAName.lambdef, 0, 5, GramInit.states_50, jumpedDFAs_50),
-        new DFA(DFAName.lambdef_nocond, 0, 5, GramInit.states_51, jumpedDFAs_51),
-        new DFA(DFAName.or_test, 0, 5, GramInit.states_52, jumpedDFAs_52),
-        new DFA(DFAName.and_test, 0, 5, GramInit.states_53, jumpedDFAs_53),
-        new DFA(DFAName.not_test, 0, 3, GramInit.states_54, jumpedDFAs_54),
-        new DFA(DFAName.comparison, 0, 5, GramInit.states_55, jumpedDFAs_55),
-        new DFA(DFAName.comp_op, 0, 4, GramInit.states_56, jumpedDFAs_56),
-        new DFA(DFAName.star_expr, 0, 3, GramInit.states_57, jumpedDFAs_57),
-        new DFA(DFAName.expr, 0, 5, GramInit.states_58, jumpedDFAs_58),
-        new DFA(DFAName.xor_expr, 0, 5, GramInit.states_59, jumpedDFAs_59),
-        new DFA(DFAName.and_expr, 0, 5, GramInit.states_60, jumpedDFAs_60),
-        new DFA(DFAName.shift_expr, 0, 5, GramInit.states_61, jumpedDFAs_61),
-        new DFA(DFAName.arith_expr, 0, 5, GramInit.states_62, jumpedDFAs_62),
-        new DFA(DFAName.term, 0, 5, GramInit.states_63, jumpedDFAs_63),
-        new DFA(DFAName.factor, 0, 3, GramInit.states_64, jumpedDFAs_64),
-        new DFA(DFAName.power, 0, 4, GramInit.states_65, jumpedDFAs_65),
-        new DFA(DFAName.atom_expr, 0, 4, GramInit.states_66, jumpedDFAs_66),
-        new DFA(DFAName.atom, 0, 9, GramInit.states_67, jumpedDFAs_67),
-        new DFA(DFAName.testlist_comp, 0, 6, GramInit.states_68, jumpedDFAs_68),
-        new DFA(DFAName.trailer, 0, 7, GramInit.states_69, jumpedDFAs_69),
-        new DFA(DFAName.subscriptlist, 0, 5, GramInit.states_70, jumpedDFAs_70),
-        new DFA(DFAName.subscript, 0, 5, GramInit.states_71, jumpedDFAs_71),
-        new DFA(DFAName.sliceop, 0, 3, GramInit.states_72, jumpedDFAs_72),
-        new DFA(DFAName.exprlist, 0, 5, GramInit.states_73, jumpedDFAs_73),
-        new DFA(DFAName.testlist, 0, 5, GramInit.states_74, jumpedDFAs_74),
-        new DFA(DFAName.dictorsetmaker, 0, 19, GramInit.states_75, jumpedDFAs_75),
-        new DFA(DFAName.classdef, 0, 8, GramInit.states_76, jumpedDFAs_76),
-        new DFA(DFAName.arglist, 0, 5, GramInit.states_77, jumpedDFAs_77),
-        new DFA(DFAName.argument, 0, 6, GramInit.states_78, jumpedDFAs_78),
-        new DFA(DFAName.comp_iter, 0, 2, GramInit.states_79, jumpedDFAs_79),
-        new DFA(DFAName.comp_for, 0, 6, GramInit.states_80, jumpedDFAs_80),
-        new DFA(DFAName.comp_if, 0, 4, GramInit.states_81, jumpedDFAs_81),
-        new DFA(DFAName.encoding_decl, 0, 2, GramInit.states_82, jumpedDFAs_82),
-        new DFA(DFAName.yield_expr, 0, 3, GramInit.states_83, jumpedDFAs_83),
-        new DFA(DFAName.yield_arg, 0, 3, GramInit.states_84, jumpedDFAs_84),
+        new DFA(DFAName.single_input, 0, 3, GramInit.states_0, acceptLabel_0),
+        new DFA(DFAName.file_input, 0, 3, GramInit.states_1, acceptLabel_1),
+        new DFA(DFAName.eval_input, 0, 4, GramInit.states_2, acceptLabel_2),
+        new DFA(DFAName.decorator, 0, 7, GramInit.states_3, acceptLabel_4),
+        new DFA(DFAName.decorators, 0, 2, GramInit.states_4, acceptLabel_4),
+        new DFA(DFAName.decorated, 0, 3, GramInit.states_5, acceptLabel_5),
+        new DFA(DFAName.async_funcdef, 0, 3, GramInit.states_6, acceptLabel_6),
+        new DFA(DFAName.funcdef, 0, 8, GramInit.states_7, acceptLabel_7),
+        new DFA(DFAName.parameters, 0, 4, GramInit.states_8, acceptLabel_8),
+        new DFA(DFAName.typedargslist, 0, 34, GramInit.states_9, acceptLabel_9),
+        new DFA(DFAName.tfpdef, 0, 4, GramInit.states_10, acceptLabel_10),
+        new DFA(DFAName.varargslist, 0, 34, GramInit.states_11, acceptLabel_11),
+        new DFA(DFAName.vfpdef, 0, 2, GramInit.states_12, acceptLabel_12),
+        new DFA(DFAName.stmt, 0, 2, GramInit.states_13, acceptLabel_13),
+        new DFA(DFAName.simple_stmt, 0, 6, GramInit.states_14, acceptLabel_14),
+        new DFA(DFAName.small_stmt, 0, 2, GramInit.states_15, acceptLabel_15),
+        new DFA(DFAName.expr_stmt, 0, 7, GramInit.states_16, acceptLabel_16),
+        new DFA(DFAName.testlist_star_expr, 0, 5, GramInit.states_17, acceptLabel_68),
+        new DFA(DFAName.augassign, 0, 2, GramInit.states_18, acceptLabel_18),
+        new DFA(DFAName.del_stmt, 0, 3, GramInit.states_19, acceptLabel_19),
+        new DFA(DFAName.pass_stmt, 0, 2, GramInit.states_20, acceptLabel_20),
+        new DFA(DFAName.flow_stmt, 0, 2, GramInit.states_21, acceptLabel_21),
+        new DFA(DFAName.break_stmt, 0, 2, GramInit.states_22, acceptLabel_22),
+        new DFA(DFAName.continue_stmt, 0, 2, GramInit.states_23, acceptLabel_23),
+        new DFA(DFAName.return_stmt, 0, 3, GramInit.states_24, acceptLabel_24),
+        new DFA(DFAName.yield_stmt, 0, 2, GramInit.states_25, acceptLabel_83),
+        new DFA(DFAName.raise_stmt, 0, 5, GramInit.states_26, acceptLabel_26),
+        new DFA(DFAName.import_stmt, 0, 2, GramInit.states_27, acceptLabel_27),
+        new DFA(DFAName.import_name, 0, 3, GramInit.states_28, acceptLabel_28),
+        new DFA(DFAName.import_from, 0, 8, GramInit.states_29, acceptLabel_29),
+        new DFA(DFAName.import_as_name, 0, 4, GramInit.states_30, acceptLabel_32),
+        new DFA(DFAName.dotted_as_name, 0, 4, GramInit.states_31, acceptLabel_34),
+        new DFA(DFAName.import_as_names, 0, 5, GramInit.states_32, acceptLabel_32),
+        new DFA(DFAName.dotted_as_names, 0, 5, GramInit.states_33, acceptLabel_33),
+        new DFA(DFAName.dotted_name, 0, 5, GramInit.states_34, acceptLabel_34),
+        new DFA(DFAName.global_stmt, 0, 6, GramInit.states_35, acceptLabel_35),
+        new DFA(DFAName.nonlocal_stmt, 0, 6, GramInit.states_36, acceptLabel_36),
+        new DFA(DFAName.assert_stmt, 0, 5, GramInit.states_37, acceptLabel_37),
+        new DFA(DFAName.compound_stmt, 0, 2, GramInit.states_38, acceptLabel_38),
+        new DFA(DFAName.async_stmt, 0, 3, GramInit.states_39, acceptLabel_39),
+        new DFA(DFAName.if_stmt, 0, 15, GramInit.states_40, acceptLabel_40),
+        new DFA(DFAName.while_stmt, 0, 8, GramInit.states_41, acceptLabel_41),
+        new DFA(DFAName.for_stmt, 0, 10, GramInit.states_42, acceptLabel_42),
+        new DFA(DFAName.try_stmt, 0, 17, GramInit.states_43, acceptLabel_43),
+        new DFA(DFAName.with_stmt, 0, 8, GramInit.states_44, acceptLabel_44),
+        new DFA(DFAName.with_item, 0, 4, GramInit.states_45, acceptLabel_74),
+        new DFA(DFAName.except_clause, 0, 5, GramInit.states_46, acceptLabel_46),
+        new DFA(DFAName.suite, 0, 5, GramInit.states_47, acceptLabel_47),
+        new DFA(DFAName.test, 0, 6, GramInit.states_48, acceptLabel_48),
+        new DFA(DFAName.test_nocond, 0, 2, GramInit.states_49, acceptLabel_49),
+        new DFA(DFAName.lambdef, 0, 5, GramInit.states_50, acceptLabel_50),
+        new DFA(DFAName.lambdef_nocond, 0, 5, GramInit.states_51, acceptLabel_51),
+        new DFA(DFAName.or_test, 0, 5, GramInit.states_52, acceptLabel_52),
+        new DFA(DFAName.and_test, 0, 5, GramInit.states_53, acceptLabel_53),
+        new DFA(DFAName.not_test, 0, 3, GramInit.states_54, acceptLabel_54),
+        new DFA(DFAName.comparison, 0, 5, GramInit.states_55, acceptLabel_55),
+        new DFA(DFAName.comp_op, 0, 4, GramInit.states_56, acceptLabel_56),
+        new DFA(DFAName.star_expr, 0, 3, GramInit.states_57, acceptLabel_57),
+        new DFA(DFAName.expr, 0, 5, GramInit.states_58, acceptLabel_58),
+        new DFA(DFAName.xor_expr, 0, 5, GramInit.states_59, acceptLabel_59),
+        new DFA(DFAName.and_expr, 0, 5, GramInit.states_60, acceptLabel_60),
+        new DFA(DFAName.shift_expr, 0, 5, GramInit.states_61, acceptLabel_61),
+        new DFA(DFAName.arith_expr, 0, 5, GramInit.states_62, acceptLabel_62),
+        new DFA(DFAName.term, 0, 5, GramInit.states_63, acceptLabel_63),
+        new DFA(DFAName.factor, 0, 3, GramInit.states_64, acceptLabel_64),
+        new DFA(DFAName.power, 0, 4, GramInit.states_65, acceptLabel_65),
+        new DFA(DFAName.atom_expr, 0, 4, GramInit.states_66, acceptLabel_66),
+        new DFA(DFAName.atom, 0, 9, GramInit.states_67, acceptLabel_67),
+        new DFA(DFAName.testlist_comp, 0, 6, GramInit.states_68, acceptLabel_68),
+        new DFA(DFAName.trailer, 0, 7, GramInit.states_69, acceptLabel_69),
+        new DFA(DFAName.subscriptlist, 0, 5, GramInit.states_70, acceptLabel_70),
+        new DFA(DFAName.subscript, 0, 5, GramInit.states_71, acceptLabel_71),
+        new DFA(DFAName.sliceop, 0, 3, GramInit.states_72, acceptLabel_72),
+        new DFA(DFAName.exprlist, 0, 5, GramInit.states_73, acceptLabel_73),
+        new DFA(DFAName.testlist, 0, 5, GramInit.states_74, acceptLabel_74),
+        new DFA(DFAName.dictorsetmaker, 0, 19, GramInit.states_75, acceptLabel_75),
+        new DFA(DFAName.classdef, 0, 8, GramInit.states_76, acceptLabel_76),
+        new DFA(DFAName.arglist, 0, 5, GramInit.states_77, acceptLabel_77),
+        new DFA(DFAName.argument, 0, 6, GramInit.states_78, acceptLabel_78),
+        new DFA(DFAName.comp_iter, 0, 2, GramInit.states_79, acceptLabel_79),
+        new DFA(DFAName.comp_for, 0, 6, GramInit.states_80, acceptLabel_80),
+        new DFA(DFAName.comp_if, 0, 4, GramInit.states_81, acceptLabel_81),
+        new DFA(DFAName.encoding_decl, 0, 2, GramInit.states_82, acceptLabel_82),
+        new DFA(DFAName.yield_expr, 0, 3, GramInit.states_83, acceptLabel_83),
+        new DFA(DFAName.yield_arg, 0, 3, GramInit.states_84, acceptLabel_84),
     };
 
     public static Label[] labels = {

@@ -206,7 +206,7 @@ public class Parser
     
     public static void main(String[] args)
     {
-        File file = new File("translator.py");
+        File file = new File("test.py");
 
         try
         {
