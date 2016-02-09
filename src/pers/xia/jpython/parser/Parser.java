@@ -1,19 +1,14 @@
 package pers.xia.jpython.parser;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.Stack;
 
 import org.apache.log4j.Logger;
 
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
-
-import pers.xia.jpython.grammar.Arc;
 import pers.xia.jpython.grammar.DFA;
 import pers.xia.jpython.grammar.GramInit;
 import pers.xia.jpython.grammar.Grammar;
-import pers.xia.jpython.grammar.Label;
 import pers.xia.jpython.grammar.State;
 import pers.xia.jpython.object.PyExceptions;
 import pers.xia.jpython.tokenizer.TokState;
@@ -206,6 +201,61 @@ public class Parser
         }
     }
     
+    public void show()
+    {
+        //save the node and there index
+        class NodeAndIndex
+        {
+            Node node;
+            int index;
+            NodeAndIndex(Node node)
+            {
+                this.node = node;
+                this.index = 0;
+            }
+        }
+        
+        Stack<NodeAndIndex> stack = new Stack<NodeAndIndex>();
+        LinkedList<String> nodeNames = new LinkedList<String>();  
+        NodeAndIndex ni = new NodeAndIndex(this.tree);
+        
+        nodeNames.add(ni.node.dfaType.toString());
+        stack.add(ni);
+        
+        while(!stack.empty())
+        {
+            ni = stack.peek();
+            if(ni.index >= ni.node.childs.size())
+            {
+                stack.pop();
+                nodeNames.removeLast();
+                continue;
+            }
+            
+            Node node = ni.node.getChild(ni.index++);
+            if(node.isDFAType)
+            {
+                NodeAndIndex ni2 = new NodeAndIndex(node);
+                stack.push(ni2);
+                nodeNames.add(ni2.node.dfaType.toString());
+                continue;
+            }
+            
+            for(String s : nodeNames)
+            {
+                System.out.print(s + " ");
+            }
+            if(node.tokType == TokState.NAME)
+            {
+                System.out.println(node.tokType.toString() + " " + node.str);
+            }
+            else
+            {
+                System.out.println(node.tokType.toString());
+            }
+        }
+    }
+    
     public static void main(String[] args)
     {
         File file = new File("test.py");
@@ -230,6 +280,7 @@ public class Parser
                 tok = tokenizer.nextToken();
             }
             parser.AddToken(tok, colOffset);
+            parser.show();
         }
         catch(PyExceptions e)
         {
