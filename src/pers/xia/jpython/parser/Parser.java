@@ -7,6 +7,7 @@ import java.util.Stack;
 import org.apache.log4j.Logger;
 
 import pers.xia.jpython.grammar.DFA;
+import pers.xia.jpython.grammar.DFAType;
 import pers.xia.jpython.grammar.GramInit;
 import pers.xia.jpython.grammar.Grammar;
 import pers.xia.jpython.grammar.State;
@@ -17,6 +18,8 @@ import pers.xia.jpython.tokenizer.Tokenizer;
 
 public class Parser
 {
+    public static enum ReturnCode{OK, ACCEPT};
+    
     class StackEntry    //栈中的元素
     {
         DFA dfa; //所属的DFA
@@ -130,7 +133,7 @@ public class Parser
         this.stack.push(se1);
     }
     
-    public void AddToken(Token token, int colOffset)
+    public ReturnCode addToken(Token token, int colOffset)
     {
         int ilabel = this.classify(token);
                 
@@ -173,13 +176,13 @@ public class Parser
                         if(this.stack.empty())
                         {
                             log.debug("accept");
-                            return;
+                            return ReturnCode.ACCEPT;
                         }
                         se = this.stack.peek();
                         dfa = se.dfa;
                         state = dfa.getState(se.curState);
                     }
-                    return;
+                    return ReturnCode.OK;
                 }
             }
             
@@ -245,13 +248,13 @@ public class Parser
             {
                 System.out.print(s + " ");
             }
-            if(node.tokType == TokState.NAME)
+            if(node.dfaType == DFAType.NAME)
             {
-                System.out.println(node.tokType.toString() + " " + node.str);
+                System.out.println(node.dfaType.toString() + " " + node.str);
             }
             else
             {
-                System.out.println(node.tokType.toString());
+                System.out.println(node.dfaType.toString());
             }
         }
     }
@@ -266,9 +269,8 @@ public class Parser
             Tokenizer tokenizer = new Tokenizer(file);
             Token tok = tokenizer.nextToken();
             int colOffset = 0;
-            while(tok.state != TokState.ENDMARKER)
+            while(parser.addToken(tok, colOffset) != ReturnCode.ACCEPT)
             {
-                parser.AddToken(tok, colOffset);
                 if(tok.state == TokState.NEWLINE)
                 {
                     colOffset = 0;
@@ -279,7 +281,6 @@ public class Parser
                 }
                 tok = tokenizer.nextToken();
             }
-            parser.AddToken(tok, colOffset);
             parser.show();
         }
         catch(PyExceptions e)

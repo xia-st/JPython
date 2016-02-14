@@ -6,14 +6,14 @@ import pers.xia.jpython.object.PyExceptions;
 
 public class DFA
 {
-    public DFAName name;    //DFA name
+    public DFAType name;    //DFA name
     public int initial;    //Initial state,
     public int nstates;    //the number of state
     public State[] states;    //states for DFA
     public int[] acceptLabel;    //保存跳转到当前DFA
 
     
-    public DFA(DFAName name, int initial, int nstates, State[] states, int[] acceptLabel)
+    public DFA(DFAType name, int initial, int nstates, State[] states, int[] acceptLabel)
     {
         this.name = name;
         this.initial = initial;

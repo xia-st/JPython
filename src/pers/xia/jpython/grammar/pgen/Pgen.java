@@ -1442,7 +1442,7 @@ class Pgen
        for(int i = 0; i < grammar.ndfas; i++)
        {
            sb.append("        new DFA(" +
-                   "DFAName." + grammar.dfas[i].name + ", " +
+                   "DFAType." + grammar.dfas[i].name + ", " +
                    "0, " +
                    grammar.dfas[i].nstates + ", " +
                    fileName + "." + statesStringMap.get(grammar.dfas[i].states) + ", " +
@@ -1471,10 +1471,10 @@ class Pgen
         }
         
         //逆转label和它的下标
-        String DFAName = "%d";
+        String DFAType = "%d";
         for(int i = 0; i < this.grammar.ndfas; i++)
         {
-            DFAStringMap.put(this.grammar.dfas[i].name, String.format(DFAName, i));
+            DFAStringMap.put(this.grammar.dfas[i].name, String.format(DFAType, i));
         }
         
 
@@ -1507,16 +1507,41 @@ class Pgen
         return sb;
     }
     
-    private void writeDFANameFILE(File file)
+    private void writeDFATypeFILE(File file)
     {
         StringBuilder sb = new StringBuilder(); 
         sb.append("package pers.xia.jpython.grammar;\n\n" +
-                "public enum DFAName\n" + 
+                "public enum DFAType\n" + 
                 "{\n");
         for(int i = 0; i < this.grammar.ndfas; i++)
         {
             sb.append("    " + this.grammar.dfas[i].name + ",\n");
         }
+        
+        sb.append("\n/* The follow dfa type are copyed from TokState.java */\n");
+        sb.append("/* The follow type a used to make analyze easier */\n\n");
+        
+        try
+        {
+            BufferedReader file2 = new BufferedReader(new FileReader(
+                    "src/pers/xia/jpython/tokenizer/TokState.java"));
+            String s;
+            while((s = file2.readLine()) != null)
+            {
+                if(s.indexOf(',') < 0) continue;
+                sb.append("    " + s.trim() + "\n");
+            }
+        } 
+        catch (FileNotFoundException e1)
+        {
+            e1.printStackTrace();
+        } 
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        
+        
         sb.append("}");
         
         try
@@ -1551,8 +1576,8 @@ class Pgen
         Pgen pgen = new Pgen(grammarFile);
         pgen.createGrammar();
        
-        File targetFile = new File("src/pers/xia/jpython/grammar/DFAName.java");
-        pgen.writeDFANameFILE(targetFile);
+        File targetFile = new File("src/pers/xia/jpython/grammar/DFAType.java");
+        pgen.writeDFATypeFILE(targetFile);
         targetFile = new File("src/pers/xia/jpython/grammar/GramInit.java");
         pgen.writeGramInitFile(targetFile);
     }

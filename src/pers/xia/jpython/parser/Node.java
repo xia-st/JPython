@@ -3,23 +3,22 @@ package pers.xia.jpython.parser;
 import java.util.ArrayList;
 import java.util.List;
 
-import pers.xia.jpython.grammar.DFAName;
+import pers.xia.jpython.grammar.DFAType;
 import pers.xia.jpython.object.PyExceptions;
 import pers.xia.jpython.tokenizer.TokState;
 
 public class Node
 {
     boolean isDFAType;
-    DFAName dfaType;
-    TokState tokType;
+    DFAType dfaType;
     
     String str;
-    int lineNo;
-    int colOffset;
+    public int lineNo;
+    public int colOffset;
     
    List<Node> childs;
    
-   public Node(DFAName dfaType)
+   public Node(DFAType dfaType)
    {
        this.childs = new ArrayList<Node>();
        this.dfaType = dfaType;
@@ -29,7 +28,7 @@ public class Node
    public Node(TokState tokType)
    {
        this.childs = new ArrayList<Node>();
-       this.tokType = tokType;
+       this.dfaType = DFAType.valueOf(tokType.toString());  //modify TokState to DFAType
        this.isDFAType = false;
    }
    
@@ -46,7 +45,7 @@ public class Node
    }
    */
    
-   public void addChild(DFAName dfaName, int lineNo, int colOffset)
+   public void addChild(DFAType dfaName, int lineNo, int colOffset)
    {
        Node node = new Node(dfaName);
        
