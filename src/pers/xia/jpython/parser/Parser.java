@@ -29,7 +29,7 @@ public class Parser
 
     Stack<StackEntry> stack;    // DFA的状态栈
     Grammar grammar;    //使用的grammar
-    Node tree;  //CST树
+    public Node tree;  //CST树
     
     private Logger log;
     

@@ -6,6 +6,12 @@ import pers.xia.jpython.tokenizer.Token;
 
 public class PyExceptions extends RuntimeException
 {
+    private static final long serialVersionUID = -5566345378602605958L;
+
+    public static enum ErrorType{
+        AST_ERROR,
+        PARSER_ERROR,
+    }
     public Stack<String> map = new Stack<String>();
     public Token tok;
     
@@ -19,14 +25,24 @@ public class PyExceptions extends RuntimeException
         super(msg);
         map.push(msg);
     }
-      public PyExceptions(String message, Throwable cause) {
-        super(message, cause);
+    
+    public PyExceptions(String msg, Throwable cause) {
+        super(msg, cause);
+    }
+    
+    public PyExceptions(ErrorType type, String msg)
+    {
+        super(msg);
+        map.push(msg);
     }
       
     public PyExceptions(String msg, Token tok)
     {
         super(msg);
-        map.push(msg + tok.hashCode());
+        msg = "line: " + tok.lineNo + "\n" + 
+                tok.buf.substring(tok.lineStart, tok.lineEnd) + '\n'
+                + msg;
+        map.push(msg);
         this.tok = tok;
     }
     

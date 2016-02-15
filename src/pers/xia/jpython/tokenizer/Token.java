@@ -11,7 +11,7 @@ import pers.xia.jpython.object.PyExceptions;
 
 public class Token
 {
-    String buf;
+    public String buf;
     int cur;
  //   ErrorCode done;
     File file;
@@ -32,8 +32,8 @@ public class Token
     boolean contLine;
     
     public TokState state;
-    int lineStart;    //一行的起始位置
-    int lineEnd;    //一行的结束位置
+    public int lineStart;    //一行的起始位置
+    public int lineEnd;    //一行的结束位置
     
     private Logger log;
     
