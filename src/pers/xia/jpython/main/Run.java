@@ -37,7 +37,6 @@ public class Run
                 }
                 tok = tokenizer.nextToken();
             }
-            // parser.show();
         }
         catch(PyExceptions e)
         {
@@ -45,9 +44,13 @@ public class Run
             throw e;
         }
         
+        // parser.show();
+
         Node tree = parser.tree;
         
         Ast ast = new Ast();
         ast.fromNode(tree);
+        
+        // System.out.println(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
     }
 }

@@ -155,7 +155,7 @@ class JavaVisitor(EmitVisitor):
         self.emit("public abstract class %(name)sType{" %
                   locals(), depth)
         for attribute in sum.attributes:
-            self.emit('%s %s;' % (attribute.type, attribute.name), depth + 1)
+            self.emit('public %s %s;' % (attribute.type, attribute.name), depth + 1)
         self.emit("}", depth)
         self.close()
         for t in sum.types:
