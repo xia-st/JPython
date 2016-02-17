@@ -2,6 +2,7 @@ package pers.xia.jpython.object;
 
 import java.util.Stack;
 
+import pers.xia.jpython.parser.Node;
 import pers.xia.jpython.tokenizer.Token;
 
 public class PyExceptions extends RuntimeException
@@ -35,6 +36,20 @@ public class PyExceptions extends RuntimeException
         super(msg);
         map.push(msg);
     }
+    
+    public PyExceptions(String msg, Node n)
+    {
+        this(null, msg, n);
+    }
+    
+    public PyExceptions(ErrorType type, String msg, Node n)
+    {
+        super(msg);
+        msg = msg + "\n" + "line: " + n.lineNo + 
+                "\ncolOffset: " + n.colOffset;
+        map.push(msg);
+    }
+    
       
     public PyExceptions(String msg, Token tok)
     {

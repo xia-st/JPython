@@ -79,8 +79,14 @@ public class Node
         }
         if(n < 0 || n > this.childs.size())
         {
-            throw new PyExceptions("Out of range by Node child's list");
+            throw new PyExceptions("Out of range by Node child's list", this);
         }
         return this.childs.get(n);
     }
+    
+    public int nChild()
+    {
+        return this.childs.size();
+    }
+    
 }

@@ -7,11 +7,14 @@ import pers.xia.jpython.object.PyExceptions.ErrorType;
 import pers.xia.jpython.object.PyObject;
 
 import java.util.ArrayList;
-import java.util.List;
-
 
 public class Ast
 {
+    private static enum COMP{
+            COMP_GENEXP,
+            COMP_LISTCOMP,
+            COMP_SETCOMP
+    }
     /* 
       *Test the node's type is or not the assigened type
      */
@@ -64,16 +67,16 @@ public class Ast
         case compound_stmt:
             return 1;
         case simple_stmt:
-            return n.childs.size() / 2;
+            return n.nChild() / 2;
         case suite:
-            if(n.childs.size() == 1)
+            if(n.nChild() == 1)
             {
                 return numStmts(n.getChild(0));
             }
             else
             {
                 l = 0;
-                for(int i = 1; i < n.childs.size() - 1; i++)
+                for(int i = 2; i < n.nChild() - 1; i++)
                 {
                     l += numStmts(n.getChild(i));
                 }
@@ -81,7 +84,7 @@ public class Ast
             }
         default:
             throw new PyExceptions(ErrorType.AST_ERROR, "Non-statement found: " + 
-                    n.dfaType + " " + n.childs.size()); 
+                    n.dfaType + " " + n.nChild(), n); 
         }
     }
     
@@ -100,11 +103,11 @@ public class Ast
     {
         if(name == null)
         {
-            throw new PyExceptions(ErrorType.AST_ERROR, "assignment to keyword");
+            throw new PyExceptions(ErrorType.AST_ERROR, "assignment to keyword", n);
         }
         if("__debug__".equals(name))
         {
-            throw new PyExceptions(ErrorType.AST_ERROR, "assignment to keyword");
+            throw new PyExceptions(ErrorType.AST_ERROR, "assignment to keyword", n);
         }
         if(fullChecks)
         {
@@ -112,64 +115,814 @@ public class Ast
             {
                 if(FORBIDDEN[i].equals(name))
                 {
-                    throw new PyExceptions(ErrorType.AST_ERROR, "assignment to keyword");
+                    throw new PyExceptions(ErrorType.AST_ERROR, "assignment to keyword", n);
                 }
             }
         }
     }
     
-    private void setContext(exprType expr, expr_contextType ctx, Node n)
+    private void setContext(exprType e, expr_contextType ctx, Node n)
     {
-        //TODO
+        // FIXME remove the return statement
+        return;
+        /*
+        String exprName = null;
+        java.util.List<exprType> s = null;
+        
+        Assert(ctx != expr_contextType.AugStore && 
+                ctx != expr_contextType.AugLoad);
+        if(e instanceof Attribute)
+        {
+            ((Attribute)e).ctx = ctx;
+        }
+        else if(e instanceof Subscript)
+        {
+            ((Subscript)e).ctx = ctx;
+        }
+        else if(e instanceof Starred)
+        {
+            ((Starred)e).ctx = ctx;
+            setContext(((Starred)e).value, ctx, n);
+        }
+        else if(e instanceof Name)
+        {
+            if(ctx == expr_contextType.Store)
+            {
+                forbiddenName(((Name)e).id, n, false);
+            }
+            ((Name)e).ctx = ctx;
+        }
+        else if(e instanceof List)
+        {
+            ((List)e).ctx = ctx;
+            s = ((List)e).elts;
+        }
+        else if(e instanceof Tuple)
+        {
+            if(((Tuple)e).elts.size() > 0)
+            {
+                ((Tuple)e).ctx = ctx;
+                s = ((Tuple)e).elts;
+            }
+            else
+            {
+                exprName = "()";
+            }
+        }
+        else if(e instanceof Lambda)
+        {
+            exprName = "lambda";
+        }
+        else if(e instanceof Call)
+        {
+            exprName = "function call";
+        }
+        else if(e instanceof BoolOp ||
+                e instanceof BinOp ||
+                e instanceof UnaryOp)
+        {
+            exprName = "operator";
+        }
+        else if(e instanceof GeneratorExp)
+        {
+            exprName = "generator expression";
+        }
+        else if(e instanceof Yield ||
+                e instanceof YieldFrom)
+        {
+            exprName = "yield expression";
+        }
+        else if(e instanceof Await)
+        {
+            exprName = "await expression";
+        }
+        else if(e instanceof ListComp)
+        {
+            exprName = "list comprehension";
+        }
+        else if(e instanceof SetComp)
+        {
+            exprName = "set comprehension";
+        }
+        else if(e instanceof DictComp)
+        {
+            exprName = "dict comprehension";
+        }
+        else if(e instanceof Dict ||
+                e instanceof Set ||
+                e instanceof Num ||
+                e instanceof Str ||
+                e instanceof Bytes)
+        {
+            exprName = "literal";
+        }
+        else if(e instanceof NameConstant)
+        {
+            exprName = "keyword";
+        }
+        else if(e instanceof Ellipsis)
+        {
+            exprName = "Ellipsis";
+        }
+        else if(e instanceof Compare)
+        {
+            exprName = "comparison";
+        }
+        else if(e instanceof IfExp)
+        {
+            exprName = "conditional expression";
+        }
+        else
+        {
+            throw new PyExceptions(ErrorType.AST_ERROR, 
+                    "unexpected expression in assignment " + 
+                            e.getClass().getName() + " " + e.lineno, 
+                            n);
+        }
+        if(exprName != null)
+        {
+            throw new PyExceptions(ErrorType.AST_ERROR, 
+                    String.format("can't %s %s", 
+                        ctx == expr_contextType.Store ? "assign to" : "delete", exprName), 
+                        n);
+        }
+        if(s != null)
+        {
+            for(int i = 0; i < s.size(); i++)
+            {
+                setContext(s.get(i), ctx, n);
+            }
+        }
+        */
+    }
+    
+    private int handleKeywordonlyArgs(Node n, int start, 
+            java.util.List<argType> kwonlyargs,
+            java.util.List<exprType> kwdefaults
+            )
+    {
+        // TODO
+        return 0;
+    }
+    
+    private java.util.List<comprehensionType> astForComprehension(Node n)
+    {
+        // TODO
+        return null;
+    }
+    
+    private argType astForArg(Node ch)
+    {
+        // TODO
+        return null;
+    }
+    
+    private operatorType getOperator(Node n)
+    {
+        // TODO
+        return null;
+    }
+    
+    private exprType astForDottedName(Node n)
+    {
+        // TODO
+        return null;
+    }
+    
+    private exprType astForAtom(Node n)
+    {
+        // TODO
+        return null;
+    }
+    
+    private exprType astForTrailer(Node n, exprType leftExpr)
+    {
+        // TODO
+        return null;
+    }
+    
+    private exprType astForItercomp(Node n, COMP type)
+    {
+        /* testlist_comp: (test|star_expr)
+         *                ( comp_for | (',' (test|star_expr))* [','] ) */
+        Assert(n.nChild() > 1);
+        
+        exprType elt;
+        java.util.List<comprehensionType> comps;
+        
+        Node ch = n.getChild(0);
+        elt = astForExpr(ch);
+        
+        if(elt instanceof Starred)
+        {
+            throw new PyExceptions(ErrorType.AST_ERROR, 
+                    "iterable unpacking cannot be used in comprehension", n);
+        }
+        comps = astForComprehension(n.getChild(1));
+        
+        switch(type)
+        {
+        case COMP_GENEXP:
+            return new GeneratorExp(elt, comps, n.lineNo, n.colOffset);
+        case COMP_LISTCOMP:
+            return new ListComp(elt, comps, n.lineNo, n.colOffset);
+        case COMP_SETCOMP:
+            return new SetComp(elt, comps, n.lineNo, n.colOffset);
+        default:
+            throw new PyExceptions(ErrorType.AST_ERROR,
+                    "invalid type: " + type, n);
+        }
+    }
+    
+    private argumentsType astForArguments(Node n)
+    {
+        /* This function handles both typedargslist (function definition)
+            and varargslist (lambda definition).
+    
+            parameters: '(' [typedargslist] ')'
+            typedargslist: ((tfpdef ['=' test] ',')*
+                ('*' [tfpdef] (',' tfpdef ['=' test])* [',' '**' tfpdef]
+                | '**' tfpdef)
+                | tfpdef ['=' test] (',' tfpdef ['=' test])* [','])
+            tfpdef: NAME [':' test]
+            varargslist: ((vfpdef ['=' test] ',')*
+                ('*' [vfpdef] (',' vfpdef ['=' test])*  [',' '**' vfpdef]
+                | '**' vfpdef)
+                | vfpdef ['=' test] (',' vfpdef ['=' test])* [','])
+            vfpdef: NAME
+         */
+        int nposargs = 0;
+        int nkwonlyargs = 0;
+        int nposdefaults = 0;
+        boolean foundDefault = false;
+        
+        java.util.List<argType> posargs;
+        java.util.List<exprType> posdefaults;
+        java.util.List<argType> kwonlyargs;
+        java.util.List<exprType> kwdefaults;
+        
+        argType vararg = null;
+        argType kwarg = null;
+        argType arg;
+        Node ch;
+        
+        int i;
+        
+        if(n.dfaType == DFAType.parameters)
+        {
+            if(n.nChild() == 2)  /* () as argument list */
+            {
+                return new argumentsType(null, null, null, null, null, null);
+            }
+            n = n.getChild(1);
+        }
+        
+        Assert(n.dfaType == DFAType.typedargslist ||
+                n.dfaType == DFAType.varargslist);
+        
+        /* First count the number of positional args & defaults.  The
+            variable i is the loop index for this for loop and the next.
+            The next loop picks up where the first leaves off.
+         */
+        for(i = 0; i < n.nChild(); i++)
+        {
+            ch = n.getChild(i);
+            if(ch.dfaType == DFAType.STAR)
+            {
+                /* skip star */
+                i++;
+                if(i < n.nChild() && /* skip argument following star */
+                        (n.getChild(i).dfaType == DFAType.tfpdef ||
+                        n.getChild(i).dfaType == DFAType.vfpdef))
+                {
+                    i++;
+                }
+                break;
+            }
+            if(ch.dfaType == DFAType.DOUBLESTAR)
+            {
+                break;
+            }
+            if(ch.dfaType == DFAType.vfpdef || 
+                    ch.dfaType == DFAType.tfpdef)
+            {
+                nposargs++;
+            }
+            if(ch.dfaType == DFAType.EQUAL)
+            {
+                nposdefaults++;
+            }
+        }
+        
+        /* count the number of keyword only args &
+        defaults for keyword only args */
+        for(; i < n.nChild(); i++)
+        {
+            ch = n.getChild(i);
+            if(ch.dfaType == DFAType.DOUBLESTAR)
+            {
+                break;
+            }
+            if(ch.dfaType == DFAType.tfpdef ||
+                    ch.dfaType == DFAType.vfpdef)
+            {
+                nkwonlyargs++;
+            }
+        }
+        posargs = nposargs > 0 ? new ArrayList<argType>(nposargs) : null;
+        kwonlyargs = nkwonlyargs > 0 ? new ArrayList<argType>(nkwonlyargs) : null;
+        posdefaults = nposdefaults > 0 ? new ArrayList<exprType>(nposdefaults) : null;
+        kwdefaults = nkwonlyargs > 0 ? new ArrayList<exprType>(nkwonlyargs) : null; 
+        
+        if(nposargs + nkwonlyargs > 255)
+        {
+            throw new PyExceptions(ErrorType.AST_ERROR, "more than 255 arguments", n);
+        }
+        
+        /* tfpdef: NAME [':' test]
+            vfpdef: NAME
+         */
+        i = 0;
+        while(i < n.nChild())
+        {
+            ch = n.getChild(i);
+            switch(ch.dfaType)
+            {
+            case tfpdef:
+            case vfpdef:
+                if(n.nChild() > i + 1 && 
+                        n.getChild(i + 1).dfaType == DFAType.EQUAL)
+                {
+                    exprType expression = astForExpr(n.getChild(i + 2));
+                    
+                    Assert(posdefaults != null);
+                    posdefaults.add(expression);
+                    i += 2;
+                    foundDefault = true;
+                }
+                else if(foundDefault)
+                {
+                    new PyExceptions(ErrorType.AST_ERROR, 
+                            "non-default argument follows default argument", n);
+                }
+                arg = astForArg(ch);
+                posargs.add(arg);
+                i += 2;
+                break;
+            case STAR:
+                if( i + 1 >= n.nChild())
+                {
+                    throw new PyExceptions(ErrorType.AST_ERROR,
+                            "named arguments must follow bare *", n);
+                }
+                ch = n.getChild(i + 1); /* tfpdef or COMMA */
+                if(ch.dfaType == DFAType.COMMA)
+                {
+                    int res = 0;
+                    i += 2;
+                    res = handleKeywordonlyArgs(n, i, kwonlyargs, kwdefaults);
+                    i = res;
+                }
+                else
+                {
+                    vararg = astForArg(ch);
+                    
+                    i += 3;
+                    if(i < n.nChild() && (n.getChild(i).dfaType == DFAType.tfpdef ||
+                            n.getChild(i).dfaType == DFAType.vfpdef))
+                    {
+                        int res = 0;
+                        res = handleKeywordonlyArgs(n, i, kwonlyargs, kwdefaults);
+                        i = res;
+                    }
+                }
+                break;
+            case DOUBLESTAR:
+                ch = n.getChild(i + 1);
+                Assert(ch.dfaType == DFAType.tfpdef ||
+                        ch.dfaType == DFAType.vfpdef);
+                kwarg = astForArg(ch);
+                
+                i += 3;
+                break;
+            default:
+                throw new PyExceptions(ErrorType.AST_ERROR,
+                        String.format("unexpected node in varargslist: %s @ %d",
+                                ch.dfaType.toString(), i), n);
+            }
+        }
+        return new argumentsType(posargs, vararg, kwonlyargs, kwdefaults, kwarg, posdefaults);
+    }
+    
+    
+    private exprType astForBinop(Node n)
+    {
+        /* Must account for a sequence of expressions.
+            How should A op B op C by represented?
+            BinOp(BinOp(A, op, B), op, C).
+         */
+        exprType expr1;
+        exprType expr2;
+        exprType result;
+        
+        operatorType newoperator;
+        
+        expr1 = astForExpr(n.getChild(0));
+        expr2 = astForExpr(n.getChild(2));
+        newoperator = getOperator(n.getChild(1));
+        result = new BinOp(expr1,newoperator, expr2, n.lineNo, n.colOffset);
+        
+        for(int i = 1; i < (n.nChild() - 1) / 2; i++)
+        {
+            exprType tmpResult;
+            exprType tmp;
+            
+            Node nextOper = n.getChild(i * 2 + 1);
+            
+            newoperator = getOperator(nextOper);
+            tmp = astForExpr(n.getChild(i * 2 + 2));
+            tmpResult = new BinOp(result, newoperator, tmp, nextOper.lineNo, nextOper.colOffset);
+            
+            result = tmpResult;
+        }
+        
+        return result;
+    }
+    
+    
+    private exprType astForDecorator(Node n)
+    {
+        /* decorator: '@' dotted_name [ '(' [arglist] ')' ] NEWLINE */
+        REQ(n, DFAType.decorator);
+        REQ(n.getChild(0), DFAType.AT);
+        REQ(n.getChild(-1), DFAType.NEWLINE);
+        
+        exprType d = null;
+        exprType nameExpr;
+        
+        nameExpr = astForDottedName(n.getChild(1));
+        
+        if(n.nChild() == 3)
+        {
+            d = nameExpr;
+        }
+        else if(n.nChild() == 5)
+        {
+            d = new Call(nameExpr, null, null, n.lineNo, n.colOffset);
+        }
+        else
+        {
+            d = astForCall(n.getChild(3), nameExpr);
+        }
+        
+        return d;
+    }
+    
+    
+    private exprType astForAtomExpr(Node n)
+    {
+        /*
+           atom_expr: [AWAIT] atom trailer*
+           atom: ('(' [yield_expr|testlist_comp] ')' |
+           '[' [testlist_comp] ']' |
+           '{' [dictorsetmaker] '}' |
+         */
+        REQ(n, DFAType.atom_expr);
+        
+        int start = 0;
+        exprType e;
+        exprType tmp;
+        
+        if(n.getChild(0).dfaType == DFAType.AWAIT)
+        {
+            start = 1;
+            Assert(n.nChild() > 1);
+        }
+        
+        e = astForAtom(n.getChild(start));
+        if(n.nChild() == 1)
+        {
+            return e;
+        }
+        if(start > 0 && n.nChild() == 2)
+        {
+            return new Await(e, n.lineNo, n.colOffset);
+        }
+        
+        for(int i = start + 1; i < n.nChild(); i++)
+        {
+            Node ch = n.getChild(i);
+            if(ch.dfaType != DFAType.trailer)
+            {
+                break;
+            }
+            tmp = astForTrailer(ch, e);
+            tmp.lineno = e.lineno;
+            tmp.col_offset = e.col_offset;
+            e = tmp;
+        }
+        
+        if(start > 0)
+        {
+            return new Await(e, n.lineNo, n.colOffset);
+        }
+        else
+        {
+            return e;
+        }
     }
     
     private exprType astForGenexp(Node n)
     {
-        // TODO
-        return null;
+        Assert(n.dfaType == DFAType.testlist_comp ||
+                n.dfaType == DFAType.argument);
+        return astForItercomp(n, COMP.COMP_GENEXP);
     }
     
     private operatorType astForAugassign(Node n)
     {
-        // TODO 
-        return null;
+        REQ(n, DFAType.augassign);
+        n = n.getChild(0);
+        switch(n.str)
+        {
+        case "+":
+            return operatorType.Add;
+        case "-":
+            return operatorType.Sub;
+        case "/":
+            return operatorType.Div;
+        case "//":
+            return operatorType.FloorDiv;
+        case "%":
+            return operatorType.Mod;
+        case "<":
+            return operatorType.LShift;
+        case ">":
+            return operatorType.RShift;
+        case "&":
+            return operatorType.BitAnd;
+        case "^":
+            return operatorType.BitXor;
+        case "|":
+            return operatorType.BitOr;
+        case "*":
+            return operatorType.Mult;
+        case "**":
+            return operatorType.Pow;
+        case "@":
+            return operatorType.Mult;
+        default:
+            throw new PyExceptions(ErrorType.AST_ERROR, 
+                    "invalid augassign: " + n.str, n);
+        }
     }
     
-    private List<exprType> astForExprlist(Node n, expr_contextType context)
+    private java.util.List<exprType> astForExprlist(Node n, expr_contextType context)
     {
-        // TODO
-        return null;
+        REQ(n, DFAType.exprlist);
+        java.util.List<exprType> seq = new ArrayList<exprType>((n.nChild() + 1) / 2);
+        exprType e = null;
+        
+        for(int i = 0; i < n.nChild(); i++)
+        {
+            e = astForExpr(n.getChild(i));
+            seq.add(e);
+            if(context != null)
+            {
+                setContext(e, context, n.getChild(i));
+            }
+        }
+        return seq;
     }
-    
+       
     private aliasType aliasForImportName(Node n, boolean store)
     {
-        // TODO
-        return null;
+        /*
+            import_as_name: NAME ['as' NAME]
+            dotted_as_name: dotted_name ['as' NAME]
+            dotted_name: NAME ('.' NAME)*
+         */
+        String name = null;
+        String str = null;
+        
+        while(true)
+        {
+            switch(n.dfaType)
+            {
+            case import_as_name:
+            {
+                Node nameNode = n.getChild(0);
+                name = newIdentifier(nameNode);
+                if(n.nChild() == 3)
+                {
+                    Node strNode = n.getChild(2);
+                    str = newIdentifier(strNode);
+                    if(store)
+                    {
+                        forbiddenName(str, strNode, false);
+                    }
+                }
+                else
+                {
+                    forbiddenName(name, nameNode, false);
+                }
+                return new aliasType(name, str);
+            }
+            case dotted_as_name:
+                if(n.nChild() == 1)
+                {
+                    n = n.getChild(0);
+                    continue;
+                }
+                else
+                {
+                    Node asnameNode = n.getChild(2);
+                    aliasType a = aliasForImportName(n.getChild(0), false);
+                    Assert(a.asname == null);
+                    a.asname = newIdentifier(asnameNode);
+                    forbiddenName(a.asname, asnameNode, false);
+                    return a;
+                }
+            case dotted_name:
+                if(n.nChild() == 1)
+                {
+                    Node nameNode = n.getChild(0);
+                    name = newIdentifier(nameNode);
+                    if(store)
+                    {
+                        forbiddenName(name, nameNode, false);
+                    }
+                    return new aliasType(name, null);
+                }
+                else
+                {
+                    /* Create a string of the form "a.b.c" */
+                    str = "";
+                    java.util.List<String> tmp = new ArrayList<String>(n.nChild());
+                    for(int i = 0; i < n.nChild(); i += 2)
+                    {
+                        tmp.add(n.getChild(i).str);
+                    }
+                    str = String.join(".", tmp);
+                    return new aliasType(str, null);
+                }
+            case STAR:
+                str = "*";
+                return new aliasType(str, null);
+            default:
+                throw new PyExceptions(ErrorType.AST_ERROR, 
+                        "unexpected import name: " + n.dfaType, n);
+            }
+        }
     }
     
-    private List<stmtType> astForSuite(Node n)
+    
+    private java.util.List<stmtType> astForSuite(Node n)
     {
-        // TODO
-        return null;
+        /* suite: simple_stmt | NEWLINE INDENT stmt+ DEDENT */
+        REQ(n, DFAType.suite);
+        
+        int end;
+        java.util.List<stmtType> seq = new ArrayList<stmtType>(numStmts(n));
+        Node ch = null;
+        stmtType s = null;
+        
+        if(n.getChild(0).dfaType == DFAType.simple_stmt)
+        {
+            n = n.getChild(0);
+            
+            /* simple_stmt always ends with a NEWLINE,
+                and may have a trailing SEMI
+             */
+            end = n.nChild() - 1;
+            if(n.getChild(end).dfaType == DFAType.SEMI)
+            {
+                end--;
+            }
+            
+            for(int i = 0; i < end; i += 2)
+            {
+                ch = n.getChild(i);
+                s = astForStmt(ch);
+                seq.add(s);
+            }
+        }
+        else
+        {
+            for(int i = 2; i < n.nChild() - 1; i++)
+            {
+                ch = n.getChild(i);
+                REQ(ch, DFAType.stmt);
+                if(numStmts(ch) == 1)
+                {
+                    s = astForStmt(ch);
+                    seq.add(s);
+                }
+                else
+                {
+                    ch = ch.getChild(0);
+                    REQ(ch, DFAType.simple_stmt);
+                    for(int j = 0; j < ch.nChild(); j += 2)
+                    {
+                        if(ch.getChild(j).nChild() == 0)
+                        {
+                            Assert((j + 1) == ch.nChild());
+                            break;
+                        }
+                        s = astForStmt(ch.getChild(j));
+                        seq.add(s);
+                    }
+                }
+            }
+        }
+        return seq;
     }
+    
     
     private excepthandlerType astForExceptClause(Node exc, Node body)
     {
-        // TODO
-        return null;
+        /* except_clause: 'except' [test ['as' test]] */
+        REQ(exc, DFAType.except_clause);
+        REQ(body, DFAType.suite);
+        
+        if(exc.nChild() == 1)
+        {
+            java.util.List<stmtType> suiteSeq = astForSuite(body);
+            return new ExceptHandler(null, null, suiteSeq, exc.lineNo, exc.colOffset);
+        }
+        else if(exc.nChild() == 2)
+        {
+            exprType expression = astForExpr(exc.getChild(1));
+            java.util.List<stmtType> suiteSeq = astForSuite(body);
+            return new ExceptHandler(expression, null, suiteSeq, exc.lineNo, exc.colOffset);
+        }
+        else if(exc.nChild() == 4)
+        {
+            String e = newIdentifier(exc.getChild(3));
+            forbiddenName(e, exc.getChild(3), false);
+            
+            exprType expression = astForExpr(exc.getChild(1));
+            java.util.List<stmtType> suiteSeq = astForSuite(body);
+            
+            return new ExceptHandler(expression, e, suiteSeq, exc.lineNo, exc.colOffset);
+        }
+        throw new PyExceptions(ErrorType.AST_ERROR, 
+                "wrong number of children for 'except' clause: " + exc.nChild(), exc);
     }
+
     
     private withitemType astForWithItem(Node n)
     {
-        // TODO
-        return null;
+        /* with_item: test ['as' expr] */
+        REQ(n, DFAType.with_item);
+        
+        exprType contextExpr = astForExpr(n.getChild(0));
+        exprType optionalVars = null;
+        
+        if(n.nChild() == 3)
+        {
+            optionalVars = astForExpr(n.getChild(2));
+            setContext(optionalVars, expr_contextType.Store, n);
+        }
+        return new withitemType(contextExpr, optionalVars);
+    }
+
+    
+    private stmtType astForFuncdefImpl(Node n, java.util.List<exprType> decoratorSeq, 
+            boolean isAsync)
+    {
+        /* funcdef: 'def' NAME parameters ['->' test] ':' suite */
+        REQ(n, DFAType.funcdef);
+        
+        String name;
+        argumentsType args;
+        java.util.List<stmtType> body;
+        exprType returns = null;
+        int nameI = 1;
+        
+        name = newIdentifier(n.getChild(nameI));
+        forbiddenName(name, n.getChild(nameI), false);
+        
+        args = astForArguments(n.getChild(nameI + 1));
+        if(n.getChild(nameI + 2).dfaType == DFAType.RARROW)
+        {
+            returns = astForExpr(n.getChild(nameI + 3));
+            nameI += 2;
+        }
+        body = astForSuite(n.getChild(nameI + 3));
+        
+        if(isAsync)
+        {
+            return new AsyncFunctionDef(name, args, body, decoratorSeq,
+                    returns, n.lineNo, n.colOffset);
+        }
+        else
+        {
+            return new FunctionDef(name, args, body, decoratorSeq, 
+                    returns, n.lineNo, n.colOffset);
+        }
     }
     
-    private stmtType astForFuncdefImpl(Node n, List<exprType> decoratorSeq, boolean isAsync)
-    {
-        // TODO
-        return null;
-    }
     
     private exprType astForCall(Node n, exprType func)
     {
@@ -184,14 +937,14 @@ public class Ast
         int ngens = 0;
         int ndoublestars = 0;
         
-        List<exprType> args = null;
-        List<keywordType> keywords = null;
-        for(int i = 0; i < n.childs.size(); i++)
+        java.util.List<exprType> args = null;
+        java.util.List<keywordType> keywords = null;
+        for(int i = 0; i < n.nChild(); i++)
         {
             Node ch = n.getChild(i);
             if(ch.dfaType == DFAType.argument)
             {
-                if(ch.childs.size() == 1)
+                if(ch.nChild() == 1)
                 {
                     nargs++;
                 }
@@ -209,13 +962,13 @@ public class Ast
         if(ngens > 1 || (ngens > 0 && (nargs > 0 || nkeywords > 0)))
         {
             throw new PyExceptions(ErrorType.AST_ERROR, 
-                    "Generator expression must be parenthesized if not sole argument");
+                    "Generator expression must be parenthesized if not sole argument", n);
         }
         
         if(nargs + nkeywords + ngens > 255)
         {
             throw new PyExceptions(ErrorType.AST_ERROR, 
-                    "more than 255 arguments");
+                    "more than 255 arguments", n);
         }
         
         args = new ArrayList<exprType>(nargs + ngens);
@@ -225,26 +978,26 @@ public class Ast
         nkeywords = 0; /* keyword arguments + keyword argument unpackings */
         ndoublestars = 0; /* just keyword argument unpackings */
         
-        for(int i = 0; i < n.childs.size(); i++)
+        for(int i = 0; i < n.nChild(); i++)
         {
             Node ch = n.getChild(i);
             if(ch.dfaType == DFAType.argument)
             {
                 exprType e = null;
                 Node chch = ch.getChild(0);
-                if(ch.childs.size() == 1)
+                if(ch.nChild() == 1)
                 {
                     if(nkeywords > 0)
                     {
                         if(ndoublestars > 0)
                         {
                             throw new PyExceptions(ErrorType.AST_ERROR,
-                                    "positional argument follows keyword argument unpacking");
+                                    "positional argument follows keyword argument unpacking", n);
                         }
                         else
                         {
                             throw new PyExceptions(ErrorType.AST_ERROR,
-                                    "positional argument follows keyword argument");
+                                    "positional argument follows keyword argument", n);
                         }
                     }
                     
@@ -257,7 +1010,7 @@ public class Ast
                     if(ndoublestars > 0)
                     {
                         throw new PyExceptions(ErrorType.AST_ERROR,
-                                "iterable argument unpacking follows keyword argument unpacking");
+                                "iterable argument unpacking follows keyword argument unpacking", n);
                     }
                     e = astForExpr(ch.getChild(1));
                     starred = new Starred(e, expr_contextType.Load, chch.lineNo, chch.colOffset);
@@ -288,12 +1041,12 @@ public class Ast
                     if(e instanceof Lambda)
                     {
                         throw new PyExceptions(ErrorType.AST_ERROR, 
-                                "lambda cannot contain assignment");
+                                "lambda cannot contain assignment", n);
                     }
                     else if(!(e instanceof Name))
                     {
                         throw new PyExceptions(ErrorType.AST_ERROR,
-                                "keyword can't be an expression");
+                                "keyword can't be an expression", n);
                     }
                     forbiddenName(((Name)e).id, ch, true);
                     
@@ -304,7 +1057,7 @@ public class Ast
                         if(tmp != null && tmp.equals(key))
                         {
                             throw new PyExceptions(ErrorType.AST_ERROR, 
-                                    "keyword argument repeated");
+                                    "keyword argument repeated", n);
                         }
                     }
                     e = astForExpr(ch.getChild(2));
@@ -316,53 +1069,182 @@ public class Ast
         
         return new Call(func,args, keywords, func.lineno, func.col_offset);
     }
+    
+    
 
-    private List<exprType> astForDecorators(Node n)
+    private java.util.List<exprType> astForDecorators(Node n)
     {
-        // TODO
-        return null;
+        /* decorators: decorator+ */
+        REQ(n, DFAType.decorators);
+        
+        java.util.List<exprType> decoratorSeq = null;
+        exprType d = null;
+        
+        decoratorSeq = new ArrayList<exprType>(n.nChild());
+        
+        for(int i = 0; i < n.nChild(); i++)
+        {
+            d = astForDecorator(n.getChild(i));
+            decoratorSeq.add(d);
+        }
+        return decoratorSeq;
     }
     
-    private stmtType astForAsyncFuncdef(Node n, List<exprType> decoratorSeq)
+    
+    private stmtType astForAsyncFuncdef(Node n, java.util.List<exprType> decoratorSeq)
     {
-        // TODO
-        return null;
+        /* ASYNC funcdef */
+        REQ(n, DFAType.async_funcdef);
+        REQ(n.getChild(0), DFAType.ASYNC);
+        REQ(n.getChild(1), DFAType.funcdef);
+        return astForFuncdefImpl(n.getChild(1), decoratorSeq, true);
     }
+    
     
     private exprType astForLambdef(Node n)
     {
-        // TODO
-        return null;
+        /* lambdef: 'lambda' [varargslist] ':' test
+        lambdef_nocond: 'lambda' [varargslist] ':' test_nocond */
+        argumentsType args;
+        exprType expression;
+        
+        if(n.nChild() == 3)
+        {
+            args = new argumentsType(null, null, null, null, null, null);
+            expression = astForExpr(n.getChild(2));
+        }
+        else
+        {
+            args = astForArguments(n.getChild(1));
+            expression = astForExpr(n.getChild(3));
+        }
+        return new Lambda(args, expression, n.lineNo, n.colOffset);
     }
     
     private exprType astForIfexpr(Node n)
     {
-        // TODO
-        return null;
+        /* test: or_test 'if' or_test 'else' test */
+        exprType expression;
+        exprType body;
+        exprType orelse;
+        
+        Assert(n.nChild() == 5);
+        
+        body = astForExpr(n.getChild(0));
+        expression = astForExpr(n.getChild(2));
+        orelse = astForExpr(n.getChild(4));
+        return new IfExp(expression, body, orelse, n.lineNo, n.colOffset);
     }
     
     private cmpopType astForCompOp(Node n)
     {
-        // TODO
-        return null;
+        /* comp_op: '<'|'>'|'=='|'>='|'<='|'!='|'in'|'not' 'in'|'is'
+                |'is' 'not'
+        */
+        REQ(n, DFAType.comp_op);
+        
+        if(n.nChild() == 1)
+        {
+            n = n.getChild(0);
+            switch(n.dfaType)
+            {
+            case LESS:
+                return cmpopType.Lt;
+            case GREATER:
+                return cmpopType.Gt;
+            case EQEQUAL:
+                return cmpopType.Eq;
+            case LESSEQUAL:
+                return cmpopType.LtE;
+            case GREATEREQUAL:
+                return cmpopType.GtE;
+            case NOTEQUAL:
+                return cmpopType.NotEq;
+            case NAME:
+                if("in".equals(n.str))
+                {
+                    return cmpopType.In;
+                }
+                if("is".equals(n.str))
+                {
+                    return cmpopType.Is;
+                }
+            default:
+                throw new PyExceptions(ErrorType.AST_ERROR, 
+                        "invalid comp_op: " + n.str, n);
+            }
+        }
+        else if(n.nChild() == 2)
+        {
+            /* handle "not in" and "is not" */
+            switch(n.getChild(0).dfaType)
+            {
+            case NAME:
+                if("in".equals(n.getChild(1).str))
+                {
+                    return cmpopType.NotIn;
+                }
+                if("is".equals(n.getChild(0).str))
+                {
+                    return cmpopType.IsNot;
+                }
+            default:
+                throw new PyExceptions(ErrorType.AST_ERROR, 
+                        String.format("invalid comp_op: %s %s", n.getChild(0).str, n.getChild(1).str),
+                        n);
+            }
+        }
+        throw new PyExceptions(ErrorType.AST_ERROR, 
+                String.format("invalid comp_op: has %d children", n.nChild()),
+                n);
     }
     
     private exprType astForStarred(Node n)
     {
-        // TODO
-        return null;
+        exprType tmp;
+        REQ(n, DFAType.star_expr);
+        tmp = astForExpr(n.getChild(1));
+        
+        return new Starred(tmp, expr_contextType.Load, n.lineNo, n.colOffset);
     }
+    
     
     private exprType astForFactor(Node n)
     {
-        // TODO
-        return null;
+        /* factor: ('+'|'-'|'~') factor | power */
+        exprType expression;
+        
+        expression = astForExpr(n.getChild(1));
+        
+        switch(n.getChild(0).dfaType)
+        {
+        case PLUS:
+            return new UnaryOp(unaryopType.UAdd, expression, n.lineNo, n.colOffset);
+        case MINUS:
+            return new UnaryOp(unaryopType.USub, expression, n.lineNo, n.colOffset);
+        case TILDE:
+            return new UnaryOp(unaryopType.Invert, expression, n.lineNo, n.colOffset);           
+        }
+        throw new PyExceptions(ErrorType.AST_ERROR, 
+                "unhandled factor: " + n.getChild(0).dfaType, n);
     }
     
     private exprType astForPower(Node n)
     {
-        // TODO
-        return null;
+        /* power: atom trailer* ('**' factor)* */
+        exprType e;
+        REQ(n, DFAType.power);
+        e = astForAtomExpr(n.getChild(0));
+        if(n.nChild() == 1)
+        {
+            return e;
+        }
+        if(n.getChild(-1).dfaType == DFAType.factor)
+        {
+            exprType f = astForExpr(n.getChild(-1));
+            e = new BinOp(e, operatorType.Pow, f, n.lineNo, n.colOffset);
+        }
+        return e;
     }
     
     private stmtType astForExprStmt(Node n)
@@ -377,7 +1259,7 @@ public class Ast
         test: ... here starts the operator precendence dance
          */
 
-        if(n.childs.size() == 1)
+        if(n.nChild() == 1)
         {
             exprType e = astForTestlist(n.getChild(0));
             return new Expr(e, n.lineNo, n.colOffset);
@@ -395,7 +1277,8 @@ public class Ast
                     expr1 instanceof Attribute ||
                     expr1 instanceof Subscript))
             {
-                throw new PyExceptions(ErrorType.AST_ERROR, "illegal expression for augmented assignment");
+                throw new PyExceptions(ErrorType.AST_ERROR, 
+                        "illegal expression for augmented assignment", n);
             }
             
             ch = n.getChild(2);
@@ -413,21 +1296,21 @@ public class Ast
         }
         else
         {
-            List<exprType> targets = null;
+            java.util.List<exprType> targets = null;
             Node value;
             exprType expression;
             
-            REQ(n.getChild(1), DFAType.EQEQUAL);
+            REQ(n.getChild(1), DFAType.EQUAL);
             
-            targets = new ArrayList<exprType>(n.childs.size() / 2);
+            targets = new ArrayList<exprType>(n.nChild() / 2);
             
-            for(int i = 0; i < n.childs.size() - 2; i += 2)
+            for(int i = 0; i < n.nChild() - 2; i += 2)
             {
                 Node ch = n.getChild(i);
                 if(ch.dfaType == DFAType.yield_expr)
                 {
                     throw new PyExceptions(ErrorType.AST_ERROR, 
-                            "assignment to yield expression not possible");
+                            "assignment to yield expression not possible", n);
                 }
                 exprType e = astForTestlist(ch);
                 setContext(e, expr_contextType.Store, n.getChild(i));
@@ -446,13 +1329,15 @@ public class Ast
         }
     }
     
+    
     private stmtType astForDelStmt(Node n)
     {
         /* del_stmt: 'del' exprlist */
         REQ(n, DFAType.del_stmt);
-        List<exprType> exprList = astForExprlist(n.getChild(1), expr_contextType.Del);
+        java.util.List<exprType> exprList = astForExprlist(n.getChild(1), expr_contextType.Del);
         return new Delete(exprList, n.lineNo, n.colOffset);
     }
+    
     
     private stmtType astForFlowStmt(Node n)
     {
@@ -481,7 +1366,7 @@ public class Ast
             return new Expr(exp, n.lineNo, n.colOffset);
         }
         case return_stmt:
-            if(ch.childs.size() == 1)
+            if(ch.nChild() == 1)
             {
                 return new Return(null, n.lineNo, n.colOffset);
             }
@@ -491,24 +1376,26 @@ public class Ast
                 return new Return(exp, n.lineNo, n.colOffset);
             }
         case raise_stmt:
-            if(ch.childs.size() == 1)
+            if(ch.nChild() == 1)
             {
                 return new Raise(null, null, n.lineNo, n.colOffset);
             }
-            else if(ch.childs.size() >= 2)
+            else if(ch.nChild() >= 2)
             {
                 exprType cause = null;
                 exprType exp = astForExpr(ch.getChild(1));
-                if(ch.childs.size() == 4)
+                if(ch.nChild() == 4)
                 {
                     cause = astForExpr(ch.getChild(3));
                 }
                 return new Raise(exp, cause, n.lineNo, n.colOffset);
             }
         default: 
-            throw new PyExceptions(ErrorType.AST_ERROR, "unexpected flow_stmt: " + ch.dfaType);
+            throw new PyExceptions(ErrorType.AST_ERROR, 
+                    "unexpected flow_stmt: " + ch.dfaType, n);
         }
     }
+    
     
     private stmtType astForImportStmt(Node n)
     {
@@ -518,7 +1405,7 @@ public class Ast
             import_from: 'from' (('.' | '...')* dotted_name | ('.' | '...')+)
                          'import' ('*' | '(' import_as_names ')' | import_as_names)
         */
-        List<aliasType> aliases = null;
+        java.util.List<aliasType> aliases = null;
         
         REQ(n, DFAType.import_stmt);
         n = n.getChild(0);
@@ -526,8 +1413,8 @@ public class Ast
         {
             n = n.getChild(1);
             REQ(n, DFAType.dotted_as_names);
-            aliases = new ArrayList<aliasType>((n.childs.size() + 1) / 2);
-            for(int i = 0; i < n.childs.size(); i += 2)
+            aliases = new ArrayList<aliasType>((n.nChild() + 1) / 2);
+            for(int i = 0; i < n.nChild(); i += 2)
             {
                 aliasType importAlias = aliasForImportName(n.getChild(i), true);
                 aliases.add(importAlias);
@@ -542,9 +1429,9 @@ public class Ast
             String modname = null;
             int nChildren;
             
-            for(idx = 1; idx < n.childs.size(); idx++)
+            for(idx = 1; idx < n.nChild(); idx++)
             {
-                if(n.getChild(idx).dfaType == DFAType.dotted_as_name)
+                if(n.getChild(idx).dfaType == DFAType.dotted_name)
                 {
                     mod = aliasForImportName(n.getChild(idx), false);
                     idx++;
@@ -572,18 +1459,21 @@ public class Ast
             case LPAR:
                 /* from ... import (x, y, z) */
                 n = n.getChild(idx + 1);
-                nChildren = n.childs.size();
+                nChildren = n.nChild();
+                break;
             case import_as_names:
                 /* from ... import x, y, z */
                 n = n.getChild(idx);
-                nChildren = n.childs.size();
+                nChildren = n.nChild();
                 if(nChildren % 2 == 0)
                 {
                     throw new PyExceptions(ErrorType.AST_ERROR, 
-                            "trailing comma not allowed without surrounding parentheses");
+                            "trailing comma not allowed without surrounding parentheses", n);
                 }
+                break;
             default:
-                throw new PyExceptions(ErrorType.AST_ERROR, "Unexpected node-type in from-import");
+                throw new PyExceptions(ErrorType.AST_ERROR, 
+                        "Unexpected node-type in from-import: " + n.getChild(idx).str, n.getChild(idx));
             }
             
             aliases = new ArrayList<aliasType>(nChildren);
@@ -595,7 +1485,7 @@ public class Ast
             }
             else
             {
-                for(int i = 0; i < n.childs.size(); i += 2)
+                for(int i = 0; i < n.nChild(); i += 2)
                 {
                     aliasType importAlias = aliasForImportName(n.getChild(i), true);
                     aliases.add(importAlias);
@@ -607,18 +1497,21 @@ public class Ast
             }
             return new ImportFrom(modname, aliases, ndots, n.lineNo, n.colOffset);
         }
-        throw new PyExceptions(ErrorType.AST_ERROR, "unknown import statement: starts with command " + n.getChild(0).str);
+        throw new PyExceptions(ErrorType.AST_ERROR, 
+                "unknown import statement: starts with command " + n.getChild(0).str,
+                n);
     }
+    
     
     private stmtType astForGlobalStmt(Node n)
     {
         /* global_stmt: 'global' NAME (',' NAME)* */
         String name;
-        List<String> s = new ArrayList<String>(n.childs.size() / 2);
+        java.util.List<String> s = new ArrayList<String>(n.nChild() / 2);
         
         REQ(n, DFAType.global_stmt);
         
-        for(int i = 1; i < n.childs.size(); i += 2)
+        for(int i = 1; i < n.nChild(); i += 2)
         {
             name = newIdentifier(n.getChild(i));
             s.add(name);
@@ -626,15 +1519,16 @@ public class Ast
         return new Global(s, n.lineNo, n.colOffset);
     }
     
+    
     private stmtType astForNonlocalStmt(Node n)
     {
         /* nonlocal_stmt: 'nonlocal' NAME (',' NAME)* */
         String name;
-        List<String> s = new ArrayList<String>(n.childs.size() / 2);
+        java.util.List<String> s = new ArrayList<String>(n.nChild() / 2);
         
         REQ(n, DFAType.nonlocal_stmt);
         
-        for(int i = 1; i < n.childs.size(); i += 2)
+        for(int i = 1; i < n.nChild(); i += 2)
         {
             name = newIdentifier(n.getChild(i));
             s.add(name);
@@ -642,17 +1536,18 @@ public class Ast
         return new Nonlocal(s, n.lineNo, n.colOffset);
     }
     
+    
     private stmtType astForAssertStmt(Node n)
     {
         /* assert_stmt: 'assert' test [',' test] */
         REQ(n, DFAType.assert_stmt);
         
-        if(n.childs.size() == 2)
+        if(n.nChild() == 2)
         {
             exprType expression = astForExpr(n.getChild(1));
             return new Assert(expression, null, n.lineNo, n.colOffset);
         }
-        else if(n.childs.size() == 4)
+        else if(n.nChild() == 4)
         {
             exprType expr1 = astForExpr(n.getChild(1));
             exprType expr2 = astForExpr(n.getChild(3));
@@ -661,6 +1556,7 @@ public class Ast
         return null;
     }
     
+    
     private stmtType astForIfStmt(Node n)
     {
         /* if_stmt: 'if' test ':' suite ('elif' test ':' suite)*
@@ -668,10 +1564,10 @@ public class Ast
          */
         REQ(n, DFAType.if_stmt);
         
-        if(n.childs.size() == 4)
+        if(n.nChild() == 4)
         {
             exprType expression = astForExpr(n.getChild(1));
-            List<stmtType> suiteSeq = astForSuite(n.getChild(3));
+            java.util.List<stmtType> suiteSeq = astForSuite(n.getChild(3));
             return new If(expression, suiteSeq, null, n.lineNo, n.colOffset);
         }
         
@@ -680,16 +1576,16 @@ public class Ast
         if(s.equals("else"))
         {
             exprType expression = astForExpr(n.getChild(1));
-            List<stmtType> seq1 = astForSuite(n.getChild(3));
-            List<stmtType> seq2 = astForSuite(n.getChild(6));
+            java.util.List<stmtType> seq1 = astForSuite(n.getChild(3));
+            java.util.List<stmtType> seq2 = astForSuite(n.getChild(6));
             return new If(expression, seq1, seq2, n.lineNo, n.colOffset);
         }
         else if(s.equals("elif"))
         {
             exprType expression = null;
-            List<stmtType> suiteSeq = null;
-            List<stmtType> orelse = null;
-            int nElif = n.childs.size() - 4;
+            java.util.List<stmtType> suiteSeq = null;
+            java.util.List<stmtType> orelse = null;
+            int nElif = n.nChild() - 4;
             boolean hasElse = false;
             
             /* must reference the child n_elif+1 since 'else' token is third,
@@ -704,7 +1600,7 @@ public class Ast
             
             if(hasElse)
             {
-                List<stmtType> suiteSeq2;
+                java.util.List<stmtType> suiteSeq2;
                 
                 orelse = new ArrayList<stmtType>(1);
                 expression = astForExpr(n.getChild(-6));
@@ -720,7 +1616,7 @@ public class Ast
             for(int i = 0; i < nElif; i++)
             {
                 int off = 5 + (nElif - i - 1) * 4;
-                List<stmtType> newObj = new ArrayList<stmtType>(1);
+                java.util.List<stmtType> newObj = new ArrayList<stmtType>(1);
                 expression = astForExpr(n.getChild(off));
                 suiteSeq = astForSuite(n.getChild(off + 2));
                 newObj.add(
@@ -734,30 +1630,32 @@ public class Ast
             return new If(expression, suiteSeq, orelse, n.lineNo, n.colOffset);
         }
         throw new PyExceptions(ErrorType.AST_ERROR, 
-                "unexpected token in 'if' statement: " + s);
+                "unexpected token in 'if' statement: " + s, n);
     }
+    
     
     private stmtType astForWhileStmt(Node n)
     {
         /* while_stmt: 'while' test ':' suite ['else' ':' suite] */
         REQ(n, DFAType.while_stmt);
         
-        if(n.childs.size() == 4)
+        if(n.nChild() == 4)
         {
             exprType expression = astForExpr(n.getChild(1));
-            List<stmtType> suiteSeq = astForSuite(n.getChild(3));
+            java.util.List<stmtType> suiteSeq = astForSuite(n.getChild(3));
             return new While(expression, suiteSeq, null, n.lineNo, n.colOffset);
         }
-        else if(n.childs.size() == 7)
+        else if(n.nChild() == 7)
         {
             exprType expression = astForExpr(n.getChild(1));
-            List<stmtType> seq1 = astForSuite(n.getChild(3));
-            List<stmtType> seq2 = astForSuite(n.getChild(6));
+            java.util.List<stmtType> seq1 = astForSuite(n.getChild(3));
+            java.util.List<stmtType> seq2 = astForSuite(n.getChild(6));
             return new While(expression, seq1, seq2, n.lineNo, n.colOffset);
         }
         throw new PyExceptions(ErrorType.AST_ERROR, 
-                "wrong number of tokens for 'while' statement: " + n.childs.size());
+                "wrong number of tokens for 'while' statement: " + n.nChild(), n);
     }
+    
     
     private stmtType astForForStmt(Node n, boolean isAsync)
     {
@@ -766,22 +1664,22 @@ public class Ast
         
         exprType expression;
         exprType target, first;
-        List<stmtType> suiteSeq;
-        List<stmtType> seq = null;
+        java.util.List<stmtType> suiteSeq;
+        java.util.List<stmtType> seq = null;
         Node ch = null;
         
-        if(n.childs.size() == 9)
+        if(n.nChild() == 9)
         {
             seq = astForSuite(n.getChild(8));
         }
         
         ch = n.getChild(1);
-        List<exprType> _target = astForExprlist(ch, expr_contextType.Store);
+        java.util.List<exprType> _target = astForExprlist(ch, expr_contextType.Store);
         
         /* Check the # of children rather than the length of _target, since
         for x, in ... has 1 element in _target, but still requires a Tuple. */
         first = _target.get(0);
-        if(ch.childs.size() == 1)
+        if(ch.nChild() == 1)
         {
             target = first;
         }
@@ -801,6 +1699,7 @@ public class Ast
         }
     }
     
+    
     private stmtType astForTryStmt(Node n)
     {
         /*
@@ -813,17 +1712,17 @@ public class Ast
          */
         REQ(n ,DFAType.try_stmt);
         
-        int nExcept = (n.childs.size() - 3) / 3;
-        List<excepthandlerType> handlers = null;
-        List<stmtType> orelse = null;
-        List<stmtType> finalbody = null;
-        List<stmtType> body = astForSuite(n.getChild(2));
+        int nExcept = (n.nChild() - 3) / 3;
+        java.util.List<excepthandlerType> handlers = null;
+        java.util.List<stmtType> orelse = null;
+        java.util.List<stmtType> finalbody = null;
+        java.util.List<stmtType> body = astForSuite(n.getChild(2));
         
         if(n.getChild(-3).dfaType == DFAType.NAME)
         {
             if("finally".equals(n.getChild(-3).str))
             {
-                if(n.childs.size() >= 9 &&
+                if(n.nChild() >= 9 &&
                         n.getChild(-6).dfaType == DFAType.NAME)
                 {
                     orelse = astForSuite(n.getChild(-4));
@@ -840,7 +1739,8 @@ public class Ast
         }
         else if(n.getChild(-3).dfaType != DFAType.except_clause)
         {
-            throw new PyExceptions(ErrorType.AST_ERROR, "malformed 'try' statement");
+            throw new PyExceptions(ErrorType.AST_ERROR, 
+                    "malformed 'try' statement", n);
         }
         if(nExcept > 0)
         {
@@ -857,14 +1757,15 @@ public class Ast
         return new Try(body, handlers, orelse, finalbody, n.lineNo, n.colOffset);
     }
     
+    
     private stmtType astForWithStmt(Node n, boolean isAsync)
     {
         /* with_stmt: 'with' with_item (',' with_item)*  ':' suite */
         REQ(n, DFAType.with_stmt);
-        List<withitemType> items = new ArrayList<withitemType>((n.childs.size() - 2) / 2);
-        List<stmtType> body = null;
+        java.util.List<withitemType> items = new ArrayList<withitemType>((n.nChild() - 2) / 2);
+        java.util.List<stmtType> body = null;
         
-        for(int i = 1; i < n.childs.size() - 2; i += 2)
+        for(int i = 1; i < n.nChild() - 2; i += 2)
         {
             withitemType item = astForWithItem(n.getChild(i));
             items.add(item);
@@ -882,23 +1783,25 @@ public class Ast
         }
     }
     
-    private stmtType astForFuncdef(Node n, List<exprType> decoratorSeq)
+    
+    private stmtType astForFuncdef(Node n, java.util.List<exprType> decoratorSeq)
     {
         /* funcdef: 'def' NAME parameters ['->' test] ':' suite */
         return astForFuncdefImpl(n, decoratorSeq, false);
     }
     
-    private stmtType astForClassdef(Node n, List<exprType> decoratorSeq)
+    
+    private stmtType astForClassdef(Node n, java.util.List<exprType> decoratorSeq)
     {
         /* classdef: 'class' NAME ['(' arglist ')'] ':' suite */
         
         REQ(n, DFAType.classdef);
         
         String className = null;
-        List<stmtType> s = null;
+        java.util.List<stmtType> s = null;
         exprType call = null;
         
-        if(n.childs.size() == 4)  /* class NAME ':' suite */
+        if(n.nChild() == 4)  /* class NAME ':' suite */
         {
             s = astForSuite(n.getChild(3));
             className = newIdentifier(n.getChild(1));
@@ -928,13 +1831,14 @@ public class Ast
                 decoratorSeq, n.lineNo, n.colOffset);
     }
     
+    
     private stmtType astForDecorated(Node n)
     {
         /* decorated: decorators (classdef | funcdef | async_funcdef) */
         REQ(n, DFAType.decorated);
         
         stmtType thing = null;
-        List<exprType> decoratorSeq = null;
+        java.util.List<exprType> decoratorSeq = null;
         
         decoratorSeq = astForDecorators(n.getChild(0));
         
@@ -962,6 +1866,7 @@ public class Ast
         return thing;
     }
     
+    
     private stmtType astForAsyncStmt(Node n)
     {
         /* async_stmt: ASYNC (funcdef | with_stmt | for_stmt) */
@@ -977,9 +1882,11 @@ public class Ast
         case for_stmt:
             return astForForStmt(n.getChild(1), true);
         default:
-            throw new PyExceptions(ErrorType.AST_ERROR, "invalid async stament: " + n.getChild(1).str);
+            throw new PyExceptions(ErrorType.AST_ERROR, 
+                    "invalid async stament: " + n.getChild(1).str, n);
         }
     }
+    
     
     private exprType astForExpr(Node n)
     {
@@ -1001,7 +1908,7 @@ public class Ast
             atom_expr: [AWAIT] atom trailer*
             yield_expr: 'yield' [yield_arg]
          */
-        List<exprType> seq = null;
+        java.util.List<exprType> seq = null;
         
         while(true)
         {
@@ -1014,20 +1921,20 @@ public class Ast
                 {
                     return astForLambdef(n.getChild(0));
                 }
-                else if(n.childs.size() > 1)
+                else if(n.nChild() > 1)
                 {
                     return astForIfexpr(n);
                 }
                 /* Fallthrough */
             case or_test:
             case and_test:
-                if(n.childs.size() == 1)
+                if(n.nChild() == 1)
                 {
                     n = n.getChild(0);
                     continue;
                 }
-                seq = new ArrayList<exprType>((n.childs.size() + 1) / 2);
-                for(int i = 0; i < n.childs.size(); i += 2)
+                seq = new ArrayList<exprType>((n.nChild() + 1) / 2);
+                for(int i = 0; i < n.nChild(); i += 2)
                 {
                     exprType e = astForExpr(n.getChild(i));
                     seq.add(e);
@@ -1039,7 +1946,7 @@ public class Ast
                 Assert("or".equals(n.getChild(1).str));
                 return new BoolOp(boolopType.Or, seq, n.lineNo, n.colOffset);
             case not_test:
-                if(n.childs.size() == 1)
+                if(n.nChild() == 1)
                 {
                     n = n.getChild(0);
                     continue;
@@ -1050,7 +1957,7 @@ public class Ast
                     return new UnaryOp(unaryopType.Not, expression, n.lineNo, n.colOffset);
                 }
             case comparison:
-                if(n.childs.size() == 1)
+                if(n.nChild() == 1)
                 {
                     n = n.getChild(0);
                     continue;
@@ -1058,10 +1965,10 @@ public class Ast
                 else
                 {
                     exprType expression;
-                    List<cmpopType> ops = new ArrayList<cmpopType>(n.childs.size() / 2);
-                    List<exprType> cmps = new ArrayList<exprType>(n.childs.size() / 2);
+                    java.util.List<cmpopType> ops = new ArrayList<cmpopType>(n.nChild() / 2);
+                    java.util.List<exprType> cmps = new ArrayList<exprType>(n.nChild() / 2);
                     
-                    for(int i = 1; i < n.childs.size(); i += 2)
+                    for(int i = 1; i < n.nChild(); i += 2)
                     {
                         cmpopType newOperator = astForCompOp(n.getChild(i));
                         expression = astForExpr(n.getChild(i + 1));
@@ -1080,24 +1987,25 @@ public class Ast
             case shift_expr:
             case arith_expr:
             case term:
-                if(n.childs.size() == 1)
+                if(n.nChild() == 1)
                 {
                     n = n.getChild(0);
                     continue;
                 }
+                return astForBinop(n);
             case yield_expr:
                 Node an = null;
                 Node en = null;
                 boolean isFrom = false;
                 exprType exp = null;
-                if(n.childs.size() > 1)
+                if(n.nChild() > 1)
                 {
                     an = n.getChild(1);
                 }
                 if(an != null)
                 {
                     en = an.getChild(-1);
-                    if(an.childs.size() == 2)
+                    if(an.nChild() == 2)
                     {
                         isFrom = true;
                         exp = astForExpr(en);
@@ -1114,7 +2022,7 @@ public class Ast
                 }
                 return new Yield(exp, n.lineNo, n.colOffset);
             case factor:
-                if(n.childs.size() == 1)
+                if(n.nChild() == 1)
                 {
                     n = n.getChild(0);
                     continue;
@@ -1124,12 +2032,13 @@ public class Ast
                 return astForPower(n);
             default:
                 throw new PyExceptions(ErrorType.AST_ERROR, 
-                        "unhandled expr: " + n.dfaType);
+                        "unhandled expr: " + n.dfaType, n);
             }
         }
     }
     
-    private List<exprType> seqForTestlist(Node n)
+    
+    private java.util.List<exprType> seqForTestlist(Node n)
     {
         /* testlist: test (',' test)* [',']
             testlist_star_expr: test|star_expr (',' test|star_expr)* [',']
@@ -1137,9 +2046,9 @@ public class Ast
         Assert(n.dfaType == DFAType.testlist ||
                 n.dfaType == DFAType.testlist_star_expr ||
                 n.dfaType == DFAType.testlist_comp);
-        List<exprType> seq = new ArrayList<exprType>((n.childs.size() + 1) / 2);
+        java.util.List<exprType> seq = new ArrayList<exprType>((n.nChild() + 1) / 2);
         exprType expression = null;
-        for(int i = 0; i < n.childs.size(); i += 2)
+        for(int i = 0; i < n.nChild(); i += 2)
         {
             Node ch = n.getChild(i);
             Assert(ch.dfaType == DFAType.test ||
@@ -1151,11 +2060,12 @@ public class Ast
         return seq;
     }
     
+    
     private stmtType astForStmt(Node n)
     {
         if(n.dfaType == DFAType.stmt)
         {
-            Assert(n.childs.size() == 1);
+            Assert(n.nChild() == 1);
             n = n.getChild(0);
         }
         if(n.dfaType == DFAType.simple_stmt)
@@ -1191,7 +2101,7 @@ public class Ast
             default:
                 throw new PyExceptions(ErrorType.AST_ERROR, "unhandled small_stmt: Type=" + 
                         n.dfaType.toString() + "child length=" +
-                        n.childs.size());
+                        n.nChild(), n);
             }
         }
         else
@@ -1224,19 +2134,20 @@ public class Ast
             default:
                 throw new PyExceptions(ErrorType.AST_ERROR, "unhandled small_stmt: Type=" + 
                         n.dfaType.toString() + "child length=" +
-                        n.childs.size());
+                        n.nChild(), n);
             }
         }
     }
+    
     
     private exprType astForTestlist(Node n)
     {
         /* testlist_comp: test (comp_for | (',' test)* [',']) */
         /* testlist: test (',' test)* [','] */
-        Assert(n.childs.size() > 0);
+        Assert(n.nChild() > 0);
         if(n.dfaType == DFAType.testlist_comp)
         {
-            if(n.childs.size() > 1)
+            if(n.nChild() > 1)
             {
                 Assert(n.getChild(1).dfaType != DFAType.comp_for);
             }
@@ -1246,26 +2157,28 @@ public class Ast
             Assert(n.dfaType == DFAType.testlist ||
                     n.dfaType == DFAType.testlist_star_expr);
         }
-        if(n.childs.size() == 1)
+        if(n.nChild() == 1)
         {
             return astForExpr(n.getChild(0));
         }
         else
         {
-            List<exprType> tmp = seqForTestlist(n);
+            java.util.List<exprType> tmp = seqForTestlist(n);
             return new Tuple(tmp, expr_contextType.Load, n.lineNo, n.colOffset);
         }
     }
+    
     
     public modType fromNode(Node n)
     {
         if(!n.isDFAType)
         {
-            throw new PyExceptions(ErrorType.AST_ERROR, "cst's top node is not nonterminal node");
+            throw new PyExceptions(ErrorType.AST_ERROR, 
+                    "cst's top node is not nonterminal node", n);
         }
         
         modType res = null;
-        List<stmtType> stmts = null;
+        java.util.List<stmtType> stmts = null;
         stmtType s;
         Node ch;
         int num;
@@ -1274,7 +2187,7 @@ public class Ast
         {
         case file_input:
             stmts = new ArrayList<stmtType>(numStmts(n));
-            for(int i = 0; i < n.childs.size() - 1; i++)
+            for(int i = 0; i < n.nChild() - 1; i++)
             {
                 ch = n.getChild(i);
                 if(ch.dfaType == DFAType.NEWLINE)
@@ -1325,7 +2238,7 @@ public class Ast
                 else
                 {
                     REQ(n, DFAType.simple_stmt);
-                    for(int i = 0; i < n.childs.size(); i+=2)
+                    for(int i = 0; i < n.nChild(); i+=2)
                     {
                         if(n.getChild(i).dfaType == DFAType.NEWLINE)
                         {
@@ -1341,7 +2254,7 @@ public class Ast
             break;
         default:
             throw new PyExceptions(ErrorType.AST_ERROR, "invalid node " + 
-                    n.dfaType.toString() + " for FromNode");
+                    n.dfaType.toString() + " for FromNode", n);
         }
         
         return res;

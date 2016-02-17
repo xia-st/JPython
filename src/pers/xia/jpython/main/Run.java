@@ -17,7 +17,7 @@ public class Run
 {
     public static void main(String[] args)
     {
-        File file = new File("test.py");
+        File file = new File("translator.py");
         Parser parser = new Parser(GramInit.grammar, 1);
 
         try
@@ -37,19 +37,20 @@ public class Run
                 }
                 tok = tokenizer.nextToken();
             }
+                    
+            // parser.show();
+    
+            Node tree = parser.tree;
+            
+            Ast ast = new Ast();
+            ast.fromNode(tree);
         }
         catch(PyExceptions e)
         {
             e.printStackTrace();
             throw e;
         }
-        
-        // parser.show();
 
-        Node tree = parser.tree;
-        
-        Ast ast = new Ast();
-        ast.fromNode(tree);
         
         // System.out.println(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
     }
