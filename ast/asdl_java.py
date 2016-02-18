@@ -159,7 +159,7 @@ class JavaVisitor(EmitVisitor):
         self.emit("}", depth)
         self.close()
         for t in sum.types:
-            self.visit(t, name, depth, sum)
+            self.visit(t, name, depth, sum.attributes)
 
     def visitProduct(self, product, name, depth):
         self.open("%sType" % name, useDataOutput=1)
@@ -168,15 +168,17 @@ class JavaVisitor(EmitVisitor):
                   depth)
         for f in product.fields:
             self.visit(f, depth + 1)
+        for attr in product.attributes:
+            self.visit(attr, depth + 1)
         self.emit("", depth)
 
         self.javaMethods(product, name, "%sType" % name, product.fields,
-                         depth+1, None)
+                         depth+1, product.attributes)
 
         self.emit("}", depth)
         self.close()
 
-    def visitConstructor(self, cons, name, depth, sum):
+    def visitConstructor(self, cons, name, depth, attributes):
         self.open(cons.name, useDataOutput=1)
         enums = []
         for f in cons.fields:
@@ -193,26 +195,26 @@ class JavaVisitor(EmitVisitor):
             self.visit(f, depth + 1)
         self.emit("", depth)
 
-        self.javaMethods(cons, cons.name, cons.name, cons.fields, depth+1, sum)
+        self.javaMethods(cons, cons.name, cons.name, cons.fields, depth+1, attributes)
 
         self.emit("}", depth)
         self.close()
 
-    def javaMethods(self, type, clsname, ctorname, fields, depth, sum):
+    def javaMethods(self, type, clsname, ctorname, fields, depth, attributes):
         # The java ctors
         fpargs = ", ".join([self.fieldDef(f) for f in fields])
-        if sum and sum.attributes:
+        if attributes:
             if fpargs:
                 fpargs += ","
             else:
                 fpargs = ""
-            fpargs += ", ".join([self.fieldDef(a) for a in sum.attributes])
+            fpargs += ", ".join([self.fieldDef(a) for a in attributes])
 
         self.emit("public %s(%s) {" % (ctorname, fpargs), depth)
         for f in fields:
             self.emit("this.%s = %s;" % (f.name, f.name), depth+1)
-        if sum and sum.attributes:
-            for attr in sum.attributes:
+        if attributes:
+            for attr in attributes:
                 self.emit("this.%s = %s;" % (attr.name, attr.name), depth+1)
         self.emit("}", depth)
         self.emit("", 0)
@@ -282,9 +284,9 @@ class JavaVisitor(EmitVisitor):
     bltinnames = {
         'int': 'int',
         'identifier': 'String',
-        'string': 'String',
+        'string': 'PyObject',
         'object': 'PyObject',  # was PyObject
-        'bytes': 'byte[]',
+        'bytes': 'PyObject',
         'singleton': 'PyObject',
     }
 

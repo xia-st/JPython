@@ -7,10 +7,15 @@ import java.io.IOException;
 public class argType{
     public String arg;
     public exprType annotation;
+    public int lineno;
+    public int col_offset;
 
-    public argType(String arg, exprType annotation) {
+    public argType(String arg, exprType annotation,int lineno, int
+    col_offset) {
         this.arg = arg;
         this.annotation = annotation;
+        this.lineno = lineno;
+        this.col_offset = col_offset;
     }
 
     public String toString() {

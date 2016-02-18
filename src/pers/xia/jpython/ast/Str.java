@@ -5,9 +5,9 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 public class Str extends exprType {
-    public String s;
+    public PyObject s;
 
-    public Str(String s,int lineno, int col_offset) {
+    public Str(PyObject s,int lineno, int col_offset) {
         this.s = s;
         this.lineno = lineno;
         this.col_offset = col_offset;

@@ -1,7 +1,5 @@
 package pers.xia.jpython.grammar;
 
-import java.util.Map;
-
 import pers.xia.jpython.object.PyExceptions;
 
 public class DFA

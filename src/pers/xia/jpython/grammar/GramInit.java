@@ -1,9 +1,6 @@
 /* Created by Pgen */
 package pers.xia.jpython.grammar;
 
-import java.util.Map;
-import java.util.HashMap;
-
 import pers.xia.jpython.tokenizer.TokState;
 
 public final class GramInit{

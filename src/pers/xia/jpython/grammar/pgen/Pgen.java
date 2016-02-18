@@ -7,7 +7,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -1483,8 +1482,6 @@ class Pgen
         
         sb.append("/* Created by Pgen */\n");
         sb.append("package pers.xia.jpython.grammar;\n\n" +
-                "import java.util.Map;\n" + 
-                "import java.util.HashMap;\n\n" +
                 "import pers.xia.jpython.tokenizer.TokState;\n\n");
         sb.append("public final class GramInit{\n\n");
         
@@ -1531,6 +1528,7 @@ class Pgen
                 if(s.indexOf(',') < 0) continue;
                 sb.append("    " + s.trim() + "\n");
             }
+            file2.close();
         } 
         catch (FileNotFoundException e1)
         {

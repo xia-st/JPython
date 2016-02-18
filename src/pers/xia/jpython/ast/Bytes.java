@@ -5,9 +5,9 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 public class Bytes extends exprType {
-    public byte[] s;
+    public PyObject s;
 
-    public Bytes(byte[] s,int lineno, int col_offset) {
+    public Bytes(PyObject s,int lineno, int col_offset) {
         this.s = s;
         this.lineno = lineno;
         this.col_offset = col_offset;

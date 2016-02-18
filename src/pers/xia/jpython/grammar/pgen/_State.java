@@ -43,7 +43,7 @@ class _State
     {
         for(int i = 0; i < this.narcs; i++)
         {
-            if(this.arcs[i].nextState == nextState);
+            if(this.arcs[i].nextState == nextState)
             {
                 return i;
             }

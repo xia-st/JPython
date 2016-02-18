@@ -2,7 +2,6 @@ package pers.xia.jpython.main;
 
 import java.io.File;
 
-
 import pers.xia.jpython.grammar.GramInit;
 import pers.xia.jpython.object.PyExceptions;
 import pers.xia.jpython.parser.Ast;
@@ -25,11 +24,11 @@ public class Run
             Tokenizer tokenizer = new Tokenizer(file);
             Token tok = tokenizer.nextToken();
             int colOffset = 0;
-            while(parser.addToken(tok, colOffset) != ReturnCode.ACCEPT)
+            while (parser.addToken(tok, colOffset) != ReturnCode.ACCEPT)
             {
-                if(tok.state == TokState.NEWLINE)
+                if (tok.state == TokState.NEWLINE)
                 {
-                    colOffset = 0;
+                    colOffset = 1;
                 }
                 else
                 {
@@ -37,21 +36,21 @@ public class Run
                 }
                 tok = tokenizer.nextToken();
             }
-                    
+
             // parser.show();
-    
+
             Node tree = parser.tree;
-            
+
             Ast ast = new Ast();
             ast.fromNode(tree);
         }
-        catch(PyExceptions e)
+        catch (PyExceptions e)
         {
             e.printStackTrace();
             throw e;
         }
 
-        
-        // System.out.println(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
+        // System.out.println(Runtime.getRuntime().totalMemory() -
+        // Runtime.getRuntime().freeMemory());
     }
 }
