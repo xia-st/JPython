@@ -9,6 +9,7 @@ import pers.xia.jpython.object.PyBytes;
 import pers.xia.jpython.object.PyExceptions;
 import pers.xia.jpython.object.PyExceptions.ErrorType;
 import pers.xia.jpython.object.PyObject;
+import pers.xia.jpython.object.PyUnicode;
 
 public class Ast
 {
@@ -375,13 +376,32 @@ public class Ast
 
         v = parseStr(n.getChild(0));
 
-        // TODO
+        boolean bytesmode = (v instanceof PyBytes);
+
         for (int i = 1; i < n.nChild(); i++)
         {
             PyObject s;
-        }
+            boolean subbm = false;
+            s = parseStr(n.getChild(i));
 
-        return null;
+            subbm = (s instanceof PyBytes);
+            if(bytesmode != subbm)
+            {
+                throw new PyExceptions(ErrorType.AST_ERROR,
+                        "cannot mix bytes and nonbytes literal", n);
+            }
+
+            // XXX 源代码使用了PyType来检查v和s是否为PyBytes
+            if(v instanceof PyBytes && s instanceof PyBytes)
+            {
+                v = ((PyBytes) v).concat((PyBytes) s);
+            }
+            else
+            {
+                v = PyUnicode.concat(v, s);
+            }
+        }
+        return v;
     }
 
     private PyObject parseNumber(Node n)

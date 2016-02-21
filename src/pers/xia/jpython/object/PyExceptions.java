@@ -11,7 +11,7 @@ public class PyExceptions extends RuntimeException
 
     public static enum ErrorType
     {
-        AST_ERROR, PARSER_ERROR,
+        AST_ERROR, PARSER_ERROR, SYSTEM_ERROR,
     }
 
     public Stack<String> map = new Stack<String>();
@@ -60,6 +60,12 @@ public class PyExceptions extends RuntimeException
         this.tok = tok;
     }
 
+    public PyExceptions(ErrorType type, String msg, PyObject obj)
+    {
+        super(msg);
+        map.push(msg);
+    }
+
     public String toString()
     {
         String msg = "";
@@ -77,7 +83,7 @@ public class PyExceptions extends RuntimeException
         {
             msg += map.pop() + "\n";
         }
-        if (msg.length() > 0)
+        if(msg.length() > 0)
         {
             System.err.println(msg);
         }
