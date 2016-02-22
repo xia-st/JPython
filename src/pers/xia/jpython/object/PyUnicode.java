@@ -25,7 +25,19 @@ public class PyUnicode extends PyObject
 
     public PyUnicode(String str)
     {
+        this(str, false);
+    }
+
+    public PyUnicode(String str, boolean rawmode)
+    {
         this.str = str;
+        if(rawmode)
+        {
+            // FIXME should use faster and more complete method
+            this.str.replace("\\n", "\n");
+            this.str.replace("\\t", "\t");
+            this.str.replace("\\\\", "\\");
+        }
     }
 
     public PyUnicode(PyObject obj)
@@ -56,4 +68,5 @@ public class PyUnicode extends PyObject
         return new PyUnicode(newStr);
 
     }
+
 }

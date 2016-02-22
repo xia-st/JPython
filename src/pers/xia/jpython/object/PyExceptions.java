@@ -47,7 +47,8 @@ public class PyExceptions extends RuntimeException
     public PyExceptions(ErrorType type, String msg, Node n)
     {
         super(msg);
-        msg = msg + "\n" + "line: " + n.lineNo + " colOffset: " + n.colOffset;
+        msg = msg + "\n" + "line: " + n.lineNo + " colOffset: " + n.colOffset
+                + "\n" + n.dfaType + " " + n.str;
         map.push(msg);
     }
 
@@ -55,7 +56,7 @@ public class PyExceptions extends RuntimeException
     {
         super(msg);
         msg = "line: " + tok.lineNo + "\n"
-                + tok.buf.substring(tok.lineStart, tok.lineEnd) + '\n' + msg;
+                + tok.buf.substring(tok.lineStart, tok.lineEnd) + "\n" + msg;
         map.push(msg);
         this.tok = tok;
     }

@@ -6,8 +6,11 @@ import pers.xia.jpython.ast.*;
 import pers.xia.jpython.grammar.DFAType;
 import pers.xia.jpython.object.Py;
 import pers.xia.jpython.object.PyBytes;
+import pers.xia.jpython.object.PyComplex;
 import pers.xia.jpython.object.PyExceptions;
 import pers.xia.jpython.object.PyExceptions.ErrorType;
+import pers.xia.jpython.object.PyFloat;
+import pers.xia.jpython.object.PyLong;
 import pers.xia.jpython.object.PyObject;
 import pers.xia.jpython.object.PyUnicode;
 
@@ -23,7 +26,14 @@ public class Ast
      */
     private void REQ(Node n, DFAType type)
     {
-        myAssert(n.dfaType == type);
+        try
+        {
+            myAssert(n.dfaType == type);
+        }
+        catch (PyExceptions e)
+        {
+            throw new PyExceptions(ErrorType.AST_ERROR, "AST Error", n);
+        }
     }
 
     /*
@@ -249,10 +259,109 @@ public class Ast
         }
     }
 
-    private PyObject parseStr(Node n)
+    private PyObject decodeUnicode(String str, boolean rawmode, String encode)
     {
         // TODO
         return null;
+    }
+
+    private PyObject parseStr(Node n)
+    {
+
+        boolean bytesmode = false;
+        boolean rawmode = false;
+        //boolean needEncoding = false;
+        String s = n.str;
+
+        int start = 0;
+        int end;
+        char quote = s.charAt(0);
+        myAssert(s != null);
+        if(Character.isLetter(s.charAt(start)))
+        {
+            while (!bytesmode || !rawmode)
+            {
+                if(quote == 'b' || quote == 'B')
+                {
+                    quote = s.charAt(++start);
+                    bytesmode = true;
+                }
+                else if(quote == 'u' || quote == 'U')
+                {
+                    quote = s.charAt(++start);
+                }
+                else if(quote == 'r' || quote == 'R')
+                {
+                    quote = s.charAt(++start);
+                    rawmode = true;
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+
+        if(quote != '\'' && quote != '"')
+        {
+            throw new PyExceptions(ErrorType.AST_ERROR, "bad internal call", n);
+        }
+
+        start++;
+
+        end = s.length();
+        if(s.charAt(--end) != quote)
+        {
+            throw new PyExceptions(ErrorType.AST_ERROR, "bad internal call", n);
+        }
+
+        if(end - start >= 4 && s.charAt(start) == quote
+                && s.charAt(start + 1) == quote)
+        {
+            start += 2;
+            if(s.charAt(--end) != quote || s.charAt(--end) != quote)
+            {
+                throw new PyExceptions(ErrorType.AST_ERROR, "bad internal call",
+                        n);
+            }
+        }
+
+        /*
+        if(!bytesmode && !rawmode)
+        {
+            return decodeUnicode(s.substring(start, end), rawmode, Py.encoding);
+        }
+        */
+
+        if(bytesmode)
+        {
+            for (int i = start; i < end; i++)
+            {
+                if(s.charAt(i) >= 0x80)
+                {
+                    throw new PyExceptions(ErrorType.AST_ERROR,
+                            "bytes can only contain ASCII literal characters.",
+                            n);
+                }
+            }
+        }
+        /*
+        needEncoding = (!bytesmode && Py.encoding != null
+                && Py.encoding.equals("utf-8"));
+         */
+        /*
+         * 以下代码没有采用cPython的方案，赶脚cPython的方案在Java中
+         * 不适用，希望我没有想错；
+         */
+
+        if(bytesmode)
+        {
+            return new PyBytes(s);
+        }
+        else
+        {
+            return new PyUnicode(s, rawmode);
+        }
     }
 
     private Object[] astForDictelement(Node n, int i)
@@ -318,7 +427,7 @@ public class Ast
             {
                 REQ(n, DFAType.comp_iter);
                 n = n.getChild(0);
-                if(n.dfaType == DFAType.comp_iter)
+                if(n.dfaType == DFAType.comp_for)
                 {
                     continue count_comp_for;
                 }
@@ -406,8 +515,33 @@ public class Ast
 
     private PyObject parseNumber(Node n)
     {
-        // TODO
-        return null;
+        int end;
+        long x;
+        double dx;
+        boolean imflag;
+
+        String s = n.str;
+        myAssert(s != null);
+
+        end = s.length() - 1;
+
+        imflag = (s.charAt(end) == 'j' || s.charAt(end) == 'J');
+        if(imflag)
+        {
+            double imag = Double.parseDouble(s.substring(0, s.length() - 1));
+            return new PyComplex(0., imag);
+        }
+        else
+        {
+            if(s.indexOf('.') > 0 || s.indexOf('E') > 0 || s.indexOf('e') > 0)
+            {
+                return new PyFloat(s);
+            }
+            else
+            {
+                return new PyLong(s);
+            }
+        }
     }
 
     private exprType astForListcomp(Node n)
@@ -424,7 +558,7 @@ public class Ast
 
         elts = new ArrayList<exprType>((n.nChild() + 1) / 2);
 
-        for (int i = 0; i < n.nChild(); i++)
+        for (int i = 0; i < n.nChild(); i += 2)
         {
             exprType expression;
             expression = astForExpr(n.getChild(i));
@@ -580,10 +714,11 @@ public class Ast
                 {
                     expression = astForExpr(n.getChild(i + 2));
                     kwdefaults.add(expression);
+                    i += 2;
                 }
                 else
                 {
-                    kwdefaults.addAll(null);
+                    kwdefaults.add(null);
                 }
 
                 if(ch.nChild() == 3)
@@ -670,6 +805,11 @@ public class Ast
 
                     expression = astForExpr(n.getChild(1));
                     ifs.add(expression);
+
+                    if(n.nChild() == 3)
+                    {
+                        n = n.getChild(2);
+                    }
                 }
                 /* on exit, must guarantee that n is a comp_for */
                 if(n.dfaType == DFAType.comp_iter)
@@ -1031,17 +1171,22 @@ public class Ast
 
     private argumentsType astForArguments(Node n)
     {
-        /*
-         * This function handles both typedargslist (function definition) and
-         * varargslist (lambda definition).
-         * 
-         * parameters: '(' [typedargslist] ')' typedargslist: ((tfpdef ['='
-         * test] ',')* ('*' [tfpdef] (',' tfpdef ['=' test])* [',' '**' tfpdef]
-         * | '**' tfpdef) | tfpdef ['=' test] (',' tfpdef ['=' test])* [','])
-         * tfpdef: NAME [':' test] varargslist: ((vfpdef ['=' test] ',')* ('*'
-         * [vfpdef] (',' vfpdef ['=' test])* [',' '**' vfpdef] | '**' vfpdef) |
-         * vfpdef ['=' test] (',' vfpdef ['=' test])* [',']) vfpdef: NAME
+        /* This function handles both typedargslist (function definition)
+            and varargslist (lambda definition).
+        
+            parameters: '(' [typedargslist] ')'
+            typedargslist: ((tfpdef ['=' test] ',')*
+                ('*' [tfpdef] (',' tfpdef ['=' test])* [',' '**' tfpdef]
+                | '**' tfpdef)
+                | tfpdef ['=' test] (',' tfpdef ['=' test])* [','])
+            tfpdef: NAME [':' test]
+            varargslist: ((vfpdef ['=' test] ',')*
+                ('*' [vfpdef] (',' vfpdef ['=' test])*  [',' '**' vfpdef]
+                | '**' vfpdef)
+                | vfpdef ['=' test] (',' vfpdef ['=' test])* [','])
+            vfpdef: NAME
          */
+
         int nposargs = 0;
         int nkwonlyargs = 0;
         int nposdefaults = 0;
@@ -1342,31 +1487,31 @@ public class Ast
         n = n.getChild(0);
         switch (n.str)
         {
-        case "+":
+        case "+=":
             return operatorType.Add;
-        case "-":
+        case "-=":
             return operatorType.Sub;
-        case "/":
+        case "/=":
             return operatorType.Div;
-        case "//":
+        case "//=":
             return operatorType.FloorDiv;
-        case "%":
+        case "%=":
             return operatorType.Mod;
-        case "<":
+        case "<<=":
             return operatorType.LShift;
-        case ">":
+        case ">>=":
             return operatorType.RShift;
-        case "&":
+        case "&=":
             return operatorType.BitAnd;
-        case "^":
+        case "^=":
             return operatorType.BitXor;
-        case "|":
+        case "|=":
             return operatorType.BitOr;
-        case "*":
+        case "*=":
             return operatorType.Mult;
-        case "**":
+        case "**=":
             return operatorType.Pow;
-        case "@":
+        case "@=":
             return operatorType.Mult;
         default:
             throw new PyExceptions(ErrorType.AST_ERROR,
@@ -1380,9 +1525,9 @@ public class Ast
         REQ(n, DFAType.exprlist);
         java.util.List<exprType> seq = new ArrayList<exprType>(
                 (n.nChild() + 1) / 2);
-        exprType e = null;
+        exprType e;
 
-        for (int i = 0; i < n.nChild(); i++)
+        for (int i = 0; i < n.nChild(); i += 2)
         {
             e = astForExpr(n.getChild(i));
             seq.add(e);
@@ -1805,8 +1950,8 @@ public class Ast
     private exprType astForLambdef(Node n)
     {
         /*
-         * lambdef: 'lambda' [varargslist] ':' test lambdef_nocond: 'lambda'
-         * [varargslist] ':' test_nocond
+         * lambdef: 'lambda' [varargslist] ':' test 
+         * lambdef_nocond: 'lambda' [varargslist] ':' test_nocond
          */
         argumentsType args;
         exprType expression;

@@ -9,12 +9,12 @@ public class Tokenizer
 {
     private Logger log;
     private Token tok;
-    
+
     public Tokenizer()
     {
         log = Logger.getLogger(Tokenizer.class);
     }
-    
+
     public Tokenizer(File file)
     {
         this();
@@ -27,23 +27,23 @@ public class Tokenizer
         this.tok.str = this.tok.buf.substring(this.tok.start, this.tok.end);
         return tok;
     }
-    
+
     public static void main(String[] args)
     {
-       File file = new File("translator.py");
-       try
-       {
-           Tokenizer tokenizer = new Tokenizer(file);
-           Token tok = tokenizer.nextToken();
-           while(tok.state != TokState.ENDMARKER)
-           {
-               System.out.println(tok);
-               tok = tokenizer.nextToken();
-           }
-       }
-       catch(PyExceptions e)
-       {
-           e.printStackTrace();
-       }
+        File file = new File("./test/test.py");
+        try
+        {
+            Tokenizer tokenizer = new Tokenizer(file);
+            Token tok = tokenizer.nextToken();
+            while (tok.state != TokState.ENDMARKER)
+            {
+                System.out.println(tok);
+                tok = tokenizer.nextToken();
+            }
+        }
+        catch (PyExceptions e)
+        {
+            e.printStackTrace();
+        }
     }
 }

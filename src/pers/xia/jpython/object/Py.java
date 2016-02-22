@@ -10,14 +10,14 @@ public final class Py
 
     public static String encoding = "utf-8";
 
-    private final static PyInteger[] integerCache = new PyInteger[Config.NSMALLPOSINTS
+    private final static PyLong[] integerCache = new PyLong[Config.NSMALLPOSINTS
             - Config.NSMALLNEGINTS];
 
     static
     {
         for (int i = 0; i < Config.NSMALLPOSINTS - Config.NSMALLNEGINTS; i++)
         {
-            integerCache[i] = new PyInteger(Config.NSMALLNEGINTS + i);
+            integerCache[i] = new PyLong(Config.NSMALLNEGINTS + i);
         }
     }
 
@@ -27,6 +27,6 @@ public final class Py
         {
             return integerCache[i + Config.NSMALLNEGINTS];
         }
-        return new PyInteger(i);
+        return new PyLong(i);
     }
 }

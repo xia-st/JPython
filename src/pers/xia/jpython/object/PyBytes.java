@@ -9,6 +9,11 @@ public class PyBytes extends PyObject
         this.bytes = bytes;
     }
 
+    public PyBytes(String str)
+    {
+        this.bytes = str.getBytes();
+    }
+
     public PyBytes concat(PyBytes pyBytes)
     {
         byte[] concatedBytes = pyBytes.bytes;

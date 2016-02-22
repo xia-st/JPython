@@ -30,6 +30,7 @@ public class Token
     int start;
     int end;
     boolean contLine;
+    boolean asyncDef;
 
     public TokState state;
     public int lineStart; // 一行的起始位置
@@ -57,6 +58,7 @@ public class Token
         this.input = null;
         this.start = this.end = 0;
         this.contLine = false;
+        this.asyncDef = false;
 
         this.log = Logger.getLogger(Tokenizer.class);
         this.lineStart = lineEnd = 0;
@@ -91,7 +93,7 @@ public class Token
     public String toString()
     {
         // log.info(this.buf.substring(this.lineStart, this.lineEnd));
-        if (this.state == TokState.NEWLINE || this.state == TokState.ENDMARKER
+        if(this.state == TokState.NEWLINE || this.state == TokState.ENDMARKER
                 || this.state == TokState.INDENT
                 || this.state == TokState.DEDENT)
         {
@@ -103,13 +105,13 @@ public class Token
 
     private char nextC()
     {
-        if (this.buf == null)
+        if(this.buf == null)
         {
             throw new PyExceptions("Parser Error: buf is null");
         }
-        if (this.cur < this.buf.length())
+        if(this.cur < this.buf.length())
         {
-            if (this.buf.charAt(this.cur) == '\n')
+            if(this.buf.charAt(this.cur) == '\n')
             {
                 this.lineNo++;
             }
@@ -123,17 +125,17 @@ public class Token
 
     private void backup(char c)
     {
-        if (c != '\0')
+        if(c != '\0')
         {
-            if (--this.cur < 0)
+            if(--this.cur < 0)
             {
                 throw new PyExceptions("token.backup: beginning of buffer");
             }
-            if (this.buf.charAt(this.cur) != c)
+            if(this.buf.charAt(this.cur) != c)
             {
                 throw new PyExceptions("token.backup: backup error");
             }
-            if (c == '\n')
+            if(c == '\n')
             {
                 this.lineNo--;
             }
@@ -142,7 +144,7 @@ public class Token
 
     private boolean is_potential_identifier_start(char c)
     {
-        if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_'
+        if((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_'
                 || c >= 128)
         {
             return true;
@@ -155,7 +157,7 @@ public class Token
 
     private boolean is_potential_identifier_char(char c)
     {
-        if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
+        if((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
                 || (c >= '0' && c <= '9') || c == '_' || c >= 128)
         {
             return true;
@@ -174,10 +176,10 @@ public class Token
 
         char c = this.nextC();
 
-        if (c == quote)
+        if(c == quote)
         {
             c = this.nextC();
-            if (c == quote)
+            if(c == quote)
             {
                 quote_size = 3;
             }
@@ -187,7 +189,7 @@ public class Token
             }
         }
 
-        if (c != quote)
+        if(c != quote)
         {
             this.backup(c);
         }
@@ -195,22 +197,22 @@ public class Token
         while (quote_size != end_quote_size)
         {
             c = this.nextC();
-            if (c == '\0')
+            if(c == '\0')
             {
                 throw new PyExceptions("badly token");
             }
-            if (quote_size == 1 && c == '\n')
+            if(quote_size == 1 && c == '\n')
             {
                 throw new PyExceptions("End of line");
             }
-            if (c == quote)
+            if(c == quote)
             {
                 end_quote_size++;
             }
             else
             {
                 end_quote_size = 0;
-                if (c == '\\')
+                if(c == '\\')
                 {
                     c = this.nextC();
                 }
@@ -233,11 +235,11 @@ public class Token
         for (;;)
         {
             c = this.nextC();
-            if (c == ' ')
+            if(c == ' ')
             {
                 col++;
             }
-            else if (c == '\t')
+            else if(c == '\t')
             {
                 col += Config.TABSIZE;
             }
@@ -249,9 +251,9 @@ public class Token
         this.backup(c);
 
         // 如果是空行的话做一个标记
-        if (c == '#' || c == '\n')
+        if(c == '#' || c == '\n')
         {
-            if (col == 0 && c == '\n' && this.prompt != null)
+            if(col == 0 && c == '\n' && this.prompt != null)
             {
                 // 在交互模式中完全的空行被用来当做代码输入的结束
                 blankline = false;
@@ -263,15 +265,15 @@ public class Token
         }
 
         // 如果非空行且不在括号内部的话设置缩进
-        if (!blankline && this.level == 0)
+        if(!blankline && this.level == 0)
         {
-            if (col == this.indstack[this.indent])
+            if(col == this.indstack[this.indent])
             {
                 /* No changed */
             }
-            else if (col > this.indstack[this.indent])
+            else if(col > this.indstack[this.indent])
             {
-                if (this.indent + 1 >= Config.MAXINDENT)
+                if(this.indent + 1 >= Config.MAXINDENT)
                 {
                     throw new PyExceptions(
                             "IndentationError: too many levels of indentation");
@@ -287,7 +289,7 @@ public class Token
                     this.pendin--;
                     this.indent--;
                 }
-                if (col != this.indstack[this.indent])
+                if(col != this.indstack[this.indent])
                 {
                     log.error(col + " " + this.indstack[this.indent]);
                     throw new PyExceptions();
@@ -299,7 +301,7 @@ public class Token
 
     private boolean isxdigit(char c)
     {
-        if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'F')
+        if((c >= '0' && c <= '9') || (c >= 'A' && c <= 'F')
                 || (c >= 'a' && c <= 'f'))
             return true;
         else
@@ -312,19 +314,21 @@ public class Token
         /* Process b"", r"", u"", br"" and rb"" */
         boolean saw_b = false, saw_u = false, saw_r = false;
 
+        //boolean nonAscii = false;
+
         // 处理字符串签名可能出现的b、u、r
         while (true)
         {
-            if (!(saw_b || saw_u) && (c == 'b' || c == 'B'))
+            if(!(saw_b || saw_u) && (c == 'b' || c == 'B'))
                 saw_b = true;
-            else if (!(saw_u || saw_b || saw_r) && (c == 'u' || c == 'U'))
+            else if(!(saw_u || saw_b || saw_r) && (c == 'u' || c == 'U'))
                 saw_u = true;
-            else if (!(saw_r || saw_u) && (c == 'r' || c == 'R'))
+            else if(!(saw_r || saw_u) && (c == 'r' || c == 'R'))
                 saw_r = true;
             else
                 break;
             c = this.nextC();
-            if (c == '\'' || c == '"')
+            if(c == '\'' || c == '"')
             {
                 return checkString(c);
             }
@@ -332,16 +336,68 @@ public class Token
 
         while (is_potential_identifier_char(c))
         {
-            if (c >= 128)
+            /*if(c >= 128)
             {
-                throw new PyExceptions("nonascii");
-            }
+                nonAscii = true;
+            }*/
             c = this.nextC();
         }
 
         this.backup(c);
         this.end = this.cur;
         this.state = TokState.NAME;
+
+        if(this.cur - this.start == 5)
+        {
+            if(this.asyncDef)
+            {
+                if(this.buf.substring(this.start, this.end).equals("async"))
+                {
+                    this.state = TokState.ASYNC;
+                    return true;
+                }
+                if(this.buf.substring(this.start, this.end).equals("await"))
+                {
+                    this.state = TokState.AWAIT;
+                    return true;
+                }
+            }
+            else if(this.buf.substring(this.start, this.end).equals("async"))
+            {
+                int curTmp = this.end;
+
+                char cc = buf.charAt(curTmp);
+                while (cc != '\0')
+                {
+                    /*if(cc == '#')
+                    {
+                        while (cc != '\n')
+                        {
+                            cc = buf.charAt(++curTmp);
+                        }
+                    }*/
+                    if(cc != ' ' && cc != '\t')
+                    {
+                        break;
+                    }
+                    cc = buf.charAt(++curTmp);
+                }
+
+                int endTmp = curTmp + 1;
+                cc = buf.charAt(endTmp);
+
+                while (is_potential_identifier_char(cc))
+                {
+                    cc = buf.charAt(++endTmp);
+                }
+                if(buf.substring(curTmp, endTmp).equals("def"))
+                {
+                    this.state = TokState.ASYNC;
+                    this.asyncDef = true;
+                    return true;
+                }
+            }
+        }
 
         return true;
     }
@@ -356,21 +412,21 @@ public class Token
 
     private boolean checkNumber(char c)
     {
-        if (c == '0')
+        if(c == '0')
         {
             c = this.nextC();
-            if (c == '.')
+            if(c == '.')
             {
                 return fraction();
             }
-            if (c == 'j' || c == 'J')
+            if(c == 'j' || c == 'J')
             {
                 return imaginary();
             }
-            if (c == 'x' || c == 'X')
+            if(c == 'x' || c == 'X')
             {
                 c = this.nextC();
-                if (!this.isxdigit(c))
+                if(!this.isxdigit(c))
                 {
                     this.backup(c);
                     throw new PyExceptions();
@@ -380,10 +436,10 @@ public class Token
                     c = this.nextC();
                 } while (this.isxdigit(c));
             }
-            else if (c == 'o' || c == 'O')
+            else if(c == 'o' || c == 'O')
             {
                 c = this.nextC();
-                if (c < '0' || c > '7')
+                if(c < '0' || c > '7')
                 {
                     this.backup(c);
                     throw new PyExceptions();
@@ -393,10 +449,10 @@ public class Token
                     c = this.nextC();
                 } while (c >= '0' && c <= '8');
             }
-            else if (c == 'b' || c == 'B')
+            else if(c == 'b' || c == 'B')
             {
                 c = this.nextC();
-                if (c != '0' && c != '1')
+                if(c != '0' && c != '1')
                 {
                     this.backup(c);
                     throw new PyExceptions();
@@ -419,19 +475,19 @@ public class Token
                     c = this.nextC();
                 }
 
-                if (c == '.')
+                if(c == '.')
                 {
                     return fraction();
                 }
-                else if (c == 'e' || c == 'E')
+                else if(c == 'e' || c == 'E')
                 {
                     return exponent(c);
                 }
-                else if (c == 'j' || c == 'J')
+                else if(c == 'j' || c == 'J')
                 {
                     return imaginary();
                 }
-                else if (nonZero)
+                else if(nonZero)
                 {
                     this.backup(c);
                     throw new PyExceptions();
@@ -445,9 +501,17 @@ public class Token
                 c = this.nextC();
             } while (Character.isDigit(c));
 
-            if (c == '.')
+            if(c == '.')
             {
                 return fraction();
+            }
+            if(c == 'e' || c == 'E')
+            {
+                return exponent(c);
+            }
+            if(c == 'j' || c == 'J')
+            {
+                return imaginary();
             }
         }
 
@@ -462,16 +526,16 @@ public class Token
     private boolean exponent(char e)
     {
         char c = this.nextC();
-        if (c == '+' || c == '-')
+        if(c == '+' || c == '-')
         {
             c = this.nextC();
-            if (!Character.isDigit(c))
+            if(!Character.isDigit(c))
             {
                 this.backup(c);
                 throw new PyExceptions();
             }
         }
-        else if (!Character.isDigit(c))
+        else if(!Character.isDigit(c))
         {
             this.backup(c);
             this.backup(e);
@@ -486,7 +550,7 @@ public class Token
             c = this.nextC();
         } while (Character.isDigit(c));
 
-        if (c == 'j' || c == 'J')
+        if(c == 'j' || c == 'J')
         {
             return imaginary();
         }
@@ -507,11 +571,11 @@ public class Token
             c = this.nextC();
         } while (Character.isDigit(c));
 
-        if (c == 'e' || c == 'E')
+        if(c == 'e' || c == 'E')
         {
             return exponent(c);
         }
-        if (c == 'j' || c == 'J')
+        if(c == 'j' || c == 'J')
         {
             return imaginary();
         }
@@ -526,14 +590,14 @@ public class Token
     private boolean checkDot()
     {
         char c = this.nextC();
-        if (Character.isDigit(c))
+        if(Character.isDigit(c))
         {
             return fraction();
         }
-        else if (c == '.')
+        else if(c == '.')
         {
             c = this.nextC();
-            if (c == '.')
+            if(c == '.')
             {
                 this.end = this.cur;
                 this.state = TokState.ELLIPSIS;
@@ -724,23 +788,23 @@ public class Token
 
     private TokState threeChars(char c1, char c2, char c3)
     {
-        if (c1 == '<' && c2 == '<' && c3 == '=')
+        if(c1 == '<' && c2 == '<' && c3 == '=')
         {
             return TokState.LEFTSHIFTEQUAL;
         }
-        if (c1 == '>' && c2 == '>' && c3 == '=')
+        if(c1 == '>' && c2 == '>' && c3 == '=')
         {
             return TokState.RIGHTSHIFTEQUAL;
         }
-        if (c1 == '*' && c2 == '*' && c3 == '=')
+        if(c1 == '*' && c2 == '*' && c3 == '=')
         {
             return TokState.DOUBLESTAREQUAL;
         }
-        if (c1 == '/' && c2 == '/' && c3 == '=')
+        if(c1 == '/' && c2 == '/' && c3 == '=')
         {
             return TokState.DOUBLESLASHEQUAL;
         }
-        if (c1 == '.' && c2 == '.' && c3 == '.')
+        if(c1 == '.' && c2 == '.' && c3 == '.')
         {
             return TokState.ELLIPSIS;
         }
@@ -756,13 +820,13 @@ public class Token
         nextline: for (;;)
         {
             // 如果是在一行的开始的话则设置缩进信息
-            if (this.atbol)
+            if(this.atbol)
             {
 
                 // 设置当前行的起始和结束位置
                 this.lineStart = this.cur;
                 this.lineEnd = this.buf.indexOf('\n', this.lineStart);
-                if (this.lineEnd < 0)
+                if(this.lineEnd < 0)
                 {
                     this.lineEnd = this.buf.length();
                 }
@@ -773,9 +837,9 @@ public class Token
             }
 
             // check pendin
-            if (this.pendin != 0)
+            if(this.pendin != 0)
             {
-                if (this.pendin < 0)
+                if(this.pendin < 0)
                 {
                     this.pendin++;
                     this.state = TokState.DEDENT;
@@ -805,7 +869,7 @@ public class Token
                 this.start = this.cur - 1;
 
                 // 删除注释内容
-                if (c == '#')
+                if(c == '#')
                 {
                     while (c != '\0' && c != '\n')
                     {
@@ -813,22 +877,22 @@ public class Token
                     }
                 }
 
-                if (c == '\0')
+                if(c == '\0')
                 {
                     this.end = this.cur - 1;
                     this.state = TokState.ENDMARKER;
                     return true;
                 }
 
-                if (is_potential_identifier_start(c))
+                if(is_potential_identifier_start(c))
                 {
                     return checkName(c);
                 }
 
-                if (c == '\n')
+                if(c == '\n')
                 {
                     this.atbol = true;
-                    if (blankline || this.level > 0)
+                    if(blankline || this.level > 0)
                     {
                         continue nextline; // 跳转到nextline位置，这里不知道怎么重构了，只能这样写
                     }
@@ -837,25 +901,25 @@ public class Token
                     return true;
                 }
 
-                if (c == '.')
+                if(c == '.')
                 {
                     return checkDot();
                 }
 
-                if (Character.isDigit(c))
+                if(Character.isDigit(c))
                 {
                     return checkNumber(c);
                 }
 
-                if (c == '\'' || c == '"')
+                if(c == '\'' || c == '"')
                 {
                     return checkString(c);
                 }
 
-                if (c == '\\')
+                if(c == '\\')
                 {
                     c = this.nextC();
-                    if (c != '\n')
+                    if(c != '\n')
                     {
                         throw new PyExceptions("invlid syntax");
                     }
@@ -865,11 +929,11 @@ public class Token
 
                 char c2 = this.nextC();
                 TokState state = this.twoChars(c, c2);
-                if (state != TokState.OP)
+                if(state != TokState.OP)
                 {
                     char c3 = this.nextC();
                     TokState state3 = this.threeChars(c, c2, c3);
-                    if (state3 != TokState.OP)
+                    if(state3 != TokState.OP)
                     {
                         state = state3;
                     }
@@ -901,13 +965,13 @@ public class Token
 
                 this.state = this.oneChar(c);
 
-                if (this.state != TokState.OP)
+                if(this.state != TokState.OP)
                 {
                     return true;
                 }
 
                 log.error(c + 0);
-                throw new PyExceptions("Invlid syntex");
+                throw new PyExceptions("Invlid syntex", this);
             }
         }
     }

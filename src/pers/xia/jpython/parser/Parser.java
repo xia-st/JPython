@@ -18,26 +18,29 @@ import pers.xia.jpython.tokenizer.Tokenizer;
 
 public class Parser
 {
-    public static enum ReturnCode{OK, ACCEPT};
-    
-    class StackEntry    //栈中的元素
+    public static enum ReturnCode
+    {
+        OK, ACCEPT
+    };
+
+    class StackEntry //栈中的元素
     {
         DFA dfa; //所属的DFA
-        int curState;  //当前的state
+        int curState; //当前的state
         Node parentNode = null; //当前的父结点，用于连接下面的结点
     }
 
-    Stack<StackEntry> stack;    // DFA的状态栈
-    Grammar grammar;    //使用的grammar
-    public Node tree;  //CST树
-    
+    Stack<StackEntry> stack; // DFA的状态栈
+    Grammar grammar; //使用的grammar
+    public Node tree; //CST树
+
     private Logger log;
-    
+
     public Parser(Grammar grammar)
     {
         this(grammar, -1);
     }
-    
+
     public Parser(Grammar grammar, int start)
     {
         if(!grammar.accel)
@@ -45,21 +48,22 @@ public class Parser
             grammar.addAccelerators();
         }
         this.log = Logger.getLogger(Parser.class);
-        
+
         StackEntry stackEntry = new StackEntry();
-        
-        if(start < 0) start = grammar.start;
-       
+
+        if(start < 0)
+            start = grammar.start;
+
         stackEntry.dfa = grammar.getDFA(start);
         stackEntry.curState = grammar.getDFA(start).initial;
         stackEntry.parentNode = new Node(grammar.getDFA(start).name);
-        
+
         this.stack = new Stack<StackEntry>();
         this.stack.push(stackEntry);
         this.grammar = grammar;
         this.tree = stackEntry.parentNode;
     }
-    
+
     //根据Token确定相应的label
     private int classify(Token token)
     {
@@ -71,8 +75,8 @@ public class Parser
         if(token.state == TokState.NAME)
         {
             int label = -1; // 保存(NAME, null)这个label
-            
-            for(int i = 0; i < this.grammar.nlabels; i++)
+
+            for (int i = 0; i < this.grammar.nlabels; i++)
             {
                 if(this.grammar.labels[i].tokState == TokState.NAME)
                 {
@@ -88,15 +92,16 @@ public class Parser
                     }
                 }
             }
-            if(label == -1) throw new PyExceptions("Illegal token", token);
+            if(label == -1)
+                throw new PyExceptions("Illegal token", token);
             log.info("\"" + token.str + "\" is a token we know");
             return label;
         }
-        
+
         /* 
          * 对于普通的label只需要匹配到label的tokState即可
          */
-        for(int i = 0; i < this.grammar.nlabels; i++)
+        for (int i = 0; i < this.grammar.nlabels; i++)
         {
             if(this.grammar.labels[i].tokState == token.state)
             {
@@ -106,49 +111,50 @@ public class Parser
         }
         throw new PyExceptions("Illegal token", token);
     }
-    
+
     //设置下一个结点
-    private void shift(TokState tokState, int nextState, String str, int lineNo, int colOffset)
+    private void shift(TokState tokState, int nextState, String str, int lineNo,
+            int colOffset)
     {
         StackEntry se = this.stack.peek();
         se.parentNode.addChild(tokState, str, lineNo, colOffset);
         se.curState = nextState;
     }
-    
+
     //添加一个新的stackEntry
     private void push(DFA nextDFA, int nextState, int lineNo, int colOffset)
     {
         StackEntry se = this.stack.peek();
-                
+
         se.parentNode.addChild(nextDFA.name, lineNo, colOffset);
         se.curState = nextState;
-        
+
         Node node = se.parentNode.getChild(-1);
-        
+
         StackEntry se1 = new StackEntry();
         se1.dfa = nextDFA;
         se1.curState = nextDFA.initial;
         se1.parentNode = node;
-        
+
         this.stack.push(se1);
     }
-    
+
     public ReturnCode addToken(Token token, int colOffset)
     {
         int ilabel = this.classify(token);
-                
-        for(;;)
+
+        for (;;)
         {
             StackEntry se = this.stack.peek();
             DFA dfa = se.dfa;
             State state = dfa.getState(se.curState);
-            
+
             log.debug("DFA: " + dfa.name);
-            
+
             if(ilabel >= state.lower && ilabel < state.upper)
             {
                 int x = state.next(ilabel - state.lower);
-                
+
                 if(x > -1)
                 {
                     if((x & (1 << 7)) > 0)
@@ -159,19 +165,21 @@ public class Parser
                         this.push(dfa1, nextState, token.lineNo, colOffset);
                         continue;
                     }
-                    
+
                     log.debug("shift...");
-                    this.shift(token.state, x, token.str, token.lineNo, colOffset);
-                    
+                    this.shift(token.state, x, token.str, token.lineNo,
+                            colOffset);
+
                     /* 
                      * Pop while we are in an accept-only state
                      */
-                    
+
                     state = dfa.getState(this.stack.peek().curState);
-                    while(state.accept && state.narcs == 1)
+                    while (state.accept && state.narcs == 1)
                     {
                         log.debug("Pop while singal accept-only state...");
-                        log.debug("DFA before Pop: " + this.stack.peek().dfa.name);
+                        log.debug("DFA before Pop: "
+                                + this.stack.peek().dfa.name);
                         this.stack.pop();
                         if(this.stack.empty())
                         {
@@ -185,7 +193,7 @@ public class Parser
                     return ReturnCode.OK;
                 }
             }
-            
+
             if(state.accept)
             {
                 log.debug("Pop while accept...");
@@ -197,13 +205,14 @@ public class Parser
                 }
                 continue;
             }
-            
-            log.error("token: " + token.state + " " + token.str + " ilabel: " + ilabel + " curState: " + se.curState + " lower: " + 
-                    state.lower + " lineNo: " + token.lineNo);
+
+            log.error("token: " + token.state + " " + token.str + " ilabel: "
+                    + ilabel + " curState: " + se.curState + " lower: "
+                    + state.lower + " lineNo: " + token.lineNo);
             throw new PyExceptions("Illigal token: ", token);
         }
     }
-    
+
     public void show()
     {
         //save the node and there index
@@ -211,21 +220,22 @@ public class Parser
         {
             Node node;
             int index;
+
             NodeAndIndex(Node node)
             {
                 this.node = node;
                 this.index = 0;
             }
         }
-        
+
         Stack<NodeAndIndex> stack = new Stack<NodeAndIndex>();
-        LinkedList<String> nodeNames = new LinkedList<String>();  
+        LinkedList<String> nodeNames = new LinkedList<String>();
         NodeAndIndex ni = new NodeAndIndex(this.tree);
-        
+
         nodeNames.add(ni.node.dfaType.toString());
         stack.add(ni);
-        
-        while(!stack.empty())
+
+        while (!stack.empty())
         {
             ni = stack.peek();
             if(ni.index >= ni.node.childs.size())
@@ -234,7 +244,7 @@ public class Parser
                 nodeNames.removeLast();
                 continue;
             }
-            
+
             Node node = ni.node.getChild(ni.index++);
             if(node.isDFAType)
             {
@@ -243,8 +253,8 @@ public class Parser
                 nodeNames.add(ni2.node.dfaType.toString());
                 continue;
             }
-            
-            for(String s : nodeNames)
+
+            for (String s : nodeNames)
             {
                 System.out.print(s + " ");
             }
@@ -258,10 +268,10 @@ public class Parser
             }
         }
     }
-    
+
     public static void main(String[] args)
     {
-        File file = new File("test.py");
+        File file = new File("test/test.py");
 
         try
         {
@@ -269,7 +279,7 @@ public class Parser
             Tokenizer tokenizer = new Tokenizer(file);
             Token tok = tokenizer.nextToken();
             int colOffset = 0;
-            while(parser.addToken(tok, colOffset) != ReturnCode.ACCEPT)
+            while (parser.addToken(tok, colOffset) != ReturnCode.ACCEPT)
             {
                 if(tok.state == TokState.NEWLINE)
                 {
@@ -283,7 +293,7 @@ public class Parser
             }
             parser.show();
         }
-        catch(PyExceptions e)
+        catch (PyExceptions e)
         {
             e.printStackTrace();
             throw e;
