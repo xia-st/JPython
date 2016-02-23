@@ -213,62 +213,6 @@ public class Parser
         }
     }
 
-    public void show()
-    {
-        //save the node and there index
-        class NodeAndIndex
-        {
-            Node node;
-            int index;
-
-            NodeAndIndex(Node node)
-            {
-                this.node = node;
-                this.index = 0;
-            }
-        }
-
-        Stack<NodeAndIndex> stack = new Stack<NodeAndIndex>();
-        LinkedList<String> nodeNames = new LinkedList<String>();
-        NodeAndIndex ni = new NodeAndIndex(this.tree);
-
-        nodeNames.add(ni.node.dfaType.toString());
-        stack.add(ni);
-
-        while (!stack.empty())
-        {
-            ni = stack.peek();
-            if(ni.index >= ni.node.childs.size())
-            {
-                stack.pop();
-                nodeNames.removeLast();
-                continue;
-            }
-
-            Node node = ni.node.getChild(ni.index++);
-            if(node.isDFAType)
-            {
-                NodeAndIndex ni2 = new NodeAndIndex(node);
-                stack.push(ni2);
-                nodeNames.add(ni2.node.dfaType.toString());
-                continue;
-            }
-
-            for (String s : nodeNames)
-            {
-                System.out.print(s + " ");
-            }
-            if(node.dfaType == DFAType.NAME)
-            {
-                System.out.println(node.dfaType.toString() + " " + node.str);
-            }
-            else
-            {
-                System.out.println(node.dfaType.toString());
-            }
-        }
-    }
-
     public static void main(String[] args)
     {
         File file = new File("test/test.py");
@@ -278,20 +222,24 @@ public class Parser
             Parser parser = new Parser(GramInit.grammar, 1);
             Tokenizer tokenizer = new Tokenizer(file);
             Token tok = tokenizer.nextToken();
-            int colOffset = 0;
+            int colOffset = 1;
+            int lineNo = 1;
             while (parser.addToken(tok, colOffset) != ReturnCode.ACCEPT)
             {
-                if(tok.state == TokState.NEWLINE)
+
+                tok = tokenizer.nextToken();
+                if(tok.lineNo != lineNo)
                 {
-                    colOffset = 0;
+                    colOffset = 1;
+                    lineNo = tok.lineNo;
                 }
                 else
                 {
                     colOffset++;
                 }
-                tok = tokenizer.nextToken();
+                System.out.println(tok + " " + colOffset);
             }
-            parser.show();
+            parser.tree.show();
         }
         catch (PyExceptions e)
         {

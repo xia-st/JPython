@@ -6,6 +6,7 @@ import pers.xia.jpython.grammar.GramInit;
 import pers.xia.jpython.object.PyExceptions;
 import pers.xia.jpython.parser.Ast;
 import pers.xia.jpython.parser.Node;
+import pers.xia.jpython.parser.ParseToken;
 import pers.xia.jpython.parser.Parser;
 import pers.xia.jpython.parser.Parser.ReturnCode;
 import pers.xia.jpython.tokenizer.TokState;
@@ -20,32 +21,12 @@ public class Run
         File file = new File(fileName);
         if(file.isDirectory())
             return;
-        Parser parser = new Parser(GramInit.grammar, 1);
-
         try
         {
-            Tokenizer tokenizer = new Tokenizer(file);
-            Token tok = tokenizer.nextToken();
-            int colOffset = 0;
-            while (parser.addToken(tok, colOffset) != ReturnCode.ACCEPT)
-            {
-                if(tok.state == TokState.NEWLINE)
-                {
-                    colOffset = 1;
-                }
-                else
-                {
-                    colOffset++;
-                }
-                tok = tokenizer.nextToken();
-            }
-
-            //parser.show();
-
-            Node tree = parser.tree;
+            Node node = ParseToken.parseFile(file, GramInit.grammar, 1);
 
             Ast ast = new Ast();
-            ast.fromNode(tree);
+            ast.fromNode(node);
         }
         catch (PyExceptions e)
         {
@@ -57,8 +38,6 @@ public class Run
 
     public static void main(String[] args)
     {
-        //*
-
         File file = new File("./test");
         if(file.isDirectory())
         {
@@ -69,10 +48,5 @@ public class Run
                     parse("./test/" + fileName);
             }
         }
-        //*/
-
-        //parse("./test/test.py");
-        // System.out.println(Runtime.getRuntime().totalMemory() -
-        // Runtime.getRuntime().freeMemory());
     }
 }

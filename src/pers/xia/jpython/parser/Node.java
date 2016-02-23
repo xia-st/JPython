@@ -1,7 +1,9 @@
 package pers.xia.jpython.parser;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Stack;
 
 import pers.xia.jpython.grammar.DFAType;
 import pers.xia.jpython.object.PyExceptions;
@@ -69,11 +71,11 @@ public class Node
 
     public Node getChild(int n)
     {
-        if (n < 0)
+        if(n < 0)
         {
             n = this.childs.size() + n;
         }
-        if (n < 0 || n > this.childs.size())
+        if(n < 0 || n > this.childs.size())
         {
             throw new PyExceptions("Out of range by Node child's list", this);
         }
@@ -83,6 +85,62 @@ public class Node
     public int nChild()
     {
         return this.childs.size();
+    }
+
+    public void show()
+    {
+        //save the node and there index
+        class NodeAndIndex
+        {
+            Node node;
+            int index;
+
+            NodeAndIndex(Node node)
+            {
+                this.node = node;
+                this.index = 0;
+            }
+        }
+
+        Stack<NodeAndIndex> stack = new Stack<NodeAndIndex>();
+        LinkedList<String> nodeNames = new LinkedList<String>();
+        NodeAndIndex ni = new NodeAndIndex(this);
+
+        nodeNames.add(ni.node.dfaType.toString());
+        stack.add(ni);
+
+        while (!stack.empty())
+        {
+            ni = stack.peek();
+            if(ni.index >= ni.node.childs.size())
+            {
+                stack.pop();
+                nodeNames.removeLast();
+                continue;
+            }
+
+            Node node = ni.node.getChild(ni.index++);
+            if(node.isDFAType)
+            {
+                NodeAndIndex ni2 = new NodeAndIndex(node);
+                stack.push(ni2);
+                nodeNames.add(ni2.node.dfaType.toString());
+                continue;
+            }
+
+            for (String s : nodeNames)
+            {
+                System.out.print(s + " ");
+            }
+            if(node.dfaType == DFAType.NAME)
+            {
+                System.out.println(node.dfaType.toString() + " " + node.str);
+            }
+            else
+            {
+                System.out.println(node.dfaType.toString());
+            }
+        }
     }
 
 }
