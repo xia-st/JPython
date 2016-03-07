@@ -259,12 +259,6 @@ public class Ast
         }
     }
 
-    private PyObject decodeUnicode(String str, boolean rawmode, String encode)
-    {
-        // TODO
-        return null;
-    }
-
     private PyObject parseStr(Node n)
     {
 

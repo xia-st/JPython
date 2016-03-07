@@ -237,7 +237,7 @@ public class Parser
                 {
                     colOffset++;
                 }
-                System.out.println(tok + " " + colOffset);
+                //System.out.println(tok + " " + colOffset);
             }
             parser.tree.show();
         }
