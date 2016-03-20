@@ -23,15 +23,20 @@ public class PyUnicode extends PyObject
         }
     }
 
-    public PyUnicode(String str)
+    public static PyUnicode internFromString(String str)
     {
-        this(str, false);
+        return internFromString(str, false);
     }
 
-    public PyUnicode(String str, boolean rawmode)
+    public static PyUnicode internFromString(String str, boolean rawmode)
+    {
+        return new PyUnicode(str, rawmode);
+    }
+
+    private PyUnicode(String str, boolean rawmode)
     {
         this.str = str;
-        if(rawmode)
+        if(!rawmode)
         {
             // FIXME should use faster and more complete method
             this.str.replace("\\n", "\n");
@@ -40,7 +45,7 @@ public class PyUnicode extends PyObject
         }
     }
 
-    public PyUnicode(PyObject obj)
+    private PyUnicode(PyObject obj)
     {
         // TODO
     }
@@ -65,7 +70,7 @@ public class PyUnicode extends PyObject
         }
 
         String newStr = this.str + ((PyUnicode) obj).str;
-        return new PyUnicode(newStr);
+        return internFromString(newStr);
 
     }
 

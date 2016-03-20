@@ -1,15 +1,16 @@
 package pers.xia.jpython.object;
 
 public class PyLong extends PyObject
-
 {
+    private long num;
+
     public PyLong(long num)
     {
 
     }
 
-    public PyLong(String str)
+    public static PyObject newLong(String str)
     {
-
+        return new PyLong(Long.parseLong(str));
     }
 }

@@ -354,7 +354,7 @@ public class Ast
         }
         else
         {
-            return new PyUnicode(s, rawmode);
+            return PyUnicode.internFromString(s, rawmode);
         }
     }
 
@@ -533,7 +533,7 @@ public class Ast
             }
             else
             {
-                return new PyLong(s);
+                return PyLong.newLong(s);
             }
         }
     }
