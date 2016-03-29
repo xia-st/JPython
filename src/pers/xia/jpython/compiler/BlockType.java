@@ -2,5 +2,5 @@ package pers.xia.jpython.compiler;
 
 public enum BlockType
 {
-    FunctionBlock, ClassBlock, ModuleBlocl
+    FunctionBlock, ClassBlock, ModuleBlock
 }

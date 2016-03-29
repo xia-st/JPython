@@ -29,4 +29,9 @@ public final class Py
         }
         return new PyLong(i);
     }
+    
+    public static PyObject PyNumber_InPlaceOr(PyObject v, PyObject w)
+    {
+    	return null;
+    }
 }

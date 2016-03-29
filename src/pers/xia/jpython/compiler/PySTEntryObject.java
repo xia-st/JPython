@@ -4,37 +4,41 @@ import pers.xia.jpython.object.Py;
 import pers.xia.jpython.object.PyDict;
 import pers.xia.jpython.object.PyList;
 import pers.xia.jpython.object.PyObject;
+import pers.xia.jpython.object.PySet;
 
 class PySTEntryObject extends PyObject
 {
-    PyObject steId;
-    PyObject steSymbols;
-    String steName;
-    PyObject steVarnames;
-    PyObject steChildren;
-    PyObject steDirecitives;
-    BlockType steType;
-    boolean steNested;
-    boolean steFree;
-    boolean steChildFree;
-    boolean steGenerator;
-    boolean steVarargs;
-    boolean steVarkeywords;
-    boolean steReturnsValue;
-    boolean steNeedsClassClosure;
+    PyObject steId; /* int: key in ste_table->st_blocks */
+    PyObject steSymbols; /* dict: variable names to flags */
+    String steName; /* string: name of current block */
+    PyList steVarnames; /* list of function parameters */
+    PyList steChildren; /* list of child blocks */
+    PyObject steDirecitives; /* locations of global and nonlocal statements */
+    BlockType steType; /* module, class, or function */
+    boolean steNested; /* true if block is nested */
+    boolean steFree; /* true if block has free variables */
+    boolean steChildFree; /* true if a child block has free vars,
+                               including free refs to globals */
+    boolean steGenerator; /* true if namespace is a generator */
+    boolean steVarargs; /* true if block has varargs */
+    boolean steVarkeywords; /* true if block has varkeywords */
+    boolean steReturnsValue; /* true if a child block has free vars,
+                                   including free refs to globals */
 
-    int steLineno;
-    int steColOffset;
-    int steOptLineno;
-    int steOptColOffset;
-    int steTmpname;
+    boolean steNeedsClassClosure;/* for class scopes, true if a
+                                    closure over __class__
+                                    should be created */
+    int steLineno; /* first line of block */
+    int steColOffset; /* offset of first line of block */
+    int steOptLineno; /* lineno of last exec or import * */
+    int steOptColOffset; /* offset of last exec or import * */
+    int steTmpname; /* counter for listcomp temp vars */
     Symtable steTable;
 
     // TODO coding
     public PySTEntryObject(Symtable st, String name, BlockType block,
             Object key, int lineno, int colOffet)
     {
-        PySTEntryObject ste = null;
         PyObject k = null;
         k = Py.newInteger(key.hashCode());
         this.steTable = st;
