@@ -3,6 +3,7 @@ package pers.xia.jpython.compiler;
 import java.util.List;
 
 import pers.xia.jpython.ast.Expression;
+import pers.xia.jpython.ast.FunctionDef;
 import pers.xia.jpython.ast.Interactive;
 import pers.xia.jpython.ast.Module;
 import pers.xia.jpython.ast.Suite;
@@ -37,7 +38,11 @@ public class Symtable
     
     private static String top, lambda, genexpr, listcomp, 
     		setcomp, dictcomp, __ckass__;
-    
+
+    private enum DefUse
+    {
+        DEF_GLOBAL, DEF_LOCAL, DEF_PARAM, DEF_NONLOCAL, USE, DEF_FREE
+    };
     public Symtable()
     {
     	this.stFileName = null;
@@ -49,9 +54,26 @@ public class Symtable
     	this.stPrivate = null;
     }
     
+    private boolean addDef(String name, DefUse flag)
+    {
+        // TODO
+        return true;
+    }
+
     private boolean visitStmt(stmtType s)
     {
-    	// TODO
+        if (s instanceof FunctionDef)
+        {
+            FunctionDef f = (FunctionDef)s;
+            if (!this.addDef(f.name, DefUse.DEF_LOCAL))
+            {
+                return false;
+            }
+            if(f.args.defaults != null)
+            {
+                visit_
+            }
+        }
     	return true;
     }
     

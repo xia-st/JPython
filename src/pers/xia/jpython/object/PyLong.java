@@ -24,11 +24,11 @@ public class PyLong extends PyObject
             }
             else if (str.charAt(1) == 'b' || str.charAt(1) == 'B')
             {
-                return new PyLong(Long.parseLong(str, 2));
+                return new PyLong(Long.parseLong(str.substring(2), 2));
             }
             else if (str.charAt(1) == 'o' || str.charAt(1) == 'O')
             {
-                return new PyLong(Long.parseLong(str, 8));
+                return new PyLong(Long.parseLong(str.substring(2), 8));
             }
             else
             {
@@ -37,6 +37,7 @@ public class PyLong extends PyObject
         }
         catch (NumberFormatException err)
         {
+            System.out.println(str);
             return null;
         }
     }
