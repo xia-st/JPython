@@ -7,11 +7,6 @@ import pers.xia.jpython.object.PyExceptions;
 import pers.xia.jpython.parser.Ast;
 import pers.xia.jpython.parser.Node;
 import pers.xia.jpython.parser.ParseToken;
-import pers.xia.jpython.parser.Parser;
-import pers.xia.jpython.parser.Parser.ReturnCode;
-import pers.xia.jpython.tokenizer.TokState;
-import pers.xia.jpython.tokenizer.Token;
-import pers.xia.jpython.tokenizer.Tokenizer;
 
 public class Run
 {

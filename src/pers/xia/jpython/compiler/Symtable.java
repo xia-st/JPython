@@ -31,8 +31,8 @@ public class Symtable
                       compiler structure */
     PyObject stPrivate; /* name of current class or NULL */
 
-    int recursionDepth; /* current recursion depth */
-    int recursionLimit; /* recursion limit */
+    //int recursionDepth; /* current recursion depth */
+    //int recursionLimit; /* recursion limit */
 
     
     private static String top, lambda, genexpr, listcomp, 
@@ -102,6 +102,7 @@ public class Symtable
     private boolean analyzeBlock(PySTEntryObject ste, PySet bound, 
     		PySet free, PySet global)
     {
+        // TODO
     	PyObject name, v;
     	PyDict scopes = null;
 		PySet local = null;
@@ -150,7 +151,7 @@ public class Symtable
     	List<stmtType> seq;
     	
     	st.stFileName = fileName;
-    	
+
     	if(top == null)
     	{
     		top = "top";
@@ -163,6 +164,7 @@ public class Symtable
     	{
 	    	if(mod instanceof Module)
 	    	{
+
 	    		seq = ((Module)mod).body;
 	    		for(int i = 0; i < seq.size(); i++)
 	    		{
@@ -198,10 +200,10 @@ public class Symtable
 	    	st.exitBlock(mod);
 	    	
 	    	/* Make the second symbol analysis pass */
-	    	if(st.analyze())
-	    	{
-	    		return st;
-	    	}
+            /*if(st.analyze())
+            {
+            	return st;
+            }*/
     	}
     	throw new PyExceptions("symtable visit error");
     }
