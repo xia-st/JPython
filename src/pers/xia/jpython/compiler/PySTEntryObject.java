@@ -14,7 +14,7 @@ class PySTEntryObject extends PyObject
     String steName; /* string: name of current block */
     PyList steVarnames; /* list of function parameters */
     PyList steChildren; /* list of child blocks */
-    PyObject steDirecitives; /* locations of global and nonlocal statements */
+    PyList steDirecitives; /* locations of global and nonlocal statements */
     BlockType steType; /* module, class, or function */
     boolean steNested; /* true if block is nested */
     boolean steFree; /* true if block has free variables */

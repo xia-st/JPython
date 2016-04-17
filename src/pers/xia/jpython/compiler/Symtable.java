@@ -67,16 +67,91 @@ public class Symtable
     	this.stPrivate = null;
     }
     
+    private void implicitArg(int pos)
+    {
+        String id = String.valueOf(pos);
+        this.addDef(id, DEF_PARAM);
+    }
+    
+    private void newTmpname()
+    {
+        String tmp = String.format("_[%d]", ++this.stCur.steTmpname);
+        this.addDef(tmp, DEF_LOCAL);
+    }
+    
+    private void visitComprehension(comprehensionType lc)
+    {
+        this.visitExpr(lc.target);
+        this.visitExpr(lc.iter);
+        if(lc.ifs != null)
+        {
+            for(exprType expr : lc.ifs)
+            {
+                this.visitExpr(expr);
+            }
+        }
+    }
+    
     private void visitArgannotations(java.util.List<argType> args)
     {
-        // TODO
+        for(argType arg : args)
+        {
+            if(arg.annotation != null)
+            {
+                this.visitExpr(arg.annotation);
+            }
+        }
     }
     
     private void visitParams(java.util.List<argType> args)
     {
-        // TODO
+        for(argType arg : args)
+        {
+            this.addDef(arg.arg, DEF_PARAM);
+        }
     }
     
+    private void handleComprehension(exprType e, String scopeName,java.util.List<comprehensionType> generators,
+            exprType elt, exprType value)
+    {
+        boolean isGenerator = e instanceof GeneratorExp;
+        boolean needsTmp = !isGenerator;
+        comprehensionType outermost = generators.get(0);
+        this.visitExpr(outermost.iter);
+        
+        if(scopeName == null)
+        {
+            throw new PyExceptions(ErrorType.SYMTABLE_ERROR, "scope name is null");
+        }
+        this.enterBlock(scopeName, BlockType.FunctionBlock, e, e.lineno, e.col_offset);
+        this.stCur.steGenerator = isGenerator;
+        this.implicitArg(0);
+        
+        if(needsTmp)
+        {
+            this.newTmpname();
+        }
+        
+        this.visitExpr(outermost.target);
+        if(outermost.ifs != null)
+        {
+            for(exprType expr : outermost.ifs)
+            {
+                this.visitExpr(expr);
+            }
+        }
+        
+        for(int i = 1; i < generators.size(); i++)
+        {
+            this.visitComprehension(generators.get(i));
+        }
+        if(value != null)
+        {
+            this.visitExpr(value);
+        }
+        this.visitExpr(elt);
+        this.exitBlock(e);
+    }
     private void addDef(String name, int flag)
     {
         PyObject o;
@@ -86,7 +161,7 @@ public class Symtable
         dict = this.stCur.steSymbols;
         if((o = dict.getItem(mangled)) != null)
         {
-            val = ((PyLong)o).toLang();
+            val = ((PyLong)o).asLong();
             if((flag & DEF_PARAM) > 0 & (val & DEF_PARAM) > 0)
             {
                 throw new PyExceptions(ErrorType.SYNTAX_ERROR, String.format(DUPLICATE_ARGUMENT, name));
@@ -110,7 +185,7 @@ public class Symtable
         {
             if((o = this.stGlobal.getItem(mangled)) != null)
             {
-                val |= ((PyLong)o).toLang();
+                val |= ((PyLong)o).asLong();
             }
             o = Py.newInteger(val);
             
@@ -201,44 +276,87 @@ public class Symtable
 
     private long lookup(String name)
     {
-        // TODO
         return 0;
+        /* TODO delete the commit mark while PyDict's getItem method is complete
+        PyObject o;
+        PyObject mangled = Compiler._PyMangLe(this.stPrivate, name);
+        o = this.stCur.steSymbols.getItem(mangled);
+        return ((PyLong)o).asLong();
+        */
     }
 
     private void warn(String buf, int lineno)
     {
-        // TODO
+        // TODO Nothing here
     }
 
     private void recordDirective(String name, stmtType s)
     {
-        // TODO
+        PyObject data;
+        int res;
+        if(this.stCur.steDirecitives == null)
+        {
+            this.stCur.steDirecitives = new PyList(0);
+        }
+        // FIXME Don't know the usage of C source code there
+        data = PyUnicode.internFromString(name);
+        this.stCur.steDirecitives.append(data);
     }
     
     
     private void visitGenexp(exprType e)
     {
-        // TODO
+        GeneratorExp g = (GeneratorExp)e;
+        this.handleComprehension(e, "genexpr", g.generators, g.elt, null);
     }
     
     private void visitListcomp(exprType e)
     {
-        // TODO
+        ListComp l = (ListComp)e;
+        this.handleComprehension(e,  "listcomp", l.generators, l.elt, null);
     }
     
     private void visitSetcomp(exprType e)
     {
-        // TODO
+        SetComp s = (SetComp)e;
+        this.handleComprehension(e, "setcomp", s.generators, s.elt, null);
     }
     
     private void visitDictcomp(exprType e)
     {
-        // TODO
+        DictComp d = (DictComp)e;
+        this.handleComprehension(e, "dictcomp", d.generators, d.key, d.value);
     }
     
     private void visitSlice(sliceType s)
     {
-        // TODO
+        if(s instanceof Slice)
+        {
+            Slice slice = (Slice)s;
+            if(slice.lower != null)
+            {
+                this.visitExpr(slice.lower);
+            }
+            if(slice.upper != null)
+            {
+                this.visitExpr(slice.upper);
+            }
+            if(slice.step != null)
+            {
+                this.visitExpr(slice.step);
+            }
+        }
+        else if(s instanceof ExtSlice)
+        {
+            for(sliceType slice : ((ExtSlice)s).dims)
+            {
+                this.visitSlice(slice);
+            }
+        }
+        else if(s instanceof Index)
+        {
+            this.visitExpr(((Index)s).value);
+        }
     }
 
     private void visitStmt(stmtType s)

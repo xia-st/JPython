@@ -42,7 +42,7 @@ public class PyLong extends PyObject
         }
     }
 
-    public long toLang()
+    public long asLong()
     {
         return num;
     }
