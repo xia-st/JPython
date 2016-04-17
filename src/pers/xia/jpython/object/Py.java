@@ -20,14 +20,26 @@ public final class Py
             integerCache[i] = new PyLong(Config.NSMALLNEGINTS + i);
         }
     }
-
-    public static final PyObject newInteger(int i)
+    
+    public static final PyLong newInteger(int i)
     {
         if(i < Config.NSMALLPOSINTS && i > Config.NSMALLNEGINTS)
         {
-            return integerCache[i + Config.NSMALLNEGINTS];
+            return integerCache[(int)i - Config.NSMALLNEGINTS];
         }
         return new PyLong(i);
+    }
+    
+    public static final PyLong newInteger(long i)
+    {
+        if(i < Integer.MIN_VALUE || i > Integer.MAX_VALUE)
+        {
+            return newInteger((int)i);
+        }
+        else
+        {
+            return new PyLong(i);
+        }
     }
     
     public static PyObject PyNumber_InPlaceOr(PyObject v, PyObject w)

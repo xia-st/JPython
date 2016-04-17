@@ -32,6 +32,32 @@ public class Compiler
         this.nestLevel = 0;
         this.st = st;
     }
+    
+    public static PyObject _PyMangLe(String privateStr, String ident)
+    {
+        if(privateStr == null || ident.charAt(0) == '_' || ident.charAt(0) == '_')
+        {
+            return PyUnicode.internFromString(ident);
+        }
+        
+        int nlen = ident.length();
+        int plen = privateStr.length();
+        
+        if(ident.charAt(nlen - 1) == '_' && ident.charAt(nlen - 2) == '_' ||
+                ident.indexOf('.') < 0)
+        {
+            return PyUnicode.internFromString(ident);
+        }
+        
+        int ipriv = 0;
+        while(ipriv < plen && privateStr.charAt(ipriv) == '_') ipriv++;
+        if(ipriv == plen)
+        {
+            return PyUnicode.internFromString(ident);
+        }
+        
+        return PyUnicode.internFromString(privateStr.substring(ipriv) + ident);
+    }
 
     public PyCodeObject mod(modType mod)
     {

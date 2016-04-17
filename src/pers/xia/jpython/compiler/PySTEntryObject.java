@@ -3,13 +3,14 @@ package pers.xia.jpython.compiler;
 import pers.xia.jpython.object.Py;
 import pers.xia.jpython.object.PyDict;
 import pers.xia.jpython.object.PyList;
+import pers.xia.jpython.object.PyLong;
 import pers.xia.jpython.object.PyObject;
 import pers.xia.jpython.object.PySet;
 
 class PySTEntryObject extends PyObject
 {
-    PyObject steId; /* int: key in ste_table->st_blocks */
-    PyObject steSymbols; /* dict: variable names to flags */
+    PyLong steId; /* int: key in ste_table->st_blocks */
+    PyDict steSymbols; /* dict: variable names to flags */
     String steName; /* string: name of current block */
     PyList steVarnames; /* list of function parameters */
     PyList steChildren; /* list of child blocks */
@@ -39,7 +40,7 @@ class PySTEntryObject extends PyObject
     public PySTEntryObject(Symtable st, String name, BlockType block,
             Object key, int lineno, int colOffet)
     {
-        PyObject k = null;
+        PyLong k = null;
         k = Py.newInteger(key.hashCode());
         this.steTable = st;
         this.steId = k;

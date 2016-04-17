@@ -11,4 +11,9 @@ public class PyDict extends PyObject
     {
         return true;
     }
+    
+    public PyObject getItem(PyObject key)
+    {
+        return null;
+    }
 }

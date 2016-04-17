@@ -11,7 +11,11 @@ public class PyExceptions extends RuntimeException
 
     public static enum ErrorType
     {
-        AST_ERROR, PARSER_ERROR, SYSTEM_ERROR,
+        AST_ERROR, 
+        PARSER_ERROR, 
+        SYSTEM_ERROR, 
+        SYMTABLE_ERROR,
+        SYNTAX_ERROR
     }
 
     public Stack<String> map = new Stack<String>();
@@ -35,7 +39,13 @@ public class PyExceptions extends RuntimeException
 
     public PyExceptions(ErrorType type, String msg)
     {
+        this(type, msg, 0, 0);
+    }
+    
+    public PyExceptions(ErrorType type, String msg, int lineno, int colOffset)
+    {
         super(msg);
+        msg += "\nlineno: " + lineno + ", colOffset: " + colOffset; 
         map.push(msg);
     }
 

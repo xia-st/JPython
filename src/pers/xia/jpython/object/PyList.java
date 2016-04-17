@@ -1,20 +1,24 @@
 package pers.xia.jpython.object;
 
+import java.util.ArrayList;
+
 public class PyList extends PyObject
 {
+    ArrayList<PyObject> list;
     public PyList(int n)
     {
-
+        list = new ArrayList<PyObject>(n);
     }
 
 	public boolean append(PyObject newitem) {
 		// TODO Auto-generated method stub
-		return false;
+	    list.add(newitem);
+		return true;
 	}
 
-	public long getSize() {
+	public int getSize() {
 		// TODO Auto-generated method stub
-		return 0;
+		return list.size();
 	}
 
 	public void setSlice(long l, long size, PyObject object) {
@@ -22,8 +26,8 @@ public class PyList extends PyObject
 		
 	}
 
-	public PyObject getItem(long l) {
+	public PyObject getItem(int l) {
 		// TODO Auto-generated method stub
-		return null;
+		return list.get(l);
 	}
 }

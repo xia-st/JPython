@@ -6,7 +6,7 @@ public class PyLong extends PyObject
 
     public PyLong(long num)
     {
-
+        this.num = num;
     }
 
     public static PyObject newLong(String str)
@@ -37,8 +37,13 @@ public class PyLong extends PyObject
         }
         catch (NumberFormatException err)
         {
-            System.out.println(str);
-            return null;
+            //System.out.println(str);
+            return new PyNumber(str);
         }
+    }
+
+    public long toLang()
+    {
+        return num;
     }
 }
