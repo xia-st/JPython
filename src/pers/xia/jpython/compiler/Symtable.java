@@ -778,7 +778,7 @@ public class Symtable
     private void enterBlock(String name,
     		BlockType block, Object ast, int lineno, int colOffet) // add parameter
     {
-        System.out.println("enter: " + block);
+        //System.out.println("enter: " + block);
     	PySTEntryObject prev = null, ste;
     	ste = new PySTEntryObject(this, name, block, ast, lineno, colOffet);
     	
@@ -799,7 +799,7 @@ public class Symtable
     
     private void exitBlock(Object ast)
     {
-        System.out.println("exit");
+        //System.out.println("exit");
     	int size; // TODO set the py list max size to int max size
     	this.stCur = null;
     	size = this.stStack.getSize();
@@ -915,7 +915,6 @@ public class Symtable
     
     public static void main(String args[])
     {        
-        /*
         File file1 = new File("test/");
         if(file1.isDirectory())
         {
@@ -941,7 +940,7 @@ public class Symtable
                 }
             }
         }
-        */
+        /*
         File file = new File("test/test_doctest2.py");
         try
         {
@@ -956,5 +955,6 @@ public class Symtable
             e.printStackTrace();
             throw e;
         }
+        */
     }
 }
