@@ -3,8 +3,5 @@
 *.pyc
 /.settings/
 /test/
-<<<<<<< HEAD
 /.idea/
 /out/
-=======
->>>>>>> 720d361d874318d2d46bffbfc3cbd2fd77352fa3
