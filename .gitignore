@@ -3,3 +3,7 @@
 *.pyc
 /.settings/
 /test/
+/out/
+/.idea/
+/.setting/
+/JPython.iml
