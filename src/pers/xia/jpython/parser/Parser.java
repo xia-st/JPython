@@ -4,8 +4,6 @@ import java.io.File;
 import java.util.LinkedList;
 import java.util.Stack;
 
-import org.apache.log4j.Logger;
-
 import pers.xia.jpython.grammar.DFA;
 import pers.xia.jpython.grammar.DFAType;
 import pers.xia.jpython.grammar.GramInit;
@@ -34,8 +32,6 @@ public class Parser
     Grammar grammar; //使用的grammar
     public Node tree; //CST树
 
-    private Logger log;
-
     public Parser(Grammar grammar)
     {
         this(grammar, -1);
@@ -47,7 +43,7 @@ public class Parser
         {
             grammar.addAccelerators();
         }
-        this.log = Logger.getLogger(Parser.class);
+        //this.log = Logger.getLogger(Parser.class);
 
         StackEntry stackEntry = new StackEntry();
 
@@ -87,14 +83,14 @@ public class Parser
                     }
                     if(this.grammar.labels[i].str.equals(token.str))
                     {
-                        log.info(token.str + " is a key word");
+                        //log.info(token.str + " is a key word");
                         return i;
                     }
                 }
             }
             if(label == -1)
                 throw new PyExceptions("Illegal token", token);
-            log.info("\"" + token.str + "\" is a token we know");
+            //log.info("\"" + token.str + "\" is a token we know");
             return label;
         }
 
@@ -105,7 +101,7 @@ public class Parser
         {
             if(this.grammar.labels[i].tokState == token.state)
             {
-                log.info(token.state + " is a key word");
+                //log.info(token.state + " is a key word");
                 return i;
             }
         }
@@ -149,7 +145,7 @@ public class Parser
             DFA dfa = se.dfa;
             State state = dfa.getState(se.curState);
 
-            log.debug("DFA: " + dfa.name);
+            //log.debug("DFA: " + dfa.name);
 
             if(ilabel >= state.lower && ilabel < state.upper)
             {
@@ -159,14 +155,14 @@ public class Parser
                 {
                     if((x & (1 << 7)) > 0)
                     {
-                        log.debug("push...");
+                        //log.debug("push...");
                         DFA dfa1 = grammar.getDFA(x >> 8);
                         int nextState = x & ((1 << 7) - 1);
                         this.push(dfa1, nextState, token.lineNo, colOffset);
                         continue;
                     }
 
-                    log.debug("shift...");
+                    //log.debug("shift...");
                     this.shift(token.state, x, token.str, token.lineNo,
                             colOffset);
 
@@ -177,13 +173,13 @@ public class Parser
                     state = dfa.getState(this.stack.peek().curState);
                     while (state.accept && state.narcs == 1)
                     {
-                        log.debug("Pop while singal accept-only state...");
-                        log.debug("DFA before Pop: "
-                                + this.stack.peek().dfa.name);
+                        //log.debug("Pop while singal accept-only state...");
+                        //log.debug("DFA before Pop: "
+                        //        + this.stack.peek().dfa.name);
                         this.stack.pop();
                         if(this.stack.empty())
                         {
-                            log.debug("accept");
+                            //log.debug("accept");
                             return ReturnCode.ACCEPT;
                         }
                         se = this.stack.peek();
@@ -196,8 +192,8 @@ public class Parser
 
             if(state.accept)
             {
-                log.debug("Pop while accept...");
-                log.debug("DFA before Pop: " + this.stack.peek().dfa.name);
+                //log.debug("Pop while accept...");
+                //log.debug("DFA before Pop: " + this.stack.peek().dfa.name);
                 this.stack.pop();
                 if(this.stack.empty())
                 {
@@ -206,9 +202,9 @@ public class Parser
                 continue;
             }
 
-            log.error("token: " + token.state + " " + token.str + " ilabel: "
-                    + ilabel + " curState: " + se.curState + " lower: "
-                    + state.lower + " lineNo: " + token.lineNo);
+            //log.error("token: " + token.state + " " + token.str + " ilabel: "
+            //        + ilabel + " curState: " + se.curState + " lower: "
+            //        + state.lower + " lineNo: " + token.lineNo);
             throw new PyExceptions("Illigal token: ", token);
         }
     }

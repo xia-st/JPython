@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-import org.apache.log4j.Logger;
-
 import pers.xia.jpython.config.Config;
 import pers.xia.jpython.object.PyExceptions;
 
@@ -36,8 +34,6 @@ public class Token
     public int lineStart; // 一行的起始位置
     public int lineEnd; // 一行的结束位置
 
-    private Logger log;
-
     public Token()
     {
         this.buf = null;
@@ -60,7 +56,6 @@ public class Token
         this.contLine = false;
         this.asyncDef = false;
 
-        this.log = Logger.getLogger(Tokenizer.class);
         this.lineStart = lineEnd = 0;
     }
 
@@ -92,7 +87,6 @@ public class Token
 
     public String toString()
     {
-        // log.info(this.buf.substring(this.lineStart, this.lineEnd));
         if(this.state == TokState.NEWLINE || this.state == TokState.ENDMARKER
                 || this.state == TokState.INDENT
                 || this.state == TokState.DEDENT)
@@ -291,7 +285,7 @@ public class Token
                 }
                 if(col != this.indstack[this.indent])
                 {
-                    log.error(col + " " + this.indstack[this.indent]);
+                    //log.error(col + " " + this.indstack[this.indent]);
                     throw new PyExceptions();
                 }
             }
@@ -970,7 +964,7 @@ public class Token
                     return true;
                 }
 
-                log.error(c + 0);
+                //log.error(c + 0);
                 throw new PyExceptions("Invlid syntex", this);
             }
         }

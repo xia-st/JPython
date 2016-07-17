@@ -15,8 +15,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
-import org.apache.log4j.Logger;
-
 import pers.xia.jpython.object.PyExceptions;
 import pers.xia.jpython.tokenizer.TokState;
 
@@ -30,8 +28,6 @@ class Pgen
     private BufferedReader br;    //文件缓存
     private boolean newLine;    //是否读取下一行数据
 
-    private Logger log;
-
     public Pgen()
     {
         this.grammar = new _Grammar();
@@ -40,7 +36,7 @@ class Pgen
         this.buf = null;
         this.newLine = false;
         
-        this.log = Logger.getLogger(Pgen.class);
+        //this.log = Logger.getLogger(Pgen.class);
     }
     
     public Pgen(File file)
@@ -52,7 +48,7 @@ class Pgen
                     new FileReader(file));
         } catch (FileNotFoundException e)
         {
-            log.error("文件打开失败");
+            //log.error("文件打开失败");
             throw new PyExceptions("Open file error");
         }
     }
@@ -278,7 +274,7 @@ class Pgen
         
         if((c < 'a' || c > 'z') && c != '_')
         {
-            log.error(Character.toString(c));
+            //log.error(Character.toString(c));
             throw new PyExceptions("Not a DFA name");
         }
         
