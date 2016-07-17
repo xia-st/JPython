@@ -41,8 +41,8 @@ public class Run
         File file = new File("./test");
         if(file.isDirectory())
         {
-            String[] filelist = file.list();
-            for (String fileName : filelist)
+            String[] fileList = file.list();
+            for (String fileName : fileList)
             {
                 if(fileName.charAt(fileName.length() - 1) == 'y')
                     parse("./test/" + fileName);
