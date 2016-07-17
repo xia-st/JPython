@@ -1,18 +1,15 @@
 package pers.xia.jpython.tokenizer;
 
 import java.io.File;
-import org.apache.log4j.Logger;
 
 import pers.xia.jpython.object.PyExceptions;
 
 public class Tokenizer
 {
-    private Logger log;
     private Token tok;
 
     public Tokenizer()
     {
-        log = Logger.getLogger(Tokenizer.class);
     }
 
     public Tokenizer(File file)
