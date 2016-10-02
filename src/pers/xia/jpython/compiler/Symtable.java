@@ -1040,7 +1040,7 @@ public class Symtable
             String[] filelist = file1.list();
             for (String fileName : filelist)
             {
-                System.out.println(fileName);
+                //System.out.println(fileName);
                 File file = new File("test/" + fileName);
                 if(file.isDirectory()) continue;
                 try
