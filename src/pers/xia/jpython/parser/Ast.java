@@ -28,22 +28,11 @@ public class Ast
     {
         try
         {
-            myAssert(n.dfaType == type);
+            assert(n.dfaType == type);
         }
         catch (PyExceptions e)
         {
             throw new PyExceptions(ErrorType.AST_ERROR, "AST Error", n);
-        }
-    }
-
-    /*
-     * The default assert method have some problems
-     */
-    private void myAssert(boolean b)
-    {
-        if(!b)
-        {
-            throw new PyExceptions(ErrorType.AST_ERROR, "AST Error");
         }
     }
 
@@ -138,7 +127,7 @@ public class Ast
         String exprName = null;
         java.util.List<exprType> s = null;
 
-        myAssert(ctx != expr_contextType.AugStore
+        assert(ctx != expr_contextType.AugStore
                 && ctx != expr_contextType.AugLoad);
         if(e instanceof Attribute)
         {
@@ -270,7 +259,7 @@ public class Ast
         int start = 0;
         int end;
         char quote = s.charAt(0);
-        myAssert(s != null);
+        assert(s != null);
         if(Character.isLetter(s.charAt(start)))
         {
             while (!bytesmode || !rawmode)
@@ -370,7 +359,7 @@ public class Ast
 
         if(n.getChild(i).dfaType == DFAType.DOUBLESTAR)
         {
-            myAssert(n.nChild() - i >= 2);
+            assert(n.nChild() - i >= 2);
 
             expression = astForExpr(n.getChild(i));
 
@@ -380,7 +369,7 @@ public class Ast
         }
         else
         {
-            myAssert(n.nChild() - i >= 3);
+            assert(n.nChild() - i >= 3);
 
             expression = astForExpr(n.getChild(i));
             key = expression;
@@ -515,7 +504,7 @@ public class Ast
         boolean imflag;
 
         String s = n.str;
-        myAssert(s != null);
+        assert(s != null);
 
         end = s.length() - 1;
 
@@ -540,7 +529,7 @@ public class Ast
 
     private exprType astForListcomp(Node n)
     {
-        myAssert(n.dfaType == DFAType.testlist_comp);
+        assert(n.dfaType == DFAType.testlist_comp);
         return astForItercomp(n, COMP.COMP_LISTCOMP);
     }
 
@@ -548,7 +537,7 @@ public class Ast
     {
         java.util.List<exprType> elts;
 
-        myAssert(n.dfaType == DFAType.dictorsetmaker);
+        assert(n.dfaType == DFAType.dictorsetmaker);
 
         elts = new ArrayList<exprType>((n.nChild() + 1) / 2);
 
@@ -563,7 +552,7 @@ public class Ast
 
     private exprType astForSetcomp(Node n)
     {
-        myAssert(n.dfaType == DFAType.dictorsetmaker);
+        assert(n.dfaType == DFAType.dictorsetmaker);
         return astForItercomp(n, COMP.COMP_SETCOMP);
     }
 
@@ -579,8 +568,8 @@ public class Ast
         key = (exprType) result[1];
         value = (exprType) result[2];
 
-        myAssert(key != null);
-        myAssert(n.nChild() - i >= 1);
+        assert(key != null);
+        assert(n.nChild() - i >= 1);
 
         comps = astForComprehension(n.getChild(i));
 
@@ -695,7 +684,7 @@ public class Ast
                     "named arguments must follow bare *", n);
         }
 
-        myAssert(kwdefaults != null);
+        assert(kwdefaults != null);
         while (i < n.nChild())
         {
             ch = n.getChild(i);
@@ -823,7 +812,7 @@ public class Ast
         exprType annotation = null;
         Node ch;
 
-        myAssert(n.dfaType == DFAType.tfpdef || n.dfaType == DFAType.vfpdef);
+        assert(n.dfaType == DFAType.tfpdef || n.dfaType == DFAType.vfpdef);
 
         ch = n.getChild(0);
         name = newIdentifier(ch);
@@ -1114,7 +1103,7 @@ public class Ast
                 for (int j = 0; j < slices.size(); j++)
                 {
                     slc = slices.get(j);
-                    myAssert(slc instanceof Index
+                    assert(slc instanceof Index
                             && ((Index) slc).value != null);
 
                     elts.add(((Index) slc).value);
@@ -1134,7 +1123,7 @@ public class Ast
          * testlist_comp: (test|star_expr) ( comp_for | (',' (test|star_expr))*
          * [','] )
          */
-        myAssert(n.nChild() > 1);
+        assert(n.nChild() > 1);
 
         exprType elt;
         java.util.List<comprehensionType> comps;
@@ -1207,7 +1196,7 @@ public class Ast
             n = n.getChild(1);
         }
 
-        myAssert(n.dfaType == DFAType.typedargslist
+        assert(n.dfaType == DFAType.typedargslist
                 || n.dfaType == DFAType.varargslist);
 
         /*
@@ -1290,7 +1279,7 @@ public class Ast
                 {
                     exprType expression = astForExpr(n.getChild(i + 2));
 
-                    myAssert(posdefaults != null);
+                    assert(posdefaults != null);
                     posdefaults.add(expression);
                     i += 2;
                     foundDefault = true;
@@ -1336,7 +1325,7 @@ public class Ast
                 break;
             case DOUBLESTAR:
                 ch = n.getChild(i + 1);
-                myAssert(ch.dfaType == DFAType.tfpdef
+                assert(ch.dfaType == DFAType.tfpdef
                         || ch.dfaType == DFAType.vfpdef);
                 kwarg = astForArg(ch);
 
@@ -1432,7 +1421,7 @@ public class Ast
         if(n.getChild(0).dfaType == DFAType.AWAIT)
         {
             start = 1;
-            myAssert(n.nChild() > 1);
+            assert(n.nChild() > 1);
         }
 
         e = astForAtom(n.getChild(start));
@@ -1470,7 +1459,7 @@ public class Ast
 
     private exprType astForGenexp(Node n)
     {
-        myAssert(n.dfaType == DFAType.testlist_comp
+        assert(n.dfaType == DFAType.testlist_comp
                 || n.dfaType == DFAType.argument);
         return astForItercomp(n, COMP.COMP_GENEXP);
     }
@@ -1575,7 +1564,7 @@ public class Ast
                 {
                     Node asnameNode = n.getChild(2);
                     aliasType a = aliasForImportName(n.getChild(0), false);
-                    myAssert(a.asname == null);
+                    assert(a.asname == null);
                     a.asname = newIdentifier(asnameNode);
                     forbiddenName(a.asname, asnameNode, false);
                     return a;
@@ -1664,7 +1653,7 @@ public class Ast
                     {
                         if(ch.getChild(j).nChild() == 0)
                         {
-                            myAssert((j + 1) == ch.nChild());
+                            assert((j + 1) == ch.nChild());
                             break;
                         }
                         s = astForStmt(ch.getChild(j));
@@ -1970,7 +1959,7 @@ public class Ast
         exprType body;
         exprType orelse;
 
-        myAssert(n.nChild() == 5);
+        assert(n.nChild() == 5);
 
         body = astForExpr(n.getChild(0));
         expression = astForExpr(n.getChild(2));
@@ -2600,7 +2589,7 @@ public class Ast
             }
         }
 
-        myAssert(finalbody != null || handlers.size() > 0);
+        assert(finalbody != null || handlers.size() > 0);
         return new Try(body, handlers, orelse, finalbody, n.lineNo,
                 n.colOffset);
     }
@@ -2693,7 +2682,7 @@ public class Ast
 
         decoratorSeq = astForDecorators(n.getChild(0));
 
-        myAssert(n.getChild(1).dfaType == DFAType.funcdef
+        assert(n.getChild(1).dfaType == DFAType.funcdef
                 || n.getChild(1).dfaType == DFAType.async_funcdef
                 || n.getChild(1).dfaType == DFAType.classdef);
 
@@ -2787,7 +2776,7 @@ public class Ast
                     return new BoolOp(boolopType.And, seq, n.lineNo,
                             n.colOffset);
                 }
-                myAssert("or".equals(n.getChild(1).str));
+                assert("or".equals(n.getChild(1).str));
                 return new BoolOp(boolopType.Or, seq, n.lineNo, n.colOffset);
             case not_test:
                 if(n.nChild() == 1)
@@ -2891,7 +2880,7 @@ public class Ast
          * testlist: test (',' test)* [','] testlist_star_expr: test|star_expr
          * (',' test|star_expr)* [',']
          */
-        myAssert(n.dfaType == DFAType.testlist
+        assert(n.dfaType == DFAType.testlist
                 || n.dfaType == DFAType.testlist_star_expr
                 || n.dfaType == DFAType.testlist_comp);
         java.util.List<exprType> seq = new ArrayList<exprType>(
@@ -2900,7 +2889,7 @@ public class Ast
         for (int i = 0; i < n.nChild(); i += 2)
         {
             Node ch = n.getChild(i);
-            myAssert(ch.dfaType == DFAType.test
+            assert(ch.dfaType == DFAType.test
                     || ch.dfaType == DFAType.test_nocond
                     || ch.dfaType == DFAType.star_expr);
             expression = astForExpr(ch);
@@ -2913,12 +2902,12 @@ public class Ast
     {
         if(n.dfaType == DFAType.stmt)
         {
-            myAssert(n.nChild() == 1);
+            assert(n.nChild() == 1);
             n = n.getChild(0);
         }
         if(n.dfaType == DFAType.simple_stmt)
         {
-            myAssert(numStmts(n) == 1);
+            assert(numStmts(n) == 1);
             n = n.getChild(0);
         }
         if(n.dfaType == DFAType.small_stmt)
@@ -2995,17 +2984,17 @@ public class Ast
     {
         /* testlist_comp: test (comp_for | (',' test)* [',']) */
         /* testlist: test (',' test)* [','] */
-        myAssert(n.nChild() > 0);
+        assert(n.nChild() > 0);
         if(n.dfaType == DFAType.testlist_comp)
         {
             if(n.nChild() > 1)
             {
-                myAssert(n.getChild(1).dfaType != DFAType.comp_for);
+                assert(n.getChild(1).dfaType != DFAType.comp_for);
             }
         }
         else
         {
-            myAssert(n.dfaType == DFAType.testlist
+            assert(n.dfaType == DFAType.testlist
                     || n.dfaType == DFAType.testlist_star_expr);
         }
         if(n.nChild() == 1)
